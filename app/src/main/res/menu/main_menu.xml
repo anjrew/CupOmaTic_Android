@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_setting"
+        android:enabled="true"
+        android:title="Settings"
+        android:icon="@mipmap/settings_icon"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/help"
+        android:enabled="true"
+        android:title="Instructions"
+        android:icon="@mipmap/help_icon"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+</menu>
+
+    <!--android:icon="@mipmap/ic_settings_white_48dp"-->
+    <!--android:icon="@mipmap/ic_help_outline_white_48dp"-->
