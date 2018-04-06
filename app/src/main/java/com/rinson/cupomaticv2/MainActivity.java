@@ -1,11 +1,13 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 
@@ -29,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.action_setting:
+                openSettingsActivity();
                 Log.i("Menu items selected", "Settings");
             case R.id.help:
+                openHelpActivity();
                 Log.i("Menu items selected", "Help");
                 Toast.makeText(this, "I did IT!!!", Toast.LENGTH_SHORT).show();
             default:
@@ -44,6 +48,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void clickButton(View view) {
+        openBowlsActivity();
+        Log.i("Info", "Button pressed");
+    }
+
+
+    // Open activity section
+    public void openBowlsActivity() {
+        Intent intent = new Intent(MainActivity.this,bowls.class);
+        startActivity(intent);
+    }
+
+    public void openSettingsActivity(){
+        Intent intent = new Intent(MainActivity.this,settings.class);
+        startActivity(intent);
+    }
+
+    public void openHelpActivity(){
+        Intent intent = new Intent(MainActivity.this,help.class);
+        startActivity(intent);
     }
 
 }
