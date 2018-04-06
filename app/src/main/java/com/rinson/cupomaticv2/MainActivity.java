@@ -27,21 +27,24 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-
-        switch (item.getItemId()) {
-            case R.id.action_setting:
-                openSettingsActivity();
-                Log.i("Menu items selected", "Settings");
-            case R.id.help:
-                openHelpActivity();
-                Log.i("Menu items selected", "Help");
-                Toast.makeText(this, "I did IT!!!", Toast.LENGTH_SHORT).show();
-            default:
-                return false;
-
-
+        if (item.getItemId() == R.id.action_setting){
+            openSettingsActivity();
+            Log.i("Menu items selected", "Settings");
+        }else{
+            openHelpActivity();
+            Log.i("Menu items selected", "Help");
         }
+//        switch (item.getItemId()) {
+//            case R.id.action_setting:
+//                openSettingsActivity();
+//                Log.i("Menu items selected", "Settings");
+//            case R.id.help:
+//                openHelpActivity();
+//                Log.i("Menu items selected", "Help");
+//            default:
+//                return false;
+//        }
+        return false;
     }
 
     @Override
@@ -63,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openSettingsActivity(){
-        Intent intent = new Intent(MainActivity.this,settings.class);
-        startActivity(intent);
+        Intent settingsIntent = new Intent(MainActivity.this,settings.class);
+        startActivity(settingsIntent);
     }
 
     public void openHelpActivity(){
