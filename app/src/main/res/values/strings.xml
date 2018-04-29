@@ -1,18 +1,18 @@
 <resources>
 
-        <string name="app_name">CupOmatic</string>
-        <string name="getReady">Get Ready</string>
-        <string name="start">Start</string>
-        <string name="number_of_bowls">Number of bowls?</string>
-        <string name="input_number">Input number</string>
-        <string name="interval">Interval</string>
-        <string name="Break">Break</string>
-        <string name="round_one">Round one</string>
-        <string name="round_two">Round Two</string>
-        <string name="round_three">Round Three</string>
-        <string name="vibrate">Vibrate</string>
-        <string name="sample">Sample</string>
-        <string name="Save">Save Settings</string>
+    <string name="app_name">CupOmatic</string>
+    <string name="getReady">Get Ready</string>
+    <string name="start">Start</string>
+    <string name="number_of_bowls">Number of bowls?</string>
+    <string name="input_number">Input number</string>
+    <string name="interval">Interval</string>
+    <string name="Break">Break</string>
+    <string name="round_one">Round one</string>
+    <string name="round_two">Round Two</string>
+    <string name="round_three">Round Three</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="sample">Sample</string>
+    <string name="Save">Save Settings</string>
 
 
 </resources>

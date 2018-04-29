@@ -8,11 +8,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
 
 
 public class MainActivity extends AppCompatActivity {
+
 
 
     @Override
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 //            case R.id.action_setting:
 //                openSettingsActivity();
 //                Log.i("Menu items selected", "Settings");
-//            case R.id.help:
+//            case R.id.Help:
 //                openHelpActivity();
 //                Log.i("Menu items selected", "Help");
 //            default:
@@ -51,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
     }
+
 
     public void clickButton(View view) {
         openBowlsActivity();
@@ -61,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
 
     // Open activity section
     public void openBowlsActivity() {
-        Intent intent = new Intent(MainActivity.this,bowls.class);
+        Intent intent = new Intent(MainActivity.this,Bowls.class);
         startActivity(intent);
     }
 
     public void openSettingsActivity(){
-        Intent settingsIntent = new Intent(MainActivity.this,settings.class);
+        Intent settingsIntent = new Intent(MainActivity.this,Settings.class);
         startActivity(settingsIntent);
     }
 
     public void openHelpActivity(){
-        Intent intent = new Intent(MainActivity.this,help.class);
+        Intent intent = new Intent(MainActivity.this,Help.class);
         startActivity(intent);
     }
 

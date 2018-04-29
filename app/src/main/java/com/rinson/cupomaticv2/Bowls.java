@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-public class bowls extends AppCompatActivity {
+public class Bowls extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class bowls extends AppCompatActivity {
 
     public void openBowlsActivity() {
 
-        Intent intent = new Intent(bowls.this, MainActivity.class);
+        Intent intent = new Intent(Bowls.this, MainActivity.class);
 
         startActivity(intent);
     }

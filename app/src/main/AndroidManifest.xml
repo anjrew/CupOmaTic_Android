@@ -16,9 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bowls" />
-        <activity android:name=".settings" />
-        <activity android:name=".help"></activity>
+        <activity android:name=".Bowls" />
+        <activity android:name=".Settings" />
+        <activity android:name=".Help" />
+        <activity android:name=".Round_one" />
+        <activity android:name=".Round_two" />
+        <activity android:name=".Round_three" />
+        <activity android:name=".Interval" />
+        <activity android:name=".BreakTime" />
+        <activity android:name=".sample" />
+        <activity android:name=".Sample"></activity>
     </application>
 
 </manifest>

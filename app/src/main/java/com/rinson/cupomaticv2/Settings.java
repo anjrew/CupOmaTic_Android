@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class settings extends AppCompatActivity {
+public class Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class settings extends AppCompatActivity {
 
     public void openMainActivity() {
 
-        Intent intent = new Intent(settings.this, MainActivity.class);
+        Intent intent = new Intent(Settings.this, MainActivity.class);
 
         startActivity(intent);
     }
