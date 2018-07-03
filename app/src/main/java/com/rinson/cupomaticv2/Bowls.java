@@ -18,6 +18,7 @@ public class Bowls extends AppCompatActivity {
 
     public void startButton(View view) {
         openMainActivity();
+        MainActivity.updatdateMainTimerDisplay("Ready");
         ParentTimer.startStartTimer();
         ParentTimer.switchParentTimerActiviationState();
         Log.i("Info", "Start Button pressed");
@@ -31,32 +32,3 @@ public class Bowls extends AppCompatActivity {
     }
 }
 
-
-//    ParentTimer parentTimer;
-////    MainActivity mainActivity;
-////
-////    Bowls(ParentTimer parentTimer, MainActivity mainActivity){
-////        this.mainActivity = mainActivity;
-////        this.parentTimer = parentTimer;
-////    }
-//
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_bowls);
-//    }
-//
-//    public void startButton(View view) {
-//        parentTimer.startStartTimer();
-//        openBowlsActivity();
-//        Log.i("Info", "Start Button pressed");
-//    }
-//
-//    public void openBowlsActivity() {
-//
-//        Intent intent = new Intent(Bowls.this, MainActivity.class);
-//
-//        startActivity(intent);
-//    }
-//}

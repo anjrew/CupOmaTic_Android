@@ -13,6 +13,6 @@
     <string name="vibrate">Vibrate</string>
     <string name="sample">Sample</string>
     <string name="Save">Save Settings</string>
-
+    <string name="Ready">Ready</string>
 
 </resources>
