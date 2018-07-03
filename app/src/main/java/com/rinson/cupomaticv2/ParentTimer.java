@@ -55,7 +55,7 @@ public class ParentTimer {
     int [] timersIntervals;
     //    timer timer;
     TimerCell[] timers;
-    int mainTime;
+    public static int mainTime;
     MainActivity mainActivity;
     int alarmSound;
     int alarmWarning = 1;
@@ -68,10 +68,10 @@ public class ParentTimer {
 
     int startTime;
     int bowlSetting;
-    Boolean running = false;
+    public static Boolean running = false;
 
 
-    public void startStartTimer() {
+    public static void startStartTimer() {
 
         CountDownTimer startTimer = new CountDownTimer(4000, 1000) {
 
@@ -93,7 +93,7 @@ public class ParentTimer {
     }
 
 
-    public void mainTimer() {
+    public static void mainTimer() {
         //Timer
         final Handler handler = new Handler();
         Runnable run = new Runnable() {
@@ -146,7 +146,7 @@ public class ParentTimer {
         return running;
     }
 
-    public void switchParentTimerActiviationState(){
+    public static void switchParentTimerActiviationState(){
         if (running == true){
 
             running = false;

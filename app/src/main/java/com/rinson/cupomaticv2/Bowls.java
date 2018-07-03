@@ -8,7 +8,7 @@ import android.view.View;
 
 public class Bowls extends AppCompatActivity {
 
-    ParentTimer parentTimer = new ParentTimer();
+//    ParentTimer parentTimer = new ParentTimer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +18,9 @@ public class Bowls extends AppCompatActivity {
 
     public void startButton(View view) {
         openMainActivity();
-//        parentTimer.switchParentTimerActiviationState();
-        parentTimer.startStartTimer();
+        ParentTimer.startStartTimer();
+        ParentTimer.switchParentTimerActiviationState();
         Log.i("Info", "Start Button pressed");
-        parentTimer.startStartTimer();
     }
 
     public void openMainActivity() {
