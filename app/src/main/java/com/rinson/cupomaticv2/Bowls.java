@@ -5,15 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class Bowls extends AppCompatActivity {
 
-//    ParentTimer parentTimer = new ParentTimer();
+    int numberOfBowls;
+    EditText numberSelection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowls);
+        numberSelection = (EditText)findViewById(R.id.bowlsSelection);
     }
 
     public void startButton(View view) {
@@ -23,6 +27,8 @@ public class Bowls extends AppCompatActivity {
         ParentTimer.switchParentTimerActiviationState();
         MainActivity.showStopButton();
         Log.i("Info", "Start Button pressed");
+        numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
+        Log.i("Number of Bowls",String.valueOf(numberOfBowls));
     }
 
     public void openMainActivity() {

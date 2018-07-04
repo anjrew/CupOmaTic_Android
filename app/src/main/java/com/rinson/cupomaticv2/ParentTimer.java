@@ -85,14 +85,13 @@ public class ParentTimer {
 
             @Override
             public void onTick(long millisecondsUntilDone) {
-
+                //Code executed at every Interval
                 if ((millisecondsUntilDone / 1000 > countDownTimerSeconds - getReadyDisplayTime)){
 
                     MainActivity.updatdateMainTimerDisplay("Get Ready");
 
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
-                    //Code executed at every Interval
-                    Log.i("Seconds Left", String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
+
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
                 } else {
                     MainActivity.updatdateMainTimerDisplay("Start");
@@ -103,9 +102,8 @@ public class ParentTimer {
             @Override
             public void onFinish() {
                 //Code executed at finish
-                Log.i("Done!", "Countdown Timer finished");
                 startMainTimer();
-                MainActivity.updatdateMainTimerDisplay("Start");
+                MainActivity.updatdateMainTimerDisplay("Go!");
             }
 
         }.start();
@@ -122,8 +120,6 @@ public class ParentTimer {
 
                 mainTime++;
                 MainActivity.updatdateMainTimerDisplay(convertSecsmmss(mainTime));
-                Log.i("Main time:", String.valueOf(mainTime));
-
 
                 //Time interval of timer
                 handler.postDelayed(this, 1000);
@@ -182,7 +178,7 @@ public class ParentTimer {
             running = true;
         }
 
-        Log.i("Main time status", String.valueOf(running));
+        Log.i("Main time run status", String.valueOf(running));
     }
 
     public static String convertSecsmmss(int timeInput){
@@ -214,7 +210,6 @@ public class ParentTimer {
 
     public void cancelCountdownTimer(){
         startTimer.cancel();
-
     }
 }
 
