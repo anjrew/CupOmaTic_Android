@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
+        updateGetReadyStopButton();
     }
 
 
@@ -102,10 +103,20 @@ public class MainActivity extends AppCompatActivity {
     public static void showStopButton(){
         getReadyButton.setBackgroundColor(Color.RED);
         getReadyButton.setText("Stop");
+        getReadyButton.setTextColor(Color.WHITE);
     }
 
-    private void showGetReady(){
+    private void showGetReadyButton(){
         getReadyButton.setBackgroundColor(Color.GREEN);
         getReadyButton.setText("Get Ready");
+        getReadyButton.setTextColor(Color.WHITE);
+    }
+
+    public void updateGetReadyStopButton() {
+        if (parentTimer.getRunningstaus() == true) {
+            showStopButton();
+        } else {
+            showGetReadyButton();
+        }
     }
 }
