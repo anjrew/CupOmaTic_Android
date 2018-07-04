@@ -21,6 +21,7 @@ public class Bowls extends AppCompatActivity {
         MainActivity.updatdateMainTimerDisplay("Ready");
         ParentTimer.startStartTimer();
         ParentTimer.switchParentTimerActiviationState();
+//        MainActivity.showStopButton();
         Log.i("Info", "Start Button pressed");
     }
 

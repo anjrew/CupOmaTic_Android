@@ -5,11 +5,13 @@ package com.rinson.cupomaticv2;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
+import android.view.View;
 import android.widget.TextView;
 
 public class ParentTimer {
 
-    ParentTimer(){
+    ParentTimer() {
 //        this.advancedMode = UserDefaults.standard.object(forKey: "advancedMode") as! Bool
 //        this.vibrate = UserDefaults.standard.object(forKey: "vibrate") as! Bool
 //        this.viewController = viewController
@@ -46,26 +48,26 @@ public class ParentTimer {
 //        alarmSound = UserDefaults.standard.object(forKey: "alarmSoundSave") as! [String : Int]
 
     }
+
     public static Handler handler = new Handler();
     boolean advancedMode = false;
     boolean vibrate = false;
     int interval;
     int bowl;
-    int timerAlarms ;
-    int [] timersIntervals;
+    int timerAlarms;
+    int[] timersIntervals;
     //    timer timer;
     public static TimerCell[] timers;
     public static int mainTime;
-    MainActivity mainActivity;
     int alarmSound;
     int alarmWarning = 1;
     public static int startDisplayTime = 2;
-//    Audio audio;
-//    IntervalTimer intervalTimer;
+
+     Interval intervalTimer;
 
     //Start Timer
     Boolean initiateMainTimer = true;
-//    CountDownTimer startTimer;
+    //    CountDownTimer startTimer;
     Boolean timerActive = false;
     int startTime;
     int bowlSetting;
@@ -80,11 +82,11 @@ public class ParentTimer {
             @Override
             public void onTick(long millisecondsUntilDone) {
 
-                if( ((millisecondsUntilDone/1000) > startDisplayTime)) {
+                if (((millisecondsUntilDone / 1000) > startDisplayTime)) {
                     //Code executed at every Interval
                     Log.i("Seconds Left", String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
-                }else{
+                } else {
                     MainActivity.updatdateMainTimerDisplay("Start");
                 }
 
@@ -94,69 +96,73 @@ public class ParentTimer {
             public void onFinish() {
                 //Code executed at finish
                 Log.i("Done!", "Countdown Timer finished");
-                mainTimer();
+                startMainTimer();
                 MainActivity.updatdateMainTimerDisplay("Start");
             }
+
         }.start();
     }
 
 
-    public static void mainTimer() {
-        //Timer
-        Runnable run = new Runnable() {
-            @Override
-            public void run() {
+    //Timer
+    public  static Runnable mainTimer = new Runnable() {
+        @Override
+        public void run() {
 
-                //insert code to be run every second
+            //insert code to be run every second
 //                increaseTimeByOneSecond();
-                mainTime ++ ;
-                MainActivity.updatdateMainTimerDisplay(String.valueOf(mainTime));
-                Log.i("Main time:", String.valueOf(mainTime));
+            mainTime++;
+            MainActivity.updatdateMainTimerDisplay(convertSecsmmss(mainTime));
+            Log.i("Main time:", String.valueOf(mainTime));
 
 
-                //Time interval of timer
-                handler.postDelayed(this, 1000);
-            }
+            //Time interval of timer
+            handler.postDelayed(this, 1000);
+        }
+    };
 
-        };
-        handler.post(run);
+    public static void startMainTimer(){
+//        showStopButton();
+        handler.removeCallbacks(mainTimer);
+        handler.postDelayed(mainTimer, 0);
     }
 
-    public static void increaseTimeByOneSecond(){
+
+    public static void increaseTimeByOneSecond() {
         for (int i = 0; i < timers.length; i++) {
 //            timers[i].addSecond();
         }
-        mainTime =+ 1;
+        mainTime = +1;
 
     }
 
-    public void comeBackFromBreak(){
+    public void comeBackFromBreak() {
 
     }
 
 
-    public void activateRunTimer(){
+    public void activateRunTimer() {
         running = true;
     }
 
-    public void deactivateRunTimer(){
+    public void deactivateRunTimer() {
         running = false;
     }
 
-    public static int getMainTimeInterger (){
+    public static int getMainTimeInterger() {
         return mainTime;
     }
 
-    public Boolean getRunningstaus(){
+    public Boolean getRunningstaus() {
         return running;
     }
 
-    public static void switchParentTimerActiviationState(){
-        if (running == true){
+    public static void switchParentTimerActiviationState() {
+        if (running == true) {
 
             running = false;
 
-        }else{
+        } else {
 
             running = true;
         }
@@ -164,8 +170,32 @@ public class ParentTimer {
         Log.i("Main time status", String.valueOf(running));
     }
 
-    
-}
+    public static String convertSecsmmss(int timeInput){
 
+        int timeSecs = timeInput;
+        String timeString;
+
+        int minutes = timeSecs / 60;
+        int seconds = timeSecs % 60;
+
+        if (minutes < 10 && seconds < 10){
+
+            timeString = "0"+ String.valueOf(minutes)+":0"+String.valueOf(seconds);
+
+        }else if (minutes < 10 ){
+
+            timeString = "0"+ String.valueOf(minutes)+":"+ String.valueOf(seconds);
+
+        }else if (seconds < 10) {
+
+            timeString = String.valueOf(minutes)+":0" + String.valueOf(seconds);
+
+        } else {
+
+            timeString = String.valueOf(minutes)+":"+String.valueOf(seconds);
+        }
+        return timeString;
+    }
+}
 
 
