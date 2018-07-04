@@ -55,10 +55,15 @@ public class MainActivity extends AppCompatActivity {
     public void clickButton(View view) {
 
         if (parentTimer.getRunningstaus() == true){
+            parentTimer.setRunningStatusToFalse();
+            updateGetReadyStopButton();
+            showGetReadyButton();
+            parentTimer.cancelCountdownTimer();
 
         }else {
+
             openBowlsActivity();
-            updateButtonGetReadyStop();
+            updateGetReadyStopButton();
         }
         Log.i("Info", "Button was pressed");
     }
@@ -83,18 +88,6 @@ public class MainActivity extends AppCompatActivity {
     public void updatdateMainTimerUi(){
         mainTimerDisplayText.setText("Start");
     }
-
-    public void updateButtonGetReadyStop(){
-
-        if (parentTimer.getRunningstaus() == true){
-            Log.i("Timer Status", "Running");
-
-        }else{
-            Log.i("Timer Status", "Not running");
-        }
-
-    }
-
 
     public static  void updatdateMainTimerDisplay(String text){
         mainTimerDisplayText.setText(text);

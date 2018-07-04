@@ -61,7 +61,7 @@ public class ParentTimer {
     public static int mainTime;
     int alarmSound;
     int alarmWarning = 1;
-    public static int startDisplayTime = 2;
+
 
      Interval intervalTimer;
 
@@ -73,16 +73,24 @@ public class ParentTimer {
     int bowlSetting;
     public static Boolean running = false;
 
+    public static int startDisplayTime = 1;
+    public static int getReadyDisplayTime = 5;
+    public static int countDownTimerSeconds = 9;
+    public static CountDownTimer startTimer;
 
     public static void startStartTimer() {
 
-        CountDownTimer startTimer = new CountDownTimer(7000, 1000) {
+        startTimer = new CountDownTimer(countDownTimerSeconds*1000, 1000) {
 
 
             @Override
             public void onTick(long millisecondsUntilDone) {
 
-                if (((millisecondsUntilDone / 1000) > startDisplayTime)) {
+                if ((millisecondsUntilDone / 1000 > countDownTimerSeconds - getReadyDisplayTime)){
+
+                    MainActivity.updatdateMainTimerDisplay("Get Ready");
+
+                }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
                     //Code executed at every Interval
                     Log.i("Seconds Left", String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
@@ -108,16 +116,20 @@ public class ParentTimer {
     public  static Runnable mainTimer = new Runnable() {
         @Override
         public void run() {
-
             //insert code to be run every second
 //                increaseTimeByOneSecond();
-            mainTime++;
-            MainActivity.updatdateMainTimerDisplay(convertSecsmmss(mainTime));
-            Log.i("Main time:", String.valueOf(mainTime));
+            if(running == true) {
+
+                mainTime++;
+                MainActivity.updatdateMainTimerDisplay(convertSecsmmss(mainTime));
+                Log.i("Main time:", String.valueOf(mainTime));
 
 
-            //Time interval of timer
-            handler.postDelayed(this, 1000);
+                //Time interval of timer
+                handler.postDelayed(this, 1000);
+            }else{
+                handler.removeCallbacks(mainTimer);
+            }
         }
     };
 
@@ -155,6 +167,9 @@ public class ParentTimer {
 
     public Boolean getRunningstaus() {
         return running;
+    }
+    public void setRunningStatusToFalse(){
+        running = false ;
     }
 
     public static void switchParentTimerActiviationState() {
@@ -195,6 +210,11 @@ public class ParentTimer {
             timeString = String.valueOf(minutes)+":"+String.valueOf(seconds);
         }
         return timeString;
+    }
+
+    public void cancelCountdownTimer(){
+        startTimer.cancel();
+
     }
 }
 
