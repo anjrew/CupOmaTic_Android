@@ -2,6 +2,7 @@ package com.rinson.cupomaticv2;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
     ParentTimer parentTimer = new ParentTimer();
     public static TextView mainTimerDisplayText;
     public static Button getReadyButton;
-
+//    Drawable getreadybutton = getResources().getDrawable(R.drawable.get_ready_button);
+//    Drawable stopButton = getResources().getDrawable(R.drawable.stop_button);
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -94,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void showStopButton(){
-        getReadyButton.setBackgroundColor(Color.RED);
+        getReadyButton.setBackgroundResource(R.drawable.stop_button);
         getReadyButton.setText("Stop");
         getReadyButton.setTextColor(Color.WHITE);
     }
 
     private void showGetReadyButton(){
-        getReadyButton.setBackgroundColor(Color.GREEN);
+        getReadyButton.setBackgroundResource(R.drawable.get_ready_button);
         getReadyButton.setText("Get Ready");
         getReadyButton.setTextColor(Color.WHITE);
     }

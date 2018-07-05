@@ -11,43 +11,7 @@ import android.widget.TextView;
 
 public class ParentTimer {
 
-    ParentTimer() {
-//        this.advancedMode = UserDefaults.standard.object(forKey: "advancedMode") as! Bool
-//        this.vibrate = UserDefaults.standard.object(forKey: "vibrate") as! Bool
-//        this.viewController = viewController
-//        this.interval = UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int
-//        this.bowl = UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int
-//        this.startTimerSetting = 4
-//        this.intervalTimer = IntervalTimer(timeSetting: UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int, bowlSetting: (UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int))
-//        reset()
-//
-//        intervalTimer?.setParentTimer(parentTimer: self)
-//
-//
-//        timersIntervals = [
-//        0,
-//                UserDefaults.standard.object(forKey: "breakSettingSave")  as! Int,
-//                UserDefaults.standard.object(forKey: "sampleSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundOneSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundTwoSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundThreeSettingSave") as! Int
-//        ]
-//
-//
-//        timers = [
-//        TimerCell(label: "Pour", interval: interval, timerSetting: 0, bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave" ) as! Int, iD: "pour"),
-//        TimerCell(label: "Break", interval: interval, timerSetting: timersIntervals[1], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "break"),
-//        TimerCell(label: "Sample", interval: interval, timerSetting: timersIntervals[2], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "sample"),
-//        TimerCell(label: "Round 1", interval: interval, timerSetting: timersIntervals[3], bowlCount: 0, iD: "Rd 1"),
-//        TimerCell(label: "Round 2", interval: interval, timerSetting: timersIntervals[4], bowlCount: 0, iD: "Rd 2"),
-//        TimerCell(label: "Round 3", interval: interval, timerSetting: timersIntervals[5], bowlCount: 0, iD: "Rd 3")
-//        ]
-//
-//
-//
-//        alarmSound = UserDefaults.standard.object(forKey: "alarmSoundSave") as! [String : Int]
 
-    }
 
     public static Handler handler = new Handler();
     boolean advancedMode = false;
@@ -63,7 +27,7 @@ public class ParentTimer {
     int alarmWarning = 1;
 
 
-     Interval intervalTimer;
+    IntervalTimer intervalTimer;
 
     //Start Timer
     Boolean initiateMainTimer = true;
@@ -210,6 +174,44 @@ public class ParentTimer {
 
     public void cancelCountdownTimer(){
         startTimer.cancel();
+    }
+
+    ParentTimer() {
+//        this.advancedMode = UserDefaults.standard.object(forKey: "advancedMode") as! Bool
+//        this.vibrate = UserDefaults.standard.object(forKey: "vibrate") as! Bool
+//        this.viewController = viewController
+//        this.interval = UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int
+//        this.bowl = UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int
+//        this.startTimerSetting = 4
+//        this.intervalTimer = IntervalTimer(timeSetting: UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int, bowlSetting: (UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int))
+//        reset()
+//
+//        intervalTimer.setParentTimer(parentTimer self)
+//
+//
+//        timersIntervals = [
+//        0,
+//                UserDefaults.standard.object(forKey: "breakSettingSave")  as! Int,
+//                UserDefaults.standard.object(forKey: "sampleSettingSave") as! Int,
+//                UserDefaults.standard.object(forKey: "roundOneSettingSave") as! Int,
+//                UserDefaults.standard.object(forKey: "roundTwoSettingSave") as! Int,
+//                UserDefaults.standard.object(forKey: "roundThreeSettingSave") as! Int
+//        ]
+//
+//
+//        timers = [
+//        TimerCell(label: "Pour", interval: interval, timerSetting: 0, bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave" ) as! Int, iD: "pour"),
+//        TimerCell(label: "Break", interval: interval, timerSetting: timersIntervals[1], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "break"),
+//        TimerCell(label: "Sample", interval: interval, timerSetting: timersIntervals[2], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "sample"),
+//        TimerCell(label: "Round 1", interval: interval, timerSetting: timersIntervals[3], bowlCount: 0, iD: "Rd 1"),
+//        TimerCell(label: "Round 2", interval: interval, timerSetting: timersIntervals[4], bowlCount: 0, iD: "Rd 2"),
+//        TimerCell(label: "Round 3", interval: interval, timerSetting: timersIntervals[5], bowlCount: 0, iD: "Rd 3")
+//        ]
+//
+//
+//
+//        alarmSound = UserDefaults.standard.object(forKey: "alarmSoundSave") as! [String : Int]
+
     }
 }
 
