@@ -9,14 +9,14 @@
     <TextView
         android:id="@+id/mainTimerDisplay"
         android:layout_width="wrap_content"
-        android:layout_height="67dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="163dp"
         android:layout_marginStart="163dp"
         android:layout_marginTop="50dp"
         android:background="#FAFAFA"
         android:text="00:00"
         android:textAlignment="center"
-        android:textSize="50sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

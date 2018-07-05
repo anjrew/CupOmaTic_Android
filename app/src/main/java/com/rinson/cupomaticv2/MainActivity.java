@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updatdateMainTimerUi(){
-        mainTimerDisplayText.setText("Start");
+        mainTimerDisplayText.setText("Go!");
     }
 
     public static  void updatdateMainTimerDisplay(String text){
