@@ -7,9 +7,9 @@
     <padding
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:bottom="5dp"
-        android:left="10dp"
-        android:right="10dp"
-        android:top="5dp"/>
+        android:bottom="15dp"
+        android:left="20dp"
+        android:right="20dp"
+        android:top="15dp"/>
 
 </shape>
