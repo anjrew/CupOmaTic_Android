@@ -8,15 +8,15 @@
 
 
     <NumberPicker
-        android:id="@+id/numberPicker1"
+        android:id="@+id/secondsNumberpicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/minutes2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -25,25 +25,30 @@
         android:layout_height="27dp"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="min"
+        android:text="sec"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/numberPicker1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/secondsNumberpicker"
         app:layout_constraintTop_toTopOf="parent" />
 
     <NumberPicker
-        android:id="@+id/numberPicker2"
+        android:id="@+id/minutesNumberPicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginBottom="8dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="214dp" />
+        app:layout_constraintVertical_bias="0.498" />
 
 
     <TextView
@@ -52,15 +57,15 @@
         android:layout_height="27dp"
         android:layout_centerVertical="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginEnd="172dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="sec"
+        android:text="min"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/numberPicker2"
+        app:layout_constraintStart_toEndOf="@+id/minutesNumberPicker"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

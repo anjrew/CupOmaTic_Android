@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -43,10 +44,12 @@ public class Settings extends AppCompatActivity {
 
         ListView settingsListView = (ListView) (findViewById(R.id.settingListView));
         final String[] settingsNames = {"Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
+        final String[] settingsValues = {"Mode1", "Interval1", "Break1", "Sample1", "Round One1", "Round Two1", "Round Three1", "Vibrate1"};
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.settings_list_view, settingsNames);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.settings_list_view, settingsNames);
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames);
 
-        settingsListView.setAdapter(arrayAdapter);
+        settingsListView.setAdapter(customListAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
