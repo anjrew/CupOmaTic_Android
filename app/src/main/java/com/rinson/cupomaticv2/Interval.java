@@ -16,13 +16,13 @@ public class Interval extends AppCompatActivity {
         setContentView(R.layout.activity_interval);
     }
 
-//    public void pressSetButton(View view){
-//        openSettingsActivity();
-//    }
-//
-//    public void openSettingsActivity() {
-//        Intent intent = new Intent(Interval.this, Settings.class);
-//        startActivity(intent);
-//    }
+    public void pressSetButton(View view){
+        openSettingsActivity();
+    }
+
+    public void openSettingsActivity() {
+        Intent intent = new Intent(Interval.this, Settings.class);
+        startActivity(intent);
+    }
 }
 

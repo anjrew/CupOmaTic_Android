@@ -13,10 +13,10 @@
 
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:textSize="22sp"
+    android:textSize="18sp"
     android:id="@android:id/text1"
-    android:paddingTop="18sp"
-    android:paddingBottom="18sp"
+    android:paddingTop="15sp"
+    android:paddingBottom="15sp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
