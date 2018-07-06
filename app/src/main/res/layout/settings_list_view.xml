@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@android:id/text1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:textAppearance="?android:attr/textAppearanceListItemSmall"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingStart="?android:attr/listPreferredItemPaddingStart"-->
+    <!--android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"-->
+    <!--android:minHeight="?android:attr/listPreferredItemHeightSmall"-->
+    <!--android:textSize="24sp"-->
+    <!--/>-->
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:textSize="22sp"
+    android:id="@android:id/text1"
+    android:paddingTop="18sp"
+    android:paddingBottom="18sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:gravity="center_vertical"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:layout_weight="1"
+    android:divider="@drawable/divider"
+    android:dividerHeight="16.0dp"
+    />

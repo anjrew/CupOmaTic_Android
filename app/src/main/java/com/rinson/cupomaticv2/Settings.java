@@ -44,7 +44,7 @@ public class Settings extends AppCompatActivity {
         ListView settingsListView = (ListView) (findViewById(R.id.settingListView));
         final String[] settingsNames = {"Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, settingsNames);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.settings_list_view, settingsNames);
 
         settingsListView.setAdapter(arrayAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -104,7 +104,7 @@ public class Settings extends AppCompatActivity {
                 break;
             case 2: openBreakActivity();
                 break;
-            case 3:
+            case 3: openSampleActivity();
                 break;
             case 4: openRoundOneActivity();
                 break;
