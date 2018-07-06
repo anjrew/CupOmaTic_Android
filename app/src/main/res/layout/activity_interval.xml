@@ -6,4 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".Interval">
 
+
+    <!--<NumberPicker-->
+        <!--android:id="@+id/numberPicker1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/minutes"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/minutes"-->
+        <!--android:layout_width="33dp"-->
+        <!--android:layout_height="27dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="min"-->
+        <!--android:textSize="20dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/minutes2"-->
+        <!--app:layout_constraintHorizontal_bias="0.584"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/minutes2"-->
+        <!--android:layout_width="32dp"-->
+        <!--android:layout_height="27dp"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:layout_marginEnd="104dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="sec"-->
+        <!--android:textSize="20dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/intervalSetButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:onClick="pressSetButton"-->
+        <!--android:text="Set"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView17"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="30dp"-->
+        <!--android:text="Interval"-->
+        <!--android:textSize="30sp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="50dp"
+        android:text="Interval"
+        android:textAlignment="center"
+        android:textSize="60sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

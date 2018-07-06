@@ -16,7 +16,7 @@
         android:background="#FAFAFA"
         android:text="00:00"
         android:textAlignment="center"
-        android:textSize="60sp"
+        android:textSize="70sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

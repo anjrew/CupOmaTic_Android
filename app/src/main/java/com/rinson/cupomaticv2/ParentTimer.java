@@ -58,7 +58,7 @@ public class ParentTimer {
 
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
                 } else {
-                    MainActivity.updatdateMainTimerDisplay("Start");
+                    MainActivity.updatdateMainTimerDisplay("GO!");
                 }
 
             }

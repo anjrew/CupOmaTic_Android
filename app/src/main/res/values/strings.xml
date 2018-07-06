@@ -15,4 +15,17 @@
     <string name="Save">Save Settings</string>
     <string name="Ready">Ready</string>
 
+
+    <string-array name="Classes">
+        <item>Mode</item>
+        <item>Interval</item>
+        <item>Break</item>
+        <item>Sample</item>
+        <item>Round One</item>
+        <item>Round Two</item>
+        <item>Round Three</item>
+        <item>Vibrate</item>
+    </string-array>
+
+
 </resources>

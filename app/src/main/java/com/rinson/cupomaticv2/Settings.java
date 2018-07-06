@@ -101,11 +101,17 @@ public class Settings extends AppCompatActivity {
 
         switch (arrayNumber){
             case 1: openIntervalActivity();
+                break;
             case 2: openBreakActivity();
-            case 3: openSampleActivity();
+                break;
+            case 3:
+                break;
             case 4: openRoundOneActivity();
+                break;
             case 5: openRoundTwoActivity();
+                break;
             case 6: openRoundThreeActivity();
+                break;
         }
 
 
