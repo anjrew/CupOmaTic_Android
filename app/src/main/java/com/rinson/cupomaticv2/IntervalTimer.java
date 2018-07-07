@@ -1,5 +1,6 @@
 package com.rinson.cupomaticv2;
 
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 
@@ -11,13 +12,13 @@ public class IntervalTimer {
     int bowlSetting;
     Timer timer;
     int bowlAmount;
-    static int time;
+    static int intervalTimeInSeconds;
     //  var second: Float
     Boolean active;
     int timeUnit = 10;
     static Boolean running;
     ParentTimer parentTimer;
-    public static Handler handler = new Handler();
+    static CountDownTimer intervalTimer;
 
 
     public void setParentTimer (ParentTimer parentTimer){
@@ -27,10 +28,10 @@ public class IntervalTimer {
     public void decreaseTimer(){
 
         if (bowlAmount > 0) {
-            time -= 1;
+            intervalTimeInSeconds -= 1;
 
-            if (time == 0){
-                time = timeSetting;
+            if (intervalTimeInSeconds == 0){
+                intervalTimeInSeconds = timeSetting;
                 bowlAmount -= 1;
             }
 
@@ -58,7 +59,7 @@ public class IntervalTimer {
     IntervalTimer(int timeSetting, int bowlSetting) {
         this.timeSetting = timeSetting * timeUnit;
         this.bowlSetting = bowlSetting;
-        this.time = this.timeSetting;
+        this.intervalTimeInSeconds = this.timeSetting;
         this.bowlAmount = bowlSetting;
         this.active = true;
 //        setParentTimer(ParentTimer);
@@ -73,34 +74,33 @@ public class IntervalTimer {
     public void reset(){
 
         bowlAmount = bowlSetting;
-        time = timeSetting;
+        intervalTimeInSeconds = timeSetting;
         active = false;
         }
 
-    public  static Runnable mainTimer = new Runnable() {
-        @Override
-        public void run() {
-            //insert code to be run every second
-//                increaseTimeByOneSecond();
-            if(running == true) {
 
-                time ++;
-                TimeConverters.convertIntSecStringsmmss(time);
 
-                //Time interval of timer
-                handler.postDelayed(this, 1000);
-            }else{
-                handler.removeCallbacks(mainTimer);
+    public static void startIntervalTimer(){
+
+        intervalTimer = new CountDownTimer(intervalTimeInSeconds*1000, 1000) {
+
+
+            @Override
+            public void onTick(long millisecondsUntilDone) {
+                //Code executed at every Interval
+                MainActivity.updateIntervalDisplayIntToString((int)millisecondsUntilDone/1000);
+                Log.i("interval Timer",String.valueOf(millisecondsUntilDone/1000));
             }
-        }
-    };
 
-    public static void startMainTimer(){
-//        showStopButton();
-        handler.removeCallbacks(mainTimer);
-        handler.postDelayed(mainTimer, 0);
+            @Override
+            public void onFinish() {
+                //Code executed at finish
+                Log.i("interval Timer","Finished");
+                //reset();
+            }
+
+        }.start();
     }
-
 
     public Boolean queryActive(){
 

@@ -1,6 +1,7 @@
 package com.rinson.cupomaticv2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,15 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     ParentTimer parentTimer = new ParentTimer();
+//    IntervalTimer intervalTimer;
     public static TextView mainTimerDisplayText;
     public static Button getReadyButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_menu, menu);
-
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         updateGetReadyStopButton();
+//        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds, bowlSetitng);
+
     }
 
 
@@ -111,5 +113,9 @@ public class MainActivity extends AppCompatActivity {
         } else {
             showGetReadyButton();
         }
+    }
+
+    static public void updateIntervalDisplayIntToString(int time){
+
     }
 }
