@@ -43,8 +43,36 @@ public class Interval extends AppCompatActivity {
 
         setContentView(R.layout.activity_interval);
         set = findViewById(R.id.intervalSetButton);
+        setupNumberPickers();
+    }
+
+
+    public void convertTotalTimeIntSecondsToMinutesAndSeconds(int intervalTotalTimeInSeconds){
+        minutes = intervalTotalTimeInSeconds / 60;
+        seconds = intervalTotalTimeInSeconds % 60;
+    }
+
+
+    public void saveChoiceInTotalSeconds(){
+        intervalTotalTimeInSeconds= (minutes * 60) + seconds;
+    }
+
+
+    public void pressSetButton(View view){
+        saveChoiceInTotalSeconds();
+        sharedPreferences.edit().putInt("intervalTimeInSeconds",intervalTotalTimeInSeconds).apply();
+        openSettingsActivity();
+    }
+
+
+    public void openSettingsActivity() {
+        Intent intent = new Intent(Interval.this, Settings.class);
+        startActivity(intent);
+    }
+
+    public void setupNumberPickers(){
         minutesNumberPicker = findViewById(R.id.minutesNumberPicker);
-        secondsNumberPicker = findViewById(R.id.secondsNumberpicker);
+        secondsNumberPicker = findViewById(R.id.breakNumberPicker);
 
         minutesNumberPicker.setMinValue(0);
         minutesNumberPicker.setMaxValue(59);
@@ -77,30 +105,7 @@ public class Interval extends AppCompatActivity {
                 seconds = newVal;
             }
         });
-    }
 
-
-    public void convertTotalTimeIntSecondsToMinutesAndSeconds(int intervalTotalTimeInSeconds){
-        minutes = intervalTotalTimeInSeconds / 60;
-        seconds = intervalTotalTimeInSeconds % 60;
-    }
-
-
-    public void saveChoiceInTotalSeconds(){
-        intervalTotalTimeInSeconds= (minutes * 60) + seconds;
-    }
-
-
-    public void pressSetButton(View view){
-        saveChoiceInTotalSeconds();
-        sharedPreferences.edit().putInt("intervalTimeInSeconds",intervalTotalTimeInSeconds).apply();
-        openSettingsActivity();
-    }
-
-
-    public void openSettingsActivity() {
-        Intent intent = new Intent(Interval.this, Settings.class);
-        startActivity(intent);
     }
 }
 

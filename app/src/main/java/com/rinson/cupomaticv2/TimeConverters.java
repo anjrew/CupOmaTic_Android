@@ -2,7 +2,7 @@ package com.rinson.cupomaticv2;
 
 public class TimeConverters {
 
-    public static String convertSecsmmss(int timeInput) {
+    public static String convertIntSecStringsmmss(int timeInput) {
 
         int timeSecs = timeInput;
         String timeString;
@@ -27,5 +27,11 @@ public class TimeConverters {
             timeString = String.valueOf(minutes) + ":" + String.valueOf(seconds);
         }
         return timeString;
+    }
+
+    public static int  convertMinutesToSeconds(int minutes){
+
+        return minutes * 60;
+
     }
 }

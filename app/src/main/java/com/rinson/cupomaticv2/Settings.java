@@ -19,17 +19,47 @@ public class Settings extends AppCompatActivity {
 
 
     int intervalTotalTimeInSeconds;
+    int breaktime;
+    int sampleTimeSeconds;
+    int roundoneTimeSeconds;
+    int roundTwoTimeSeconds;
+    int roundThreeTimeSeconds;
 
     SharedPreferences sharedPreferences;
 
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
-        ;
+
         if (sharedPreferences.contains("intervalTimeInSeconds")) {
             intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
             sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
+        }
+        if (sharedPreferences.contains("breakTime")) {
+            breaktime = sharedPreferences.getInt("breakTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("breakTime", 240).apply();
+        }
+        if (sharedPreferences.contains("sampleTime")) {
+            sampleTimeSeconds = sharedPreferences.getInt("sampleTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("sampleTime", 600).apply();
+        }
+        if (sharedPreferences.contains("roundOneTime")) {
+            roundoneTimeSeconds = sharedPreferences.getInt("roundOneTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundOneTime", 840).apply();
+        }
+        if (sharedPreferences.contains("roundTwoTime")) {
+            roundTwoTimeSeconds = sharedPreferences.getInt("roundTwoTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundTwoTime", 1080).apply();
+        }
+        if (sharedPreferences.contains("roundThreeTime")) {
+            roundThreeTimeSeconds = sharedPreferences.getInt("roundThreeTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
         }
     }
 
@@ -60,8 +90,16 @@ public class Settings extends AppCompatActivity {
     public void createListView() {
 
         ListView settingsListView = (findViewById(R.id.settingListView));
-        final String[] settingsNames = {"Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
-        final String[] settingsValues = {"Mode1", TimeConverters.convertSecsmmss(intervalTotalTimeInSeconds), "Break1", "Sample1", "Round One1", "Round Two1", "Round Three1", "Vibrate1"};
+        final String[] settingsNames = {"Advanced Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
+        final String[] settingsValues =
+                {"Mode1",
+                TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
+                TimeConverters.convertIntSecStringsmmss(breaktime),
+                TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
+                TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
+                TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
+                TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
+                "Vibrate1"};
 
         CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames);
 

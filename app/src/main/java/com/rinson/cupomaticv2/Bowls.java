@@ -1,6 +1,8 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +15,25 @@ public class Bowls extends AppCompatActivity {
     int numberOfBowls;
     EditText numberSelection;
 
+    //Saved variables
+    SharedPreferences sharedPreferences;
+
+    public void setUpMemory() {
+        sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains("numberOfBowls")) {
+            numberOfBowls = sharedPreferences.getInt("numberOfBowls", 0);
+        } else {
+            sharedPreferences.edit().putInt("numberOfBowls", 20).apply();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowls);
         numberSelection = findViewById(R.id.bowlsSelection);
+        setUpMemory();
     }
 
     public void startButton(View view) {
