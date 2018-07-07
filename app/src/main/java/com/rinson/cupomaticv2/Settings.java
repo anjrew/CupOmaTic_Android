@@ -3,20 +3,14 @@ package com.rinson.cupomaticv2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
 
 public class Settings extends AppCompatActivity {
-
 
     int intervalTotalTimeInSeconds;
     int breaktime;
@@ -31,7 +25,7 @@ public class Settings extends AppCompatActivity {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
 
-        if (sharedPreferences.contains("intervalTimeInSeconds")) {
+        if (sharedPreferences.contains("intervalTimeInSeconds")){
             intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
             sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
@@ -93,13 +87,13 @@ public class Settings extends AppCompatActivity {
         final String[] settingsNames = {"Advanced Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
         final String[] settingsValues =
                 {"Mode1",
-                TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
-                TimeConverters.convertIntSecStringsmmss(breaktime),
-                TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
-                TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
-                TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
-                TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
-                "Vibrate1"};
+                        TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
+                        TimeConverters.convertIntSecStringsmmss(breaktime),
+                        TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
+                        TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
+                        TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
+                        TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
+                        "Vibrate1"};
 
         CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames);
 
@@ -170,7 +164,5 @@ public class Settings extends AppCompatActivity {
             case 6: openRoundThreeActivity();
                 break;
         }
-
-
     }
 }

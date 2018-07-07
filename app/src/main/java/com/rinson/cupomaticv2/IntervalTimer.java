@@ -1,24 +1,24 @@
 package com.rinson.cupomaticv2;
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.util.Timer;
 
 public class IntervalTimer {
 
-
-
-
-
     int timeSetting;
     int bowlSetting;
     Timer timer;
     int bowlAmount;
-    int time;
+    static int time;
     //  var second: Float
     Boolean active;
     int timeUnit = 10;
+    static Boolean running;
     ParentTimer parentTimer;
+    public static Handler handler = new Handler();
+
 
     public void setParentTimer (ParentTimer parentTimer){
         this.parentTimer = parentTimer;
@@ -61,6 +61,7 @@ public class IntervalTimer {
         this.time = this.timeSetting;
         this.bowlAmount = bowlSetting;
         this.active = true;
+//        setParentTimer(ParentTimer);
     }
 
     public void invalidateIntervalTimer(){
@@ -74,9 +75,32 @@ public class IntervalTimer {
         bowlAmount = bowlSetting;
         time = timeSetting;
         active = false;
+        }
 
+    public  static Runnable mainTimer = new Runnable() {
+        @Override
+        public void run() {
+            //insert code to be run every second
+//                increaseTimeByOneSecond();
+            if(running == true) {
 
+                time ++;
+                TimeConverters.convertIntSecStringsmmss(time);
+
+                //Time interval of timer
+                handler.postDelayed(this, 1000);
+            }else{
+                handler.removeCallbacks(mainTimer);
+            }
+        }
+    };
+
+    public static void startMainTimer(){
+//        showStopButton();
+        handler.removeCallbacks(mainTimer);
+        handler.postDelayed(mainTimer, 0);
     }
+
 
     public Boolean queryActive(){
 
