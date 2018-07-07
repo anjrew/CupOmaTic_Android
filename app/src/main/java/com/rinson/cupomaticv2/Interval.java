@@ -1,30 +1,45 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.NumberPicker;
-import android.widget.TextView;
 import android.widget.NumberPicker.OnValueChangeListener;
 
 public class Interval extends AppCompatActivity {
 
     Button set;
     NumberPicker minutesNumberPicker, secondsNumberPicker;
-    TextView minutesNumberPickerText, secondsNumberPickerText;
     int intervalTotalTimeInSeconds;
     int minutes;
     int seconds;
+
+    //Saved variables
+    SharedPreferences sharedPreferences;
+
+    public void setUpMemory() {
+        sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
+
+        ;
+        if (sharedPreferences.contains("intervalTimeInSeconds")) {
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
+        } else {
+            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
+            convertTotalTimeIntSecondsToMinutesAndSeconds(intervalTotalTimeInSeconds);
+        }
+        convertTotalTimeIntSecondsToMinutesAndSeconds(intervalTotalTimeInSeconds);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        loadUserSettings();
+        setUpMemory();
 
         setContentView(R.layout.activity_interval);
         set = findViewById(R.id.intervalSetButton);
@@ -71,21 +86,17 @@ public class Interval extends AppCompatActivity {
     }
 
 
-
     public void saveChoiceInTotalSeconds(){
-       intervalTotalTimeInSeconds= (minutes * 60) + seconds;
+        intervalTotalTimeInSeconds= (minutes * 60) + seconds;
     }
 
 
     public void pressSetButton(View view){
+        saveChoiceInTotalSeconds();
+        sharedPreferences.edit().putInt("intervalTimeInSeconds",intervalTotalTimeInSeconds).apply();
         openSettingsActivity();
     }
 
-    public void loadUserSettings(){
-
-//        minutes =
-//        seconds =
-    }
 
     public void openSettingsActivity() {
         Intent intent = new Intent(Interval.this, Settings.class);

@@ -17,7 +17,7 @@ public class Bowls extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bowls);
-        numberSelection = (EditText)findViewById(R.id.bowlsSelection);
+        numberSelection = findViewById(R.id.bowlsSelection);
     }
 
     public void startButton(View view) {

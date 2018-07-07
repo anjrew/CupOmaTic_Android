@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     ParentTimer parentTimer = new ParentTimer();
     public static TextView mainTimerDisplayText;
     public static Button getReadyButton;
-//    Drawable getreadybutton = getResources().getDrawable(R.drawable.get_ready_button);
-//    Drawable stopButton = getResources().getDrawable(R.drawable.stop_button);
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -2,6 +2,7 @@ package com.rinson.cupomaticv2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,11 +18,27 @@ import android.widget.TextView;
 public class Settings extends AppCompatActivity {
 
 
+    int intervalTotalTimeInSeconds;
+
+    SharedPreferences sharedPreferences;
+
+    public void setUpMemory() {
+        sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
+
+        ;
+        if (sharedPreferences.contains("intervalTimeInSeconds")) {
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
+        } else {
+            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        setUpMemory();
         createListView();
     }
 
@@ -42,11 +59,10 @@ public class Settings extends AppCompatActivity {
 
     public void createListView() {
 
-        ListView settingsListView = (ListView) (findViewById(R.id.settingListView));
+        ListView settingsListView = (findViewById(R.id.settingListView));
         final String[] settingsNames = {"Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
-        final String[] settingsValues = {"Mode1", "Interval1", "Break1", "Sample1", "Round One1", "Round Two1", "Round Three1", "Vibrate1"};
+        final String[] settingsValues = {"Mode1", TimeConverters.convertSecsmmss(intervalTotalTimeInSeconds), "Break1", "Sample1", "Round One1", "Round Two1", "Round Three1", "Vibrate1"};
 
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.settings_list_view, settingsNames);
         CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames);
 
         settingsListView.setAdapter(customListAdapter);
@@ -119,32 +135,4 @@ public class Settings extends AppCompatActivity {
 
 
     }
-
 }
-//
-//    public void createTableRows() {
-//        for (int i = 0; i < tableRow.length; i++) {
-//
-//            tableRow[i] = new TableRow(this);
-//
-//        }
-//    }
-
-//    private void createView(TableRow tr, TextView t, String viewdata) {
-//
-//
-//        tr.SetBackgroundColor(Color.Black);
-//        tr.setClickable(true);
-//
-//        tr.setOnClickListener(tablerowOnClickListener);//add OnClickListener Here
-//
-//        tr.AddView(t); // add TextView to row.
-//
-//
-//    }
-//    private OnClickListener tablerowOnClickListener = new OnClickListener() {
-//        public void onClick(View v) {
-//            //GET TEXT HERE
-//            String currenttext = ((TextView)v).getText().toString());
-//        }
-//    };}
