@@ -37,14 +37,15 @@ public class Bowls extends AppCompatActivity {
     }
 
     public void startButton(View view) {
-        openMainActivity();
-        MainActivity.updatdateMainTimerDisplay("Ready");
-        ParentTimer.startStartTimer();
-        ParentTimer.switchParentTimerActiviationState();
-        MainActivity.showStopButton();
         Log.i("Info", "Start Button pressed");
         numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
         Log.i("Number of Bowls",String.valueOf(numberOfBowls));
+        MainActivity.parentTimer.intervalTimer.setBowlAmount(numberOfBowls);
+        openMainActivity();
+        ParentTimer.startStartTimer();
+        ParentTimer.switchParentTimerActiviationState();
+        MainActivity.showStopButton();
+
     }
 
     public void openMainActivity() {

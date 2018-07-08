@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("advancedMode", false).apply();
         }
         //
-        if (sharedPreferences.contains("intervalTotalTimeInSeconds")){
-            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTotalTimeInSeconds", 20);
+        if (sharedPreferences.contains("intervalTimeInSeconds")){
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
-            sharedPreferences.edit().putInt("intervalTotalTimeInSeconds", 20).apply();
+            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
         }
         //
         if (sharedPreferences.contains("breakTime")) {
@@ -120,11 +120,6 @@ public class MainActivity extends AppCompatActivity {
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
         updateGetReadyStopButton();
-
-        pourProgress.setBottomText("Cock");
-        pourProgress.setProgress(2);
-        intervalProgress.setProgress(4);
-        intervalProgress.setBottomText("Twat");
     }
 
     private void setupProgressViews() {
@@ -137,8 +132,10 @@ public class MainActivity extends AppCompatActivity {
         if (advancedMode == true) {
             breakProgress = findViewById(R.id.breakProgress);
             breakProgress.setMax(bowlSetting);
+            breakProgress.setBottomText("Br");
             sampleProgress = findViewById(R.id.sampleProgress);
             sampleProgress.setMax(bowlSetting);
+            sampleProgress.setBottomText("Sa");
         }else{
             breakProgress = findViewById(R.id.breakProgress);
             breakProgress.setVisibility(View.INVISIBLE);
@@ -158,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
             updateGetReadyStopButton();
             showGetReadyButton();
             parentTimer.cancelCountdownTimer();
+            parentTimer.intervalTimer.invalidateIntervalTimer();
 
         }else {
 
@@ -213,8 +211,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static public void updateIntervalDisplayInt(int time){
-        intervalProgress.setProgress(3);
-        intervalProgress.setBottomText("Cunt");
+        intervalProgress.setProgress(time);
+        intervalProgress.setBottomText("Int");
     }
 
     static public void updateIntervalDisplayToZero(){

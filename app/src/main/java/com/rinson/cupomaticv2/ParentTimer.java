@@ -99,7 +99,7 @@ public class ParentTimer {
 //        showStopButton();
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
-        intervalTimer.intervalTimer();
+        intervalTimer.startTimer();
     }
 
 
@@ -238,7 +238,6 @@ public class ParentTimer {
                                     }
 
                                 } else if (timers[x].getTimerSetting() == mainTime) {
-                                    MainActivity.intervalProgress.setBottomText(timers[x].Label());
                                     intervalTimer.startTimer();
 
 //                                    AudioServicesPlaySystemSound(SystemSoundID(1256))

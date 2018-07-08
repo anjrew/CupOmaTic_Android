@@ -43,7 +43,6 @@ public class IntervalTimer {
     public void startTimer(){
         active = true;
         bowlAmount -= 1;
-        timer.cancel();
         intervalTimer();
     }
 
@@ -59,35 +58,56 @@ public class IntervalTimer {
     }
 
     public void invalidateIntervalTimer(){
-        timer.cancel();
+        intervalTimer.cancel();
         active = false;
     }
 
     public void reset(){
 
-        bowlAmount = bowlSetting;
         intervalTimeInSeconds = timeSetting;
         active = false;
     }
 
-    public void intervalTimer(){
-        Log.i("In Interval timer","YAY");
-        intervalTimer = new CountDownTimer((timeSetting * 1000), 1000) {
+    public void totalReset(){
 
+        bowlAmount = bowlSetting;
+        reset();
+    }
+
+
+
+    public void intervalTimer(){
+
+        intervalTimer = new CountDownTimer((timeSetting * 1000), 1000) {
 
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
                 intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
-                Log.i("interval Timer",String.valueOf(millisecondsUntilDone/1000));
+                Log.i("interval Timer", String.valueOf(millisecondsUntilDone / 1000));
+                Log.i("Bowl", String.valueOf(bowlAmount));
+                ;
                 MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
             }
 
             @Override
             public void onFinish() {
+                intervalTimeInSeconds = 0;
                 //Code executed at finish
-                Log.i("interval Timer","Finished");
-                //reset();
+                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
+
+                reset();
+                if(bowlAmount > 0){
+                    Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
+//                    bowlAmount = bowlAmount - 1;
+                    MainActivity.intervalProgress.setProgress(0);
+
+                    startTimer();
+                }else{
+                    MainActivity.intervalProgress.setProgress(0);
+
+                    Log.i("interval Timer","Finished");
+                }
             }
         }.start();
     }

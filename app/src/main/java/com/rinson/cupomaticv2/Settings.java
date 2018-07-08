@@ -39,10 +39,10 @@ public class Settings extends AppCompatActivity {
             sharedPreferences.edit().putBoolean("advancedMode", false).apply();
         }
         //
-        if (sharedPreferences.contains("intervalTotalTimeInSeconds")){
-            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTotalTimeInSeconds", 20);
+        if (sharedPreferences.contains("intervalTimeInSeconds")){
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
-            sharedPreferences.edit().putInt("intervalTotalTimeInSeconds", 20).apply();
+            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
         }
         //
         if (sharedPreferences.contains("breakTime")) {
