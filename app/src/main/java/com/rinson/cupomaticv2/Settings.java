@@ -12,24 +12,39 @@ import android.widget.ListView;
 
 public class Settings extends AppCompatActivity {
 
+    int bowlSetting;
     int intervalTotalTimeInSeconds;
     int breaktime;
     int sampleTimeSeconds;
     int roundoneTimeSeconds;
     int roundTwoTimeSeconds;
     int roundThreeTimeSeconds;
+    boolean advancedMode;
+    boolean vibrate;
 
     SharedPreferences sharedPreferences;
 
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
-
-        if (sharedPreferences.contains("intervalTimeInSeconds")){
-            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
+        if (sharedPreferences.contains("bowlSetting")){
+            bowlSetting = sharedPreferences.getInt("bowlSetting", 0);
         } else {
-            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
+            sharedPreferences.edit().putInt("bowlSetting", 20).apply();
         }
+
+        if (sharedPreferences.contains("advancedMode")){
+            advancedMode = sharedPreferences.getBoolean("advancedMode",false);
+        } else {
+            sharedPreferences.edit().putBoolean("advancedMode", false).apply();
+        }
+        //
+        if (sharedPreferences.contains("intervalTotalTimeInSeconds")){
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTotalTimeInSeconds", 20);
+        } else {
+            sharedPreferences.edit().putInt("intervalTotalTimeInSeconds", 20).apply();
+        }
+        //
         if (sharedPreferences.contains("breakTime")) {
             breaktime = sharedPreferences.getInt("breakTime", 20);
         } else {
@@ -56,6 +71,7 @@ public class Settings extends AppCompatActivity {
             sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
         }
     }
+
 
 
     @Override

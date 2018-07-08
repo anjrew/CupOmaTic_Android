@@ -1,5 +1,6 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -16,8 +17,69 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    int bowlSetting;
+    int intervalTotalTimeInSeconds;
+    int breaktime;
+    int sampleTimeSeconds;
+    int roundoneTimeSeconds;
+    int roundTwoTimeSeconds;
+    int roundThreeTimeSeconds;
+    boolean advancedMode;
+    boolean vibrate;
 
-    ParentTimer parentTimer = new ParentTimer();
+    SharedPreferences sharedPreferences;
+
+    public void setUpMemory() {
+        sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains("bowlSetting")){
+            bowlSetting = sharedPreferences.getInt("bowlSetting", 0);
+        } else {
+            sharedPreferences.edit().putInt("bowlSetting", 20).apply();
+        }
+
+        if (sharedPreferences.contains("advancedMode")){
+            advancedMode = sharedPreferences.getBoolean("advancedMode",false);
+        } else {
+            sharedPreferences.edit().putBoolean("advancedMode", false).apply();
+        }
+        //
+        if (sharedPreferences.contains("intervalTotalTimeInSeconds")){
+            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTotalTimeInSeconds", 20);
+        } else {
+            sharedPreferences.edit().putInt("intervalTotalTimeInSeconds", 20).apply();
+        }
+        //
+        if (sharedPreferences.contains("breakTime")) {
+            breaktime = sharedPreferences.getInt("breakTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("breakTime", 240).apply();
+        }
+        if (sharedPreferences.contains("sampleTime")) {
+            sampleTimeSeconds = sharedPreferences.getInt("sampleTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("sampleTime", 600).apply();
+        }
+        if (sharedPreferences.contains("roundOneTime")) {
+            roundoneTimeSeconds = sharedPreferences.getInt("roundOneTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundOneTime", 840).apply();
+        }
+        if (sharedPreferences.contains("roundTwoTime")) {
+            roundTwoTimeSeconds = sharedPreferences.getInt("roundTwoTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundTwoTime", 1080).apply();
+        }
+        if (sharedPreferences.contains("roundThreeTime")) {
+            roundThreeTimeSeconds = sharedPreferences.getInt("roundThreeTime", 20);
+        } else {
+            sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
+        }
+    }
+
+
+
+    ParentTimer parentTimer;
 //    IntervalTimer intervalTimer;
     public static TextView mainTimerDisplayText;
     public static Button getReadyButton;
@@ -46,10 +108,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setUpMemory();
+        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         updateGetReadyStopButton();
-//        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds, bowlSetitng);
 
     }
 

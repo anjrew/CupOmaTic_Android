@@ -9,53 +9,8 @@ import android.util.Log;
 
 public class ParentTimer {
 
-    int intervalTotalTimeInSeconds;
-    int breaktime;
-    int sampleTimeSeconds;
-    int roundoneTimeSeconds;
-    int roundTwoTimeSeconds;
-    int roundThreeTimeSeconds;
-
-    SharedPreferences sharedPreferences;
-
-    public void setUpMemory() {
-
-        if (sharedPreferences.contains("intervalTimeInSeconds")){
-            intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
-        } else {
-            sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
-        }
-        if (sharedPreferences.contains("breakTime")) {
-            breaktime = sharedPreferences.getInt("breakTime", 20);
-        } else {
-            sharedPreferences.edit().putInt("breakTime", 240).apply();
-        }
-        if (sharedPreferences.contains("sampleTime")) {
-            sampleTimeSeconds = sharedPreferences.getInt("sampleTime", 20);
-        } else {
-            sharedPreferences.edit().putInt("sampleTime", 600).apply();
-        }
-        if (sharedPreferences.contains("roundOneTime")) {
-            roundoneTimeSeconds = sharedPreferences.getInt("roundOneTime", 20);
-        } else {
-            sharedPreferences.edit().putInt("roundOneTime", 840).apply();
-        }
-        if (sharedPreferences.contains("roundTwoTime")) {
-            roundTwoTimeSeconds = sharedPreferences.getInt("roundTwoTime", 20);
-        } else {
-            sharedPreferences.edit().putInt("roundTwoTime", 1080).apply();
-        }
-        if (sharedPreferences.contains("roundThreeTime")) {
-            roundThreeTimeSeconds = sharedPreferences.getInt("roundThreeTime", 20);
-        } else {
-            sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
-        }
-    }
-
 
     public static Handler handler = new Handler();
-    boolean advancedMode = false;
-    boolean vibrate = false;
     int bowl;
     int timerAlarms;
     int[] timersIntervals;
@@ -65,6 +20,16 @@ public class ParentTimer {
     int alarmSound;
     int alarmWarning = 1;
 
+    int bowlSetting;
+    int intervalTotalTimeInSeconds;
+    int breaktime;
+    int sampleTimeSeconds;
+    int roundoneTimeSeconds;
+    int roundTwoTimeSeconds;
+    int roundThreeTimeSeconds;
+    boolean advancedMode;
+    boolean vibrate;
+
 
     IntervalTimer intervalTimer;
 
@@ -73,7 +38,6 @@ public class ParentTimer {
     //    CountDownTimer startTimer;
     Boolean timerActive = false;
     int startTime;
-    int bowlSetting;
     public static Boolean running = false;
     static int startDisplayTime = 1;
     static int getReadyDisplayTime = 5;
@@ -215,8 +179,18 @@ public class ParentTimer {
         startTimer.cancel();
     }
 
-    ParentTimer() {
-//        setUpMemory();
+    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate) {
+        this.advancedMode = advancedMode;
+        this.bowlSetting = bowlSetting;
+        this.intervalTotalTimeInSeconds = intervalTotalTimeInSeconds;
+        this.breaktime = breaktime;
+        this.sampleTimeSeconds = sampleTimeSeconds;
+        this.roundoneTimeSeconds = roundoneTimeSeconds;
+        this.roundTwoTimeSeconds = roundTwoTimeSeconds;
+        this.roundThreeTimeSeconds = roundThreeTimeSeconds;
+        this.vibrate = vibrate;
+
+
 //        this.advancedMode = UserDefaults.standard.object(forKey: "advancedMode") as! Bool
 //        this.vibrate = UserDefaults.standard.object(forKey: "vibrate") as! Bool
 //        this.viewController = viewController
