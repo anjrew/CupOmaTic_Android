@@ -214,34 +214,17 @@ public class ParentTimer {
 
     }
 
-    public static void increaseTimer(){
+    public static void increaseTimer() {
 
 
         MainActivity.updateProgressViews();
 
-        for(int i = 0; i < timers.length; i++) {
+        for (int i = 0; i < timers.length; i++) {
 
-            //in advanced mode controlling timers and progressbars for the rounds.
-                if (i < 5) {
+            startTimercellOnTime(timers[i]);
 
-                    if (timers[i].getTimerSetting() < timers[i + 1].getTimerSetting()) {
-
-                        getReadyVoice(i);
-                        alarmBeep(i);
-
-                    } else if (timers[i].getTimerSetting() == mainTime) {
-                        intervalTimer.startTimer();
-                        timers[i].stageTimer();
-//
-////                                    AudioServicesPlaySystemSound(SystemSoundID(1256))
-////                                    vibrateProcess()}
-
-                    } else {
-
-                    }
-                }
-            }
         }
+    }
 
 
     public static String getRoundTime(int timerIndex) {
@@ -251,7 +234,6 @@ public class ParentTimer {
         int timerTwo;
 
         if (timerIndex <= timers.length){
-//            Log.i("Get RoundTime, Timer Number " + String.valueOf(timerIndex) + " of " + String.valueOf(timers.length));
             timerOne = timers[timerIndex].getTimerSetting();
             timerTwo = timers[timerIndex+1].getTimerSetting();
             timeInt = (timerTwo-timerOne) - (getMainTimeInterger() - timerOne);
@@ -282,7 +264,14 @@ public class ParentTimer {
         if (timers[timer].getTimerSetting() - mainTime == voiceWarningTime) {
 //                                        audio.playGetReady()
         }
+    }
 
+    public static void startTimercellOnTime(TimerCell timerCell){
+
+        if (timerCell.getTimerSetting() == mainTime) {
+            intervalTimer.startTimer();
+            timerCell.stageTimer();
+        }
     }
 
 }

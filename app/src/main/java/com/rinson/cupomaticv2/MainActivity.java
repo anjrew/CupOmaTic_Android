@@ -222,8 +222,8 @@ public class MainActivity extends AppCompatActivity {
     public static  void updateProgressViews(){
 
         //intervalProgress
-        pourProgress.setMax(parentTimer.timers[0].timerSetting);
-        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
+//        pourProgress.setMax(parentTimer.timers[0].timerSetting);
+//        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
         if (parentTimer.intervalTimer.active == false ){
             updateIntervalDisplayToZero();
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
         }else{
 
             sampleProgress.setBottomText("Br");
-            sampleProgress.setProgress(parentTimer.timers[2].bowlsPassed);
+            sampleProgress.setProgress(parentTimer.timers[1].bowlsPassed);
 
         }
     }

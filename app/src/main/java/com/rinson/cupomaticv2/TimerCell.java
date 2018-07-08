@@ -64,8 +64,8 @@ public class TimerCell {
     }
 
     public void decreaseTimer(){
-        Log.i("Bowls passed =",String.valueOf(bowlsPassed));
-        Log.i("Time passed =",String.valueOf(timePassed));
+        Log.i("Bowls "+ iD,String.valueOf(bowlsPassed));
+        Log.i("Time passed " +iD,String.valueOf(timePassed));
 
         if (active){
 
