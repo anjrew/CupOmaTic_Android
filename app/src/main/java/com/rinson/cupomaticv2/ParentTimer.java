@@ -27,6 +27,7 @@ public class ParentTimer {
     int roundThreeTimeSeconds;
     static boolean advancedMode;
     boolean vibrate;
+    static int voiceWarningTime = 10;
 
 
     static IntervalTimer intervalTimer;
@@ -80,7 +81,6 @@ public class ParentTimer {
         @Override
         public void run() {
             //insert code to be run every second
-//                increaseTimeByOneSecond();
             increaseTimer();
             if(running == true) {
 
@@ -100,6 +100,7 @@ public class ParentTimer {
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
         intervalTimer.startTimer();
+        timers[0].stageTimer();
     }
 
 
@@ -218,83 +219,30 @@ public class ParentTimer {
 
         MainActivity.updateProgressViews();
 
-        for (int x = 0; x < timers.length; x++){
+        for(int i = 0; i < timers.length; i++) {
 
+            //in advanced mode controlling timers and progressbars for the rounds.
+                if (i < 5) {
 
+                    if (timers[i].getTimerSetting() < timers[i + 1].getTimerSetting()) {
 
-                    //in advanced mode controlling timers and progressbars for the rounds.
-                    if (intervalTimer.active != true) {
-                        if (x < 5) {
-                            if (timers[x].getTimerSetting() < timers[x + 1].getTimerSetting()) {
+                        getReadyVoice(i);
+                        alarmBeep(i);
 
-                                if (timers[x].getTimerSetting() > mainTime) {
+                    } else if (timers[i].getTimerSetting() == mainTime) {
+                        intervalTimer.startTimer();
+                        timers[i].stageTimer();
+//
+////                                    AudioServicesPlaySystemSound(SystemSoundID(1256))
+////                                    vibrateProcess()}
 
-                                    if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 1)) {
-//                                        timers[x].playSound()
-                                    }
+                    } else {
 
-                                    if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 10)) {
-//                                        audio.playGetReady()
-                                    }
-
-                                } else if (timers[x].getTimerSetting() == mainTime) {
-                                    intervalTimer.startTimer();
-
-//                                    AudioServicesPlaySystemSound(SystemSoundID(1256))
-//                                    vibrateProcess()
-
-                                } else {
-
-                                    MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
-                                    MainActivity.intervalProgress.setBottomText(timers[1].getId());
-
-                                    if (timers[x].getTimePassed() == alarmWarning) {
-//                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
-//                                        vibrateProcess()
-                                    }
-                                }
-                            }
-                        } else {
-
-
-                            // Final Round interval progress ui
-
-                            if (timers[x].getTimerSetting() > mainTime) {
-
-                                if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 1)) {
-//                                    timers[i].playSound()
-                                }
-
-                                if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 10)) {
-//                                    audio.playGetReady()
-                                }
-
-                            } else if (timers[x].getTimerSetting() == mainTime) {
-
-                                MainActivity.intervalProgress.setBottomText(timers[x].Label());
-//                                AudioServicesPlaySystemSound(SystemSoundID(1256))
-//                                vibrateProcess()
-
-                            } else {
-
-                                MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
-                                MainActivity.intervalProgress.setBottomText(timers[1].getId());
-
-                                if (timers[x].getTimePassed() == alarmWarning) {
-//                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
-//                                        vibrateProcess()
-                                }
-
-                            }
-                        }
                     }
-            timers[x].decreaseTimer();
-            if(x < timers.length){
-                x += 1;
+                }
             }
         }
 
-    }
 
     public static String getRoundTime(int timerIndex) {
         int timerOne;
@@ -321,6 +269,22 @@ public class ParentTimer {
 
         return time;
     }
+
+    public static void getReadyVoice(int timer){
+        if (timers[timer].getTimerSetting() - getMainTimeInterger() == (alarmWarning)) {
+
+            //timers[i].playVoiceSound
+        }
+
+    }
+
+    public static void alarmBeep(int timer){
+        if (timers[timer].getTimerSetting() - mainTime == voiceWarningTime) {
+//                                        audio.playGetReady()
+        }
+
+    }
+
 }
 
 

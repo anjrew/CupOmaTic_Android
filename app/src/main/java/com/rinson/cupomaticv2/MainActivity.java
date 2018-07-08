@@ -220,7 +220,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static  void updateProgressViews(){
+
         //intervalProgress
+        pourProgress.setMax(parentTimer.timers[0].timerSetting);
+        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
         if (parentTimer.intervalTimer.active == false ){
             updateIntervalDisplayToZero();
@@ -228,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
             updateIntervalDisplayInt(parentTimer.intervalTimer.getTimeInt());
         }
 
-        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
+
 
         if (advancedMode == true) {
 

@@ -5,6 +5,9 @@
     <color name="colorAccent">#6340ff</color>
     <color name="green">#00d400</color>
     <color name="red">#c80a0a</color>
+    <color name="archBackground">#f0f0f0</color>
+
+
 
 
 </resources>

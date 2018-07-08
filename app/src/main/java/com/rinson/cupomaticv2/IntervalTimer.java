@@ -84,9 +84,6 @@ public class IntervalTimer {
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
                 intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
-                Log.i("interval Timer", String.valueOf(millisecondsUntilDone / 1000));
-                Log.i("Bowl", String.valueOf(bowlAmount));
-                ;
                 MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
             }
 
