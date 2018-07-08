@@ -33,7 +33,6 @@ public class ParentTimer {
 
     //Start Timer
     Boolean initiateMainTimer = true;
-    //    CountDownTimer startTimer;
     Boolean timerActive = false;
     int startTime;
     public static Boolean running = false;
@@ -47,7 +46,6 @@ public class ParentTimer {
 
         startTimer = new CountDownTimer(countDownTimerSeconds*1000, 1000) {
 
-
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
@@ -58,10 +56,12 @@ public class ParentTimer {
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
-                } else {
-                    MainActivity.updatdateMainTimerDisplay("GO!");
-                }
 
+                } else {
+
+                    MainActivity.updatdateMainTimerDisplay("GO!");
+
+                }
             }
 
             @Override
@@ -81,6 +81,7 @@ public class ParentTimer {
         public void run() {
             //insert code to be run every second
 //                increaseTimeByOneSecond();
+            increaseTimer();
             if(running == true) {
 
                 mainTime++;
@@ -98,6 +99,7 @@ public class ParentTimer {
 //        showStopButton();
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
+        intervalTimer.intervalTimer();
     }
 
 
@@ -191,7 +193,7 @@ public class ParentTimer {
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
 
-        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting,this);
+        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
 
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
@@ -213,45 +215,31 @@ public class ParentTimer {
 
     public static void increaseTimer(){
 
-        mainTime += 1;
 
         MainActivity.updateProgressViews();
 
-        int i = 0;
+        for (int x = 0; x < timers.length; x++){
 
-        for (TimerCell timer : timers){
 
-            if (advancedMode == false){
-
-                if (i < 2) {
-
-                    MainActivity.updateProgressViews();
-                }
-            }else{
-
-                if (i < 3) {
-
-                    MainActivity.updateProgressViews();
-
-                }else{
 
                     //in advanced mode controlling timers and progressbars for the rounds.
-                    if (intervalTimer.active != true){
-                        if (i < 5){
-                            if (timers[i].getTimerSetting() < timers[i+1].getTimerSetting()){
+                    if (intervalTimer.active != true) {
+                        if (x < 5) {
+                            if (timers[x].getTimerSetting() < timers[x + 1].getTimerSetting()) {
 
-                                if (timers[i].getTimerSetting() > mainTime) {
+                                if (timers[x].getTimerSetting() > mainTime) {
 
-                                    if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 1 )){
-//                                        timers[i].playSound()
+                                    if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 1)) {
+//                                        timers[x].playSound()
                                     }
 
-                                    if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 10 )){
+                                    if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 10)) {
 //                                        audio.playGetReady()
                                     }
 
-                                } else if (timers[i].getTimerSetting() == mainTime){
-                                    MainActivity.intervalProgress.setBottomText(timers[i].Label());
+                                } else if (timers[x].getTimerSetting() == mainTime) {
+                                    MainActivity.intervalProgress.setBottomText(timers[x].Label());
+                                    intervalTimer.startTimer();
 
 //                                    AudioServicesPlaySystemSound(SystemSoundID(1256))
 //                                    vibrateProcess()
@@ -261,30 +249,30 @@ public class ParentTimer {
                                     MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
                                     MainActivity.intervalProgress.setBottomText(timers[1].getId());
 
-                                    if(timers[i].getTimePassed() == alarmWarning){
+                                    if (timers[x].getTimePassed() == alarmWarning) {
 //                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
 //                                        vibrateProcess()
                                     }
                                 }
                             }
-                        }else{
+                        } else {
 
 
                             // Final Round interval progress ui
 
-                            if (timers[i].getTimerSetting() > mainTime) {
+                            if (timers[x].getTimerSetting() > mainTime) {
 
-                                if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 1 )){
+                                if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 1)) {
 //                                    timers[i].playSound()
                                 }
 
-                                if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 10 )){
+                                if (timers[x].getTimerSetting() - mainTime == (alarmWarning + 10)) {
 //                                    audio.playGetReady()
                                 }
 
-                            } else if (timers[i].getTimerSetting() == mainTime){
+                            } else if (timers[x].getTimerSetting() == mainTime) {
 
-                                MainActivity.intervalProgress.setBottomText(timers[i].Label());
+                                MainActivity.intervalProgress.setBottomText(timers[x].Label());
 //                                AudioServicesPlaySystemSound(SystemSoundID(1256))
 //                                vibrateProcess()
 
@@ -293,7 +281,7 @@ public class ParentTimer {
                                 MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
                                 MainActivity.intervalProgress.setBottomText(timers[1].getId());
 
-                                if(timers[i].getTimePassed() == alarmWarning){
+                                if (timers[x].getTimePassed() == alarmWarning) {
 //                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
 //                                        vibrateProcess()
                                 }
@@ -301,12 +289,9 @@ public class ParentTimer {
                             }
                         }
                     }
-                }
-            }
-
-            timer.decreaseTimer();
-            if(i < timers.length){
-                i += 1;
+            timers[x].decreaseTimer();
+            if(x < timers.length){
+                x += 1;
             }
         }
 

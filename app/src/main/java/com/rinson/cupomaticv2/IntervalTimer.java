@@ -12,18 +12,11 @@ public class IntervalTimer {
     int bowlSetting;
     Timer timer;
     int bowlAmount;
-    static int intervalTimeInSeconds;
-    //  var second: Float
+    int intervalTimeInSeconds;
     Boolean active;
-    int timeUnit = 10;
     static Boolean running;
-    ParentTimer parentTimer;
     static CountDownTimer intervalTimer;
 
-
-    public void setParentTimer (ParentTimer parentTimer){
-        this.parentTimer = parentTimer;
-    }
 
     public void decreaseTimer(){
 
@@ -43,8 +36,6 @@ public class IntervalTimer {
         }else{
             Log.i("WARNING","YOU SHOULDN'T BE HERE");
         }
-
-//        parentTimer?.viewController?.updateIntervalViews()
     }
 
 
@@ -52,22 +43,24 @@ public class IntervalTimer {
     public void startTimer(){
         active = true;
         bowlAmount -= 1;
-
         timer.cancel();
+        intervalTimer();
     }
 
-    IntervalTimer(int timeSetting, int bowlSetting, ParentTimer parentTimer) {
-        this.timeSetting = timeSetting * timeUnit;
+    IntervalTimer(int timeSetting, int bowlSetting) {
+        this.timeSetting = timeSetting;
         this.bowlSetting = bowlSetting;
-        this.intervalTimeInSeconds = this.timeSetting;
+        this.intervalTimeInSeconds = timeSetting;
         this.bowlAmount = bowlSetting;
         this.active = true;
-        this.parentTimer = parentTimer;    }
+
+;
+        Log.i("IntervalTimeInSeconds :",String.valueOf(intervalTimeInSeconds));
+    }
 
     public void invalidateIntervalTimer(){
         timer.cancel();
         active = false;
-
     }
 
     public void reset(){
@@ -75,20 +68,19 @@ public class IntervalTimer {
         bowlAmount = bowlSetting;
         intervalTimeInSeconds = timeSetting;
         active = false;
-        }
+    }
 
-
-
-    public static void startIntervalTimer(){
-
-        intervalTimer = new CountDownTimer(intervalTimeInSeconds*1000, 1000) {
+    public void intervalTimer(){
+        Log.i("In Interval timer","YAY");
+        intervalTimer = new CountDownTimer((timeSetting * 1000), 1000) {
 
 
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
-                MainActivity.updateIntervalDisplayIntToString((int)millisecondsUntilDone/1000);
+                intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
                 Log.i("interval Timer",String.valueOf(millisecondsUntilDone/1000));
+                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
             }
 
             @Override
@@ -97,9 +89,9 @@ public class IntervalTimer {
                 Log.i("interval Timer","Finished");
                 //reset();
             }
-
         }.start();
     }
+
 
     public Boolean queryActive(){
 
@@ -109,15 +101,6 @@ public class IntervalTimer {
     public int getTimeInt() {
         return intervalTimeInSeconds;
     }
-
-//
-//    public float getIntervalPercentage(){
-//
-//        if(time == 0 ){
-//            return 0;
-//        }
-//        return (float)(Double(timeSetting - time) / Double(timeSetting))
-//    }
 
     public void setBowlAmount(int bowlSetAs){
         bowlAmount = bowlSetAs;

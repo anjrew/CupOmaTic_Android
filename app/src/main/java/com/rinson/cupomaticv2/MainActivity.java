@@ -120,6 +120,11 @@ public class MainActivity extends AppCompatActivity {
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
         updateGetReadyStopButton();
+
+        pourProgress.setBottomText("Cock");
+        pourProgress.setProgress(2);
+        intervalProgress.setProgress(4);
+        intervalProgress.setBottomText("Twat");
     }
 
     private void setupProgressViews() {
@@ -207,8 +212,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    static public void updateIntervalDisplayIntToString(int time){
-        intervalProgress.setProgress(time);
+    static public void updateIntervalDisplayInt(int time){
+        intervalProgress.setProgress(3);
+        intervalProgress.setBottomText("Cunt");
     }
 
     static public void updateIntervalDisplayToZero(){
@@ -221,20 +227,20 @@ public class MainActivity extends AppCompatActivity {
         if (parentTimer.intervalTimer.active == false ){
             updateIntervalDisplayToZero();
         }else{
-            updateIntervalDisplayIntToString(parentTimer.intervalTimer.getTimeInt());
+            updateIntervalDisplayInt(parentTimer.intervalTimer.getTimeInt());
         }
 
-        pourProgress.setProgress(parentTimer.timers[1].bowlsPassed);
+        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
         if (advancedMode == true) {
 
-            breakProgress.setProgress(parentTimer.timers[2].bowlsPassed);
-            sampleProgress.setProgress(parentTimer.timers[3].bowlsPassed);
+            breakProgress.setProgress(parentTimer.timers[1].bowlsPassed);
+            sampleProgress.setProgress(parentTimer.timers[2].bowlsPassed);
 
         }else{
 
-            breakProgress.setBottomText("Sa");
-            breakProgress.setProgress(parentTimer.timers[3].bowlsPassed);
+            sampleProgress.setBottomText("Br");
+            sampleProgress.setProgress(parentTimer.timers[2].bowlsPassed);
 
         }
     }
