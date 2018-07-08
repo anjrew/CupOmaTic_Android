@@ -1,8 +1,6 @@
 package com.rinson.cupomaticv2;
 
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
@@ -18,7 +16,7 @@ public class ParentTimer {
     static TimerCell[] timers;
     static int mainTime;
     int alarmSound;
-    int alarmWarning = 1;
+    static int alarmWarning = 1;
 
     int bowlSetting;
     int intervalTotalTimeInSeconds;
@@ -27,11 +25,11 @@ public class ParentTimer {
     int roundoneTimeSeconds;
     int roundTwoTimeSeconds;
     int roundThreeTimeSeconds;
-    boolean advancedMode;
+    static boolean advancedMode;
     boolean vibrate;
 
 
-    IntervalTimer intervalTimer;
+    static IntervalTimer intervalTimer;
 
     //Start Timer
     Boolean initiateMainTimer = true;
@@ -131,6 +129,7 @@ public class ParentTimer {
     public Boolean getRunningstaus() {
         return running;
     }
+
     public void setRunningStatusToFalse(){
         running = false ;
     }
@@ -175,6 +174,8 @@ public class ParentTimer {
         return timeString;
     }
 
+
+
     public void cancelCountdownTimer(){
         startTimer.cancel();
     }
@@ -190,42 +191,151 @@ public class ParentTimer {
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
 
+        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting,this);
 
-//        this.advancedMode = UserDefaults.standard.object(forKey: "advancedMode") as! Bool
-//        this.vibrate = UserDefaults.standard.object(forKey: "vibrate") as! Bool
-//        this.viewController = viewController
-//        this.interval = UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int
-//        this.bowl = UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int
-//        this.startTimerSetting = 4
-//        this.intervalTimer = IntervalTimer(timeSetting: UserDefaults.standard.object(forKey: "intervalSettingSave") as! Int, bowlSetting: (UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int))
-//        reset()
-//
-//        intervalTimer.setParentTimer(parentTimer self)
-//
-//
-//        timersIntervals = [
-//        0,
-//                UserDefaults.standard.object(forKey: "breakSettingSave")  as! Int,
-//                UserDefaults.standard.object(forKey: "sampleSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundOneSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundTwoSettingSave") as! Int,
-//                UserDefaults.standard.object(forKey: "roundThreeSettingSave") as! Int
-//        ]
-//
-//
-//        timers = [
-//        TimerCell(label: "Pour", interval: interval, timerSetting: 0, bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave" ) as! Int, iD: "pour"),
-//        TimerCell(label: "Break", interval: interval, timerSetting: timersIntervals[1], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "break"),
-//        TimerCell(label: "Sample", interval: interval, timerSetting: timersIntervals[2], bowlCount: UserDefaults.standard.object(forKey: "numberOfBowlsSave") as! Int, iD: "sample"),
-//        TimerCell(label: "Round 1", interval: interval, timerSetting: timersIntervals[3], bowlCount: 0, iD: "Rd 1"),
-//        TimerCell(label: "Round 2", interval: interval, timerSetting: timersIntervals[4], bowlCount: 0, iD: "Rd 2"),
-//        TimerCell(label: "Round 3", interval: interval, timerSetting: timersIntervals[5], bowlCount: 0, iD: "Rd 3")
-//        ]
-//
-//
-//
-//        alarmSound = UserDefaults.standard.object(forKey: "alarmSoundSave") as! [String : Int]
+        timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
+        timers = new TimerCell[]{
+                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour"),
+
+                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "break"),
+
+                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample"),
+
+                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"Rd 1"),
+
+                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"Rd 2"),
+
+                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"Rd 3"),
+        };
+
+    }
+
+    public static void increaseTimer(){
+
+        mainTime += 1;
+
+        MainActivity.updateProgressViews();
+
+        int i = 0;
+
+        for (TimerCell timer : timers){
+
+            if (advancedMode == false){
+
+                if (i < 2) {
+
+                    MainActivity.updateProgressViews();
+                }
+            }else{
+
+                if (i < 3) {
+
+                    MainActivity.updateProgressViews();
+
+                }else{
+
+                    //in advanced mode controlling timers and progressbars for the rounds.
+                    if (intervalTimer.active != true){
+                        if (i < 5){
+                            if (timers[i].getTimerSetting() < timers[i+1].getTimerSetting()){
+
+                                if (timers[i].getTimerSetting() > mainTime) {
+
+                                    if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 1 )){
+//                                        timers[i].playSound()
+                                    }
+
+                                    if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 10 )){
+//                                        audio.playGetReady()
+                                    }
+
+                                } else if (timers[i].getTimerSetting() == mainTime){
+                                    MainActivity.intervalProgress.setBottomText(timers[i].Label());
+
+//                                    AudioServicesPlaySystemSound(SystemSoundID(1256))
+//                                    vibrateProcess()
+
+                                } else {
+
+                                    MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
+                                    MainActivity.intervalProgress.setBottomText(timers[1].getId());
+
+                                    if(timers[i].getTimePassed() == alarmWarning){
+//                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
+//                                        vibrateProcess()
+                                    }
+                                }
+                            }
+                        }else{
+
+
+                            // Final Round interval progress ui
+
+                            if (timers[i].getTimerSetting() > mainTime) {
+
+                                if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 1 )){
+//                                    timers[i].playSound()
+                                }
+
+                                if (timers[i].getTimerSetting() - mainTime == (alarmWarning + 10 )){
+//                                    audio.playGetReady()
+                                }
+
+                            } else if (timers[i].getTimerSetting() == mainTime){
+
+                                MainActivity.intervalProgress.setBottomText(timers[i].Label());
+//                                AudioServicesPlaySystemSound(SystemSoundID(1256))
+//                                vibrateProcess()
+
+                            } else {
+
+                                MainActivity.intervalProgress.setProgress(timers[1].getTimePassed());
+                                MainActivity.intervalProgress.setBottomText(timers[1].getId());
+
+                                if(timers[i].getTimePassed() == alarmWarning){
+//                                        AudioServicesPlaySystemSound(SystemSoundID(1256))
+//                                        vibrateProcess()
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+
+            timer.decreaseTimer();
+            if(i < timers.length){
+                i += 1;
+            }
+        }
+
+    }
+
+    public static String getRoundTime(int timerIndex) {
+        int timerOne;
+        String time;
+        int timeInt;
+        int timerTwo;
+
+        if (timerIndex <= timers.length){
+//            Log.i("Get RoundTime, Timer Number " + String.valueOf(timerIndex) + " of " + String.valueOf(timers.length));
+            timerOne = timers[timerIndex].getTimerSetting();
+            timerTwo = timers[timerIndex+1].getTimerSetting();
+            timeInt = (timerTwo-timerOne) - (getMainTimeInterger() - timerOne);
+
+            if(timeInt > 60){
+                time = convertSecsmmss(timeInt);
+            }else{
+                time = String.valueOf(timeInt);
+            }
+
+        }else{
+
+            time = "Final Taste";
+        }
+
+        return time;
     }
 }
 

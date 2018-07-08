@@ -56,14 +56,13 @@ public class IntervalTimer {
         timer.cancel();
     }
 
-    IntervalTimer(int timeSetting, int bowlSetting) {
+    IntervalTimer(int timeSetting, int bowlSetting, ParentTimer parentTimer) {
         this.timeSetting = timeSetting * timeUnit;
         this.bowlSetting = bowlSetting;
         this.intervalTimeInSeconds = this.timeSetting;
         this.bowlAmount = bowlSetting;
         this.active = true;
-//        setParentTimer(ParentTimer);
-    }
+        this.parentTimer = parentTimer;    }
 
     public void invalidateIntervalTimer(){
         timer.cancel();
@@ -107,9 +106,9 @@ public class IntervalTimer {
         return active;
     }
 
-//    public String getTimeLabel(){
-////        return String(Int(trunc(( Double(time) / Double(timeUnit) ) )) )
-//    }
+    public int getTimeInt() {
+        return intervalTimeInSeconds;
+    }
 
 //
 //    public float getIntervalPercentage(){

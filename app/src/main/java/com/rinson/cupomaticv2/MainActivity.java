@@ -1,5 +1,6 @@
 package com.rinson.cupomaticv2;
 
+import android.arch.core.executor.ArchTaskExecutor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.lzyzsd.circleprogress.ArcProgress;
+
 public class MainActivity extends AppCompatActivity {
 
     int bowlSetting;
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     int roundoneTimeSeconds;
     int roundTwoTimeSeconds;
     int roundThreeTimeSeconds;
-    boolean advancedMode;
+    static boolean advancedMode;
     boolean vibrate;
 
     SharedPreferences sharedPreferences;
@@ -77,10 +80,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    static ArcProgress intervalProgress;
+    static ArcProgress pourProgress;
+    static ArcProgress breakProgress;
+    static ArcProgress sampleProgress;
 
+    static ParentTimer parentTimer;
 
-    ParentTimer parentTimer;
-//    IntervalTimer intervalTimer;
     public static TextView mainTimerDisplayText;
     public static Button getReadyButton;
 
@@ -112,7 +118,30 @@ public class MainActivity extends AppCompatActivity {
         parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
+        setupProgressViews();
         updateGetReadyStopButton();
+    }
+
+    private void setupProgressViews() {
+
+        intervalProgress = findViewById(R.id.intervalProgress);
+        intervalProgress.setMax(intervalTotalTimeInSeconds);
+        pourProgress = findViewById(R.id.pourProgress);
+        pourProgress.setMax(bowlSetting);
+
+        if (advancedMode == true) {
+            breakProgress = findViewById(R.id.breakProgress);
+            breakProgress.setMax(bowlSetting);
+            sampleProgress = findViewById(R.id.sampleProgress);
+            sampleProgress.setMax(bowlSetting);
+        }else{
+            breakProgress = findViewById(R.id.breakProgress);
+            breakProgress.setVisibility(View.INVISIBLE);
+            sampleProgress = findViewById(R.id.sampleProgress);
+            sampleProgress.setMax(bowlSetting);
+            sampleProgress.setBottomText("Br");
+
+        }
 
     }
 
@@ -179,6 +208,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static public void updateIntervalDisplayIntToString(int time){
+        intervalProgress.setProgress(time);
+    }
 
+    static public void updateIntervalDisplayToZero(){
+        intervalProgress.setProgress(0);
+    }
+
+    public static  void updateProgressViews(){
+        //intervalProgress
+
+        if (parentTimer.intervalTimer.active == false ){
+            updateIntervalDisplayToZero();
+        }else{
+            updateIntervalDisplayIntToString(parentTimer.intervalTimer.getTimeInt());
+        }
+
+        pourProgress.setProgress(parentTimer.timers[1].bowlsPassed);
+
+        if (advancedMode == true) {
+
+            breakProgress.setProgress(parentTimer.timers[2].bowlsPassed);
+            sampleProgress.setProgress(parentTimer.timers[3].bowlsPassed);
+
+        }else{
+
+            breakProgress.setBottomText("Sa");
+            breakProgress.setProgress(parentTimer.timers[3].bowlsPassed);
+
+        }
     }
 }
