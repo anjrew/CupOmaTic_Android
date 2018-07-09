@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
 
         //intervalProgress
 //        pourProgress.setMax(parentTimer.timers[0].timerSetting);
-//        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
+        pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
         if (parentTimer.intervalTimer.active == false ){
             updateIntervalDisplayToZero();
