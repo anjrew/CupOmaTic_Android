@@ -15,6 +15,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final String[] element;
     private final String[] key;
     private final ToggleButton[] toggleButtons;
+//    private final boolean[] toggleBooleans;
+
+
 
 
     public CustomListAdapter(Activity activity, String[] itemName, String[] element, ToggleButton[] toggleButtons) {
@@ -25,6 +28,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         this.key=itemName;
         this.element=element;
         this.toggleButtons = toggleButtons;
+//        this.toggleBooleans =
     }
 
     public View getView(int position,View view,ViewGroup parent) {
@@ -48,10 +52,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
             toggle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (toggle.isChecked() == true) {
+                    if (toggle.isChecked() == !true) {
                         toggle.setChecked(false);
                     } else {
-                        toggle.setChecked(false);
+                        toggle.setChecked(true);
                     }
 
                     if(toggle.isChecked()==true){

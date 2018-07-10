@@ -1,6 +1,5 @@
 package com.rinson.cupomaticv2;
 
-import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -45,15 +44,14 @@ public class TimerCell {
     public void stageTimer(){
         Log.i("Inside","Timercell");
         active = true;
+        upDateIntervalTimer();
         timer = new CountDownTimer((interval * 1000), 1000) {
-
-
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
                 timePassed = timePassed - 1;
                 upDateIntervalTimer();
-                Log.i("Bowls done for "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed));
+                Log.i("Bowls done for "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed)+" - Active = "+ String.valueOf(active));
 
             }
 
@@ -69,10 +67,15 @@ public class TimerCell {
                     Log.i(label,"  timer has Finished");
 
                 }else{
+                    timePassed = 0;
+                    upDateIntervalTimer();
                     resetTimer();
                     startTimerCell();
+                    upDateIntervalTimer();
 
-                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed));}
+                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed));
+                }
+                upDateIntervalTimer();
             }
         }.start();
     }
@@ -113,6 +116,14 @@ public class TimerCell {
         bowlsPassed = 0;
         resetTimer();
     }
+
+    public void hardStop(){
+        bowlsPassed=bowlCount;
+        interval=0;
+        timer.cancel();
+
+    }
+
 
     public void resetForNextBowl(){
 

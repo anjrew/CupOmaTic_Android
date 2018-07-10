@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     int roundThreeTimeSeconds;
     static boolean advancedMode;
     boolean vibrate;
+    boolean voicePrompts;
     ActionBar actionBar;
 
     SharedPreferences sharedPreferences;
@@ -40,19 +41,19 @@ public class MainActivity extends AppCompatActivity {
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
-        if (sharedPreferences.contains("bowlSetting")){
+        if (sharedPreferences.contains("bowlSetting")) {
             bowlSetting = sharedPreferences.getInt("bowlSetting", 0);
         } else {
             sharedPreferences.edit().putInt("bowlSetting", 20).apply();
         }
 
-        if (sharedPreferences.contains("advancedMode")){
-            advancedMode = sharedPreferences.getBoolean("advancedMode",false);
+        if (sharedPreferences.contains("advancedMode")) {
+            advancedMode = sharedPreferences.getBoolean("advancedMode", false);
         } else {
             sharedPreferences.edit().putBoolean("advancedMode", false).apply();
         }
         //
-        if (sharedPreferences.contains("intervalTimeInSeconds")){
+        if (sharedPreferences.contains("intervalTimeInSeconds")) {
             intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
             sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
@@ -82,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
             roundThreeTimeSeconds = sharedPreferences.getInt("roundThreeTime", 20);
         } else {
             sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
+        }
+        if (sharedPreferences.contains("voicePrompts")) {
+            voicePrompts = sharedPreferences.getBoolean("voicePrompts", true);
+        } else {
+            sharedPreferences.edit().putBoolean("voicePrompts", true).apply();
         }
     }
 

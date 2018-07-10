@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Bowls extends AppCompatActivity {
 
@@ -37,12 +38,17 @@ public class Bowls extends AppCompatActivity {
     }
 
     public void startButton(View view) {
-        Log.i("Info", "Start Button pressed");
-        numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
-        sharedPreferences.edit().putInt("bowlSetting", numberOfBowls).apply();
-        Log.i("Number of Bowls",String.valueOf(numberOfBowls));
-        MainActivity.parentTimer.intervalTimer.setBowlAmount(numberOfBowls);
-        goFromBowlsToStartTimer();
+
+        if (numberSelection.getText().toString().matches("")) {
+            Toast.makeText(this, "You did not enter a number.", Toast.LENGTH_SHORT).show();
+        }else {
+            Log.i("Info", "Start Button pressed");
+            numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
+            sharedPreferences.edit().putInt("bowlSetting", numberOfBowls).apply();
+            Log.i("Number of Bowls", String.valueOf(numberOfBowls));
+            MainActivity.parentTimer.intervalTimer.setBowlAmount(numberOfBowls);
+            goFromBowlsToStartTimer();
+        }
     }
 
     public void openMainActivity() {
