@@ -128,25 +128,32 @@ public class MainActivity extends AppCompatActivity {
 
         intervalProgress = findViewById(R.id.intervalProgress);
         intervalProgress.setMax(intervalTotalTimeInSeconds);
+        intervalProgress.setProgress(0);
+
         pourProgress = findViewById(R.id.pourProgress);
         pourProgress.setMax(bowlSetting);
+        pourProgress.setProgress(0);
+
 
         if (advancedMode == true) {
             breakProgress = findViewById(R.id.breakProgress);
             breakProgress.setMax(bowlSetting);
             breakProgress.setBottomText("Br");
+            breakProgress.setProgress(0);
             sampleProgress = findViewById(R.id.sampleProgress);
             sampleProgress.setMax(bowlSetting);
             sampleProgress.setBottomText("Sa");
+            sampleProgress.setProgress(0);
+
         }else{
             breakProgress = findViewById(R.id.breakProgress);
             breakProgress.setVisibility(View.INVISIBLE);
+            breakProgress.setProgress(0);
             sampleProgress = findViewById(R.id.sampleProgress);
             sampleProgress.setMax(bowlSetting);
             sampleProgress.setBottomText("Br");
-
+            sampleProgress.setProgress(0);
         }
-
     }
 
 
@@ -157,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
             resetMainTimerDisplay();
             invalidateAllTimers();
             updateGetReadyStopButton();
-//            parentTimer.totalResetOfTimer();
-//            parentTimer.parentTimerCancelsIntervalTimer();
+            setupProgressViews();
+
         }else {
             openBowlsActivity();
             updateGetReadyStopButton();
@@ -240,10 +247,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void invalidateAllTimers(){
-        parentTimer.cancelCountdownTimer();
+        parentTimer.stopParentTimer();
         parentTimer.cancelTimerCells();
-        parentTimer.totalResetOfTimer();
-//        parentTimer.parentTimerCancelsIntervalTimer();
+//        parentTimer.timers[0].cancelTimer();
     }
 
     public void resetMainTimerDisplay(){

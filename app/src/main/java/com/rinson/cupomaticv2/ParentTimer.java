@@ -273,18 +273,24 @@ public class ParentTimer {
 
         for (TimerCell x : timers){
 
-//            x.cancelTimer();
+            x.cancelTimer();
         }
     }
 
     public void  totalResetOfTimer(){
-        setRunningStatusToFalse();
+//        setRunningStatusToFalse();
         mainTime = 0;
     }
 
     public void parentTimerCancelsIntervalTimer(){
         intervalTimer.cancelIntervalTimerFromParent();
 
+    }
+
+    public void stopParentTimer(){
+        cancelCountdownTimer();
+        running = false;
+        handler.removeCallbacks(mainTimer);
     }
 
 }
