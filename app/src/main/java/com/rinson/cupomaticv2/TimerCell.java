@@ -44,6 +44,7 @@ public class TimerCell {
 
     public void stageTimer(){
         Log.i("Inside","Timercell");
+        active = true;
         timer = new CountDownTimer((interval * 1000), 1000) {
 
 
@@ -62,6 +63,7 @@ public class TimerCell {
                 if (bowlsPassed == (bowlCount - 1)){
                     bowlsPassed = bowlsPassed + 1 ;
                     timePassed = 0;
+                    active = false;
                     upDateIntervalTimer();
 
                     Log.i(label,"  timer has Finished");
@@ -104,7 +106,6 @@ public class TimerCell {
 
     public void resetTimer(){
         timePassed = interval;
-        this.active = false;
     }
 
     public void totalResetTimer(){

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
 
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         setupProgressViews();
         updateGetReadyStopButton();
         actionBar = getSupportActionBar();
-        hideMainMenu();
+        hideActionBar();
 
     }
 
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             invalidateAllTimers();
             updateGetReadyStopButton();
             setupProgressViews();
+            revealActionBar();
 
         }else {
             openBowlsActivity();
@@ -267,11 +269,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void hideMainMenu(){
+    public void hideActionBar(){
         if(parentTimer.getRunningstaus() == true){
-        actionBar.hide();
-        }else{
+            actionBar.hide();
+            actionBar.setDisplayShowHomeEnabled(false);
+            actionBar.setHomeButtonEnabled(false);
+        }
+    }
 
+    public void revealActionBar(){
+        actionBar.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (parentTimer.getRunningstaus() == true) {
+            Toast.makeText(getApplicationContext(),"Back button is disabled, while the timer is running.",
+                    Toast.LENGTH_LONG).show();
+        } else {
+            super.onBackPressed();
         }
     }
 }
