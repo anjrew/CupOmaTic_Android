@@ -143,6 +143,10 @@ public class TimerCell {
         return this.iD;
     }
 
+    public boolean getActiveStatus(){
+        return active;
+    }
+
 
 
     public int getTimeUntil(int mainTimerTime){

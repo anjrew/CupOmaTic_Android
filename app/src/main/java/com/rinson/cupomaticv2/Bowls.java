@@ -52,6 +52,7 @@ public class Bowls extends AppCompatActivity {
     }
 
     public void goFromBowlsToStartTimer(){
+        MainActivity.invalidateAllTimers();
         openMainActivity();
         ParentTimer.startStartTimer();
         ParentTimer.switchParentTimerActiviationState();

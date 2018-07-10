@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     int roundThreeTimeSeconds;
     static boolean advancedMode;
     boolean vibrate;
+    ActionBar actionBar;
 
     SharedPreferences sharedPreferences;
 
@@ -122,9 +124,13 @@ public class MainActivity extends AppCompatActivity {
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
         updateGetReadyStopButton();
+        actionBar = getSupportActionBar();
+        hideMainMenu();
+
     }
 
     private void setupProgressViews() {
+
 
         intervalProgress = findViewById(R.id.intervalProgress);
         intervalProgress.setMax(intervalTotalTimeInSeconds);
@@ -228,8 +234,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static  void updateProgressViews(){
 
-        //intervalProgress
-//        pourProgress.setMax(parentTimer.timers[0].timerSetting);
         pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
 
@@ -248,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static void invalidateAllTimers(){
         parentTimer.stopParentTimer();
+        resetMainTime();
         parentTimer.cancelTimerCells();
 //        parentTimer.timers[0].cancelTimer();
     }
@@ -255,5 +260,18 @@ public class MainActivity extends AppCompatActivity {
     public void resetMainTimerDisplay(){
 
         updatdateMainTimerDisplay("00:00");
+    }
+
+    public static void resetMainTime(){
+        parentTimer.resetMainTimeToZero();
+
+    }
+
+    public void hideMainMenu(){
+        if(parentTimer.getRunningstaus() == true){
+        actionBar.hide();
+        }else{
+
+        }
     }
 }

@@ -272,8 +272,9 @@ public class ParentTimer {
     public void cancelTimerCells(){
 
         for (TimerCell x : timers){
-
+            if(x.getActiveStatus() == true){
             x.cancelTimer();
+            }
         }
     }
 
@@ -288,9 +289,20 @@ public class ParentTimer {
     }
 
     public void stopParentTimer(){
+        if(running == true){
         cancelCountdownTimer();
         running = false;
-        handler.removeCallbacks(mainTimer);
+        handler.removeCallbacks(mainTimer);}
+    }
+
+    public void resetMainTimeToZero(){
+
+        mainTime = 0;
+
+    }
+
+    public void hideMainActivitActionbar(){
+
     }
 
 }
