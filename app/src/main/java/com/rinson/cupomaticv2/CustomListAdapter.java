@@ -34,18 +34,21 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         TextView extratxt = rowView.findViewById(R.id.Option);
         ToggleButton  toggle = rowView.findViewById(R.id.toggleButton);
 
-        if(position > 2) {
+        // position of text views
+        if(position > toggleButtons.length) {
             toggle.setVisibility(View.GONE);
         }
 
-        if(position < 3){
+
+        //position of toggle buttons
+        if(position < toggleButtons.length){
             txtTitle.setVisibility(View.GONE);
+            toggle.setChecked(toggleButtons[position].isChecked());
         }
 
 
         txtTitle.setText(key[position]);
         extratxt.setText(element[position]);
-//        toggle.setChecked(toggleButtons[position].isChecked());
         return rowView;
     }
 }
