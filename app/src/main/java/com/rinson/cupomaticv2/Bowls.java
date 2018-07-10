@@ -39,6 +39,7 @@ public class Bowls extends AppCompatActivity {
     public void startButton(View view) {
         Log.i("Info", "Start Button pressed");
         numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
+        sharedPreferences.edit().putInt("bowlSetting", numberOfBowls).apply();
         Log.i("Number of Bowls",String.valueOf(numberOfBowls));
         MainActivity.parentTimer.intervalTimer.setBowlAmount(numberOfBowls);
         goFromBowlsToStartTimer();

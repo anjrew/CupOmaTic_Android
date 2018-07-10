@@ -3,12 +3,16 @@ package com.rinson.cupomaticv2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class Settings extends AppCompatActivity {
@@ -31,6 +35,12 @@ public class Settings extends AppCompatActivity {
 
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
+
+        if (sharedPreferences.contains("vibrate")){
+            vibrate = sharedPreferences.getBoolean("vibrate", false);
+        } else {
+            sharedPreferences.edit().putBoolean("vibrate", false).apply();
+        }
 
         if (sharedPreferences.contains("bowlSetting")){
             bowlSetting = sharedPreferences.getInt("bowlSetting", 0);
@@ -120,16 +130,20 @@ public class Settings extends AppCompatActivity {
                         TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
                         TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
                         TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
-                        };
+                };
 
         CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames,toggleButtons);
-
         settingsListView.setAdapter(customListAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Selected", settingsNames[position]);
-                selectOpenActivity(position);
+                if(position >= toggleButtons.length) {
+                    selectOpenActivity(position);
+                }else{
+//                    toggleButtons[0].callOnClick();
+                }
+
             }
         });
     }
@@ -196,9 +210,50 @@ public class Settings extends AppCompatActivity {
     public void createToggleButtons(){
         advancedModeToggle = new ToggleButton(getApplicationContext());
         advancedModeToggle.setChecked(advancedMode);
+
         vibrateToggle = new ToggleButton(getApplicationContext());
         vibrateToggle.setChecked(vibrate);
+
         voicePromptsToggle = new ToggleButton(getApplicationContext());
         voicePromptsToggle.setChecked(voicePrompts);
+
     }
 }
+
+
+//    final Button yourButton = (Button)view.findViewById(R.id.your_button);
+//    yourButton
+//            yourButton
+//
+//
+
+
+
+//
+//    public void myClickHandler(View v)
+//    {
+//
+//        //reset all the listView items background colours
+//        //before we set the clicked one..
+//
+//        ListView listView = new ListView(findViewById(R.id.settingListView);
+//
+//        for (int i=0; i < listView.getChildCount(); i++)
+//        {
+//        }
+//
+//
+//        //get the row the clicked button is in
+//        LinearLayout vwParentRow = (LinearLayout)v.getParent();
+//
+//        TextView child = (TextView)vwParentRow.getChildAt(0);
+//        Button btnChild = (Button)vwParentRow.getChildAt(1);
+//        btnChild.setText(child.getText());
+//        btnChild.setText("I've been clicked!");
+//
+//        int c = Color.CYAN;
+//
+//        vwParentRow.setBackgroundColor(c);
+//        vwParentRow.refreshDrawableState();
+//    }
+//}

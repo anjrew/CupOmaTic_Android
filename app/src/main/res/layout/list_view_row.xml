@@ -38,7 +38,9 @@
         android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
         android:layout_marginRight="20dp"
-        android:text="ToggleButton" />
+        android:text="ToggleButton"
+        android:onClick="myClickHandler"
+        android:focusable="false"/>
 
 
 </RelativeLayout>
