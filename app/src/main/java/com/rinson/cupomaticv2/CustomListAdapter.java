@@ -60,8 +60,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
                     if(toggle.isChecked()==true){
                         Log.i("Toggle ", "is Checked");
+                        toggle.setChecked(true);
                     }else{
                         Log.i("Toggle ", "is not Checked");
+                        toggle.setChecked(false);
                     }
                 }
             });

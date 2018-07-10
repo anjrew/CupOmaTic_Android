@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,8 +41,12 @@ public class Bowls extends AppCompatActivity {
     public void startButton(View view) {
 
         if (numberSelection.getText().toString().matches("")) {
-            Toast.makeText(this, "You did not enter a number.", Toast.LENGTH_SHORT).show();
+            Toast toast= Toast.makeText(getApplicationContext(),
+                    "You did not enter a number.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
         }else {
+
             Log.i("Info", "Start Button pressed");
             numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
             sharedPreferences.edit().putInt("bowlSetting", numberOfBowls).apply();

@@ -141,8 +141,7 @@ public class Settings extends AppCompatActivity {
                 if(position >= toggleButtons.length) {
                     selectOpenActivity(position);
                 }else{
-//                    toggleButtons[0].callOnClick();
-                }
+                    }
 
             }
         });
@@ -220,9 +219,22 @@ public class Settings extends AppCompatActivity {
     }
 
     public void updateToggleVariables(){
-        advancedMode = this.advancedModeToggle.isChecked();
-        vibrate = this.vibrateToggle.isChecked();
-        voicePrompts = this.voicePromptsToggle.isChecked();
+
+        if(this.advancedModeToggle.isChecked()==true){
+            advancedMode = true;
+        }else{
+            advancedMode = false;
+        }
+        if(this.vibrateToggle.isChecked()==true){
+            vibrate = true;
+        }else{
+            vibrate = false;
+        }
+        if(this.voicePromptsToggle.isChecked()==true){
+            voicePrompts = true;
+        }else{
+            voicePrompts = false;
+        }
 
         sharedPreferences.edit().putBoolean("voicePrompts", voicePrompts).apply();
         sharedPreferences.edit().putBoolean("vibrate", vibrate).apply();
