@@ -5,17 +5,15 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 
+import static com.rinson.cupomaticv2.ParentTimer.startTimercellOnTime;
+
 public class ParentTimer {
 
 
     public static Handler handler = new Handler();
-    int bowl;
-    int timerAlarms;
     int[] timersIntervals;
-    //    timer timer;
     static TimerCell[] timers;
     static int mainTime;
-    int alarmSound;
     static int alarmWarning = 1;
 
     int bowlSetting;
@@ -96,11 +94,8 @@ public class ParentTimer {
     };
 
     public static void startMainTimer(){
-//        showStopButton();
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
-        intervalTimer.startTimer();
-        timers[0].stageTimer();
     }
 
 
@@ -181,6 +176,7 @@ public class ParentTimer {
 
     public void cancelCountdownTimer(){
         startTimer.cancel();
+
     }
 
     ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate) {
@@ -266,12 +262,29 @@ public class ParentTimer {
         }
     }
 
-    public static void startTimercellOnTime(TimerCell timerCell){
+    public static void  startTimercellOnTime(TimerCell timerCell){
 
         if (timerCell.getTimerSetting() == mainTime) {
-            intervalTimer.startTimer();
-            timerCell.stageTimer();
+            timerCell.startTimerCell();
         }
+    }
+
+    public void cancelTimerCells(){
+
+        for (TimerCell x : timers){
+
+//            x.cancelTimer();
+        }
+    }
+
+    public void  totalResetOfTimer(){
+        setRunningStatusToFalse();
+        mainTime = 0;
+    }
+
+    public void parentTimerCancelsIntervalTimer(){
+        intervalTimer.cancelIntervalTimerFromParent();
+
     }
 
 }

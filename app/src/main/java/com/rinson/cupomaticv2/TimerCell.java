@@ -14,7 +14,7 @@ public class TimerCell {
     int timePassed;
     int bowlsPassed;
     String iD;
-    CountDownTimer timer;
+    static CountDownTimer timer;
 
     TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD){
 
@@ -29,65 +29,93 @@ public class TimerCell {
 
     }
 
-    public void activate(){
-        if(active == !true){
-        bowlsPassed ++ ;}
-        this.active = true;
+//    public void activate(){
+//        if(active == !true){
+//        bowlsPassed ++ ;}
+//        this.active = true;
+//        startTimerCell();    }
 
+    public  void cancelTimer(){
+
+        timer.cancel();
+        totalResetTimer();
     }
 
 
     public void stageTimer(){
         Log.i("Inside","Timercell");
-        activate();
         timer = new CountDownTimer((interval * 1000), 1000) {
+
 
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
-                decreaseTimer();
+                timePassed = timePassed - 1;
+                upDateIntervalTimer();
+                Log.i("Bowls done for "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed));
 
             }
 
             @Override
             public void onFinish() {
                 //Code executed at finish
-                if(active == true){
+                if (bowlsPassed == (bowlCount - 1)){
+                    bowlsPassed = bowlsPassed + 1 ;
+                    timePassed = 0;
+                    upDateIntervalTimer();
 
-                    stageTimer();
+                    Log.i(label,"  timer has Finished");
 
                 }else{
+                    resetTimer();
+                    startTimerCell();
 
-                    Log.i(label," timer has Finished");}
+                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed));}
             }
         }.start();
     }
 
-    public void decreaseTimer(){
-        Log.i("Bowls "+ iD,String.valueOf(bowlsPassed));
-        Log.i("Time passed " +iD,String.valueOf(timePassed));
+//    public void decreaseTimer(){
+//        Log.i("Bowls "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed));
+//
+//        if (active){
+//
+//            timePassed = timePassed - 1;
+//
+//            if (bowlsPassed == bowlCount){
+//                timePassed = 0;
+//                this.active = false;
+//
+//
+//
+//            }else if (timePassed == 0){
+//                bowlsPassed = bowlsPassed + 1;
+//                timePassed = interval;
+//            }
+//        }
+//    }
 
-        if (active){
+    public void startTimerCell(){
 
-            timePassed = timePassed - 1;
-
-            if (bowlsPassed == bowlCount){
-
-                timePassed = 0;
-                this.active = false;
-
-
-            }else if (timePassed == 0){
-                bowlsPassed = bowlsPassed + 1;
-                timePassed = interval;
-            }
-        }
+        stageTimer();
+        bowlsPassed = bowlsPassed + 1;
     }
+
 
     public void resetTimer(){
         timePassed = interval;
-        bowlsPassed = 0;
         this.active = false;
+    }
+
+    public void totalResetTimer(){
+
+        bowlsPassed = 0;
+        resetTimer();
+    }
+
+    public void resetForNextBowl(){
+
+        active = false;
     }
 
 
@@ -121,10 +149,6 @@ public class TimerCell {
         return mainTimerTime - timePassed;
     }
 
-    public double getPercentage(){
-
-        return (double)bowlsPassed / (bowlCount);
-    }
 
     public String getBowlsPassedString(int numberOfBowls){
 
@@ -140,15 +164,18 @@ public class TimerCell {
 
         }else if(timerSetting == mainTimer){
 
-            activate();
             return 0;
 
         }else{
 
             return getTimePassed();
-
         }
+    }
+
+    public void upDateIntervalTimer(){
+        MainActivity.intervalProgress.setProgress(timePassed);
 
     }
+
 
 }

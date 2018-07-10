@@ -21,10 +21,10 @@ public class Bowls extends AppCompatActivity {
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
-        if (sharedPreferences.contains("numberOfBowls")) {
-            numberOfBowls = sharedPreferences.getInt("numberOfBowls", 0);
+        if (sharedPreferences.contains("bowlSetting")) {
+            numberOfBowls = sharedPreferences.getInt("bowlSetting", 0);
         } else {
-            sharedPreferences.edit().putInt("numberOfBowls", 20).apply();
+            sharedPreferences.edit().putInt("bowlSetting", 20).apply();
         }
     }
 
@@ -41,11 +41,7 @@ public class Bowls extends AppCompatActivity {
         numberOfBowls = Integer.parseInt(numberSelection.getEditableText().toString());
         Log.i("Number of Bowls",String.valueOf(numberOfBowls));
         MainActivity.parentTimer.intervalTimer.setBowlAmount(numberOfBowls);
-        openMainActivity();
-        ParentTimer.startStartTimer();
-        ParentTimer.switchParentTimerActiviationState();
-        MainActivity.showStopButton();
-
+        goFromBowlsToStartTimer();
     }
 
     public void openMainActivity() {
@@ -53,6 +49,13 @@ public class Bowls extends AppCompatActivity {
         Intent intent = new Intent(Bowls.this, MainActivity.class);
 
         startActivity(intent);
+    }
+
+    public void goFromBowlsToStartTimer(){
+        openMainActivity();
+        ParentTimer.startStartTimer();
+        ParentTimer.switchParentTimerActiviationState();
+        MainActivity.showStopButton();
     }
 }
 

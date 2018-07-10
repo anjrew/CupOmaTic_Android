@@ -31,7 +31,7 @@ public class IntervalTimer {
         }else if (bowlAmount == 0) {
 
             invalidateIntervalTimer();
-            reset();
+            totalReset();
 
         }else{
             Log.i("WARNING","YOU SHOULDN'T BE HERE");
@@ -41,9 +41,10 @@ public class IntervalTimer {
 
 
     public void startTimer(){
+        intervalTimer();
         active = true;
         bowlAmount -= 1;
-        intervalTimer();
+
     }
 
     IntervalTimer(int timeSetting, int bowlSetting) {
@@ -51,27 +52,28 @@ public class IntervalTimer {
         this.bowlSetting = bowlSetting;
         this.intervalTimeInSeconds = timeSetting;
         this.bowlAmount = bowlSetting;
-        this.active = true;
+        this.active = false;
 
-;
+        ;
         Log.i("IntervalTimeInSeconds :",String.valueOf(intervalTimeInSeconds));
     }
 
-    public void invalidateIntervalTimer(){
+    public static void invalidateIntervalTimer(){
         intervalTimer.cancel();
-        active = false;
+        cancelIntervalTimer();
     }
 
-    public void reset(){
+    public void resetForNextBowl(){
 
         intervalTimeInSeconds = timeSetting;
-        active = false;
+        active = true;
     }
 
     public void totalReset(){
-
+        cancelIntervalTimer();
         bowlAmount = bowlSetting;
-        reset();
+        intervalTimeInSeconds = timeSetting;
+        active = false;
     }
 
 
@@ -83,8 +85,9 @@ public class IntervalTimer {
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
+                Log.i("Interval Timer =","  Interval Time = " + String.valueOf(millisecondsUntilDone/1000)+ "  Bowls left =" + bowlAmount) ;
                 intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
-                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
+//                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
             }
 
             @Override
@@ -93,21 +96,31 @@ public class IntervalTimer {
                 //Code executed at finish
                 MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
 
-                reset();
                 if(bowlAmount > 0){
-                    Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
-//                    bowlAmount = bowlAmount - 1;
                     MainActivity.intervalProgress.setProgress(0);
-
+                    Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
+                    resetForNextBowl();
                     startTimer();
                 }else{
                     MainActivity.intervalProgress.setProgress(0);
-
+                    totalReset();
                     Log.i("interval Timer","Finished");
                 }
             }
         }.start();
     }
+
+    public static void  cancelIntervalTimer(){
+
+        intervalTimer.cancel();
+    }
+
+    public void cancelIntervalTimerFromParent(){
+
+        intervalTimer.cancel();
+
+    }
+
 
 
     public Boolean queryActive(){
@@ -121,5 +134,12 @@ public class IntervalTimer {
 
     public void setBowlAmount(int bowlSetAs){
         bowlAmount = bowlSetAs;
+    }
+
+    public int getSecondsFromMilliSeconds(int milliSeconds){
+
+        int seconds = milliSeconds/1000;
+
+        return seconds;
     }
 }

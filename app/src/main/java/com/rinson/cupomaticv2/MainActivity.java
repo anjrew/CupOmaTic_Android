@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+
+
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
@@ -151,14 +153,13 @@ public class MainActivity extends AppCompatActivity {
     public void clickButton(View view) {
 
         if (parentTimer.getRunningstaus() == true){
-            parentTimer.setRunningStatusToFalse();
+
+            resetMainTimerDisplay();
+            invalidateAllTimers();
             updateGetReadyStopButton();
-            showGetReadyButton();
-            parentTimer.cancelCountdownTimer();
-            parentTimer.intervalTimer.invalidateIntervalTimer();
-
+//            parentTimer.totalResetOfTimer();
+//            parentTimer.parentTimerCancelsIntervalTimer();
         }else {
-
             openBowlsActivity();
             updateGetReadyStopButton();
         }
@@ -212,7 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
     static public void updateIntervalDisplayInt(int time){
         intervalProgress.setProgress(time);
-        intervalProgress.setBottomText("Int");
     }
 
     static public void updateIntervalDisplayToZero(){
@@ -224,13 +224,6 @@ public class MainActivity extends AppCompatActivity {
         //intervalProgress
 //        pourProgress.setMax(parentTimer.timers[0].timerSetting);
         pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
-
-        if (parentTimer.intervalTimer.active == false ){
-            updateIntervalDisplayToZero();
-        }else{
-            updateIntervalDisplayInt(parentTimer.intervalTimer.getTimeInt());
-        }
-
 
 
         if (advancedMode == true) {
@@ -244,5 +237,17 @@ public class MainActivity extends AppCompatActivity {
             sampleProgress.setProgress(parentTimer.timers[1].bowlsPassed);
 
         }
+    }
+
+    public static void invalidateAllTimers(){
+        parentTimer.cancelCountdownTimer();
+        parentTimer.cancelTimerCells();
+        parentTimer.totalResetOfTimer();
+//        parentTimer.parentTimerCancelsIntervalTimer();
+    }
+
+    public void resetMainTimerDisplay(){
+
+        updatdateMainTimerDisplay("00:00");
     }
 }
