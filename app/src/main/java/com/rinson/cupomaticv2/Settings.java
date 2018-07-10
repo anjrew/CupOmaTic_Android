@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ToggleButton;
 
 public class Settings extends AppCompatActivity {
 
@@ -21,6 +22,10 @@ public class Settings extends AppCompatActivity {
     int roundThreeTimeSeconds;
     boolean advancedMode;
     boolean vibrate;
+    boolean voicePrompts;
+    ToggleButton advancedModeToggle;
+    ToggleButton vibrateToggle;
+    ToggleButton voicePromptsToggle;
 
     SharedPreferences sharedPreferences;
 
@@ -70,6 +75,10 @@ public class Settings extends AppCompatActivity {
         } else {
             sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
         }
+        if (sharedPreferences.contains("voicePrompts")){
+            voicePrompts = sharedPreferences.getBoolean("voicePrompts", true);
+        } else {
+            sharedPreferences.edit().putBoolean("voicePrompts", true).apply();        }
     }
 
 
@@ -79,6 +88,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         setUpMemory();
+        createToggleButtons();
         createListView();
     }
 
@@ -100,18 +110,19 @@ public class Settings extends AppCompatActivity {
     public void createListView() {
 
         ListView settingsListView = (findViewById(R.id.settingListView));
-        final String[] settingsNames = {"Advanced Mode", "Interval", "Break", "Sample", "Round One", "Round Two", "Round Three", "Vibrate"};
+        final ToggleButton[] toggleButtons = {advancedModeToggle, voicePromptsToggle,vibrateToggle};
+        final String[] settingsNames = {"Advanced mode", "Voice prompts", "Vibrate", "Interval", "Break", "Sample", "Round one", "Round two", "Round three"};
         final String[] settingsValues =
-                {"Mode1",
+                {"Mode1","Vibrate1", "Voice prompts",
                         TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
                         TimeConverters.convertIntSecStringsmmss(breaktime),
                         TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
                         TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
                         TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
                         TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
-                        "Vibrate1"};
+                        };
 
-        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames);
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames,toggleButtons);
 
         settingsListView.setAdapter(customListAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -180,5 +191,14 @@ public class Settings extends AppCompatActivity {
             case 6: openRoundThreeActivity();
                 break;
         }
+    }
+
+    public void createToggleButtons(){
+        advancedModeToggle = new ToggleButton(getApplicationContext());
+        advancedModeToggle.setChecked(advancedMode);
+        vibrateToggle = new ToggleButton(getApplicationContext());
+        vibrateToggle.setChecked(vibrate);
+        voicePromptsToggle = new ToggleButton(getApplicationContext());
+        voicePromptsToggle.setChecked(voicePrompts);
     }
 }

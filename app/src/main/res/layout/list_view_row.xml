@@ -30,5 +30,15 @@
         android:layout_marginEnd="20dp"
         />
 
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center_vertical"
+        android:layout_marginRight="20dp"
+        android:text="ToggleButton" />
+
 
 </RelativeLayout>
