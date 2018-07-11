@@ -325,6 +325,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void playPour(){
+
+        mediaPlayer.create(this,R.raw.pour).start();
+
+    }
+
     public void playBeep() {
         mediaPlayer.create(this,R.raw.beep).start();
     }

@@ -53,11 +53,14 @@ public class ParentTimer {
 
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
+                    playBeep();
+
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
 
                 } else {
 
                     MainActivity.updatdateMainTimerDisplay("GO!");
+                    playPour();
 
                 }
             }
@@ -95,6 +98,10 @@ public class ParentTimer {
     public static void startMainTimer(){
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
+    }
+
+    private static void playPour() {
+        mainActivity.playPour();
     }
 
 

@@ -82,7 +82,6 @@ public class TimerCell {
         bowlsPassed = bowlsPassed + 1;
     }
 
-
     public void resetTimer(){
         timePassed = interval;
     }
