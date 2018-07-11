@@ -33,7 +33,6 @@ public class TimerCell {
 //        this.sound = mediaPlayer;
 //        this.context = context;
 
-17:11
     }
 
 //    public void playGetReady(){

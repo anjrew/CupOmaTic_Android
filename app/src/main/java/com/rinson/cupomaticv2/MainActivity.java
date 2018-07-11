@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     boolean voicePrompts;
     ActionBar actionBar;
 
-//    MediaPlayer[] intervalsMediaPLayers;
+    MediaPlayer[] intervalsMediaPLayers;
 
     SharedPreferences sharedPreferences;
 
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMemory();
-        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate, this);
+        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate, this, intervalsMediaPLayers);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
@@ -297,14 +297,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    private void setupintervalsMediaPLayers() {
-//
-//        intervalsMediaPLayers[0] = MediaPlayer.create(this,R.raw.pour);
-//        intervalsMediaPLayers[1] = MediaPlayer.create(this, R.raw.brake);
-//        intervalsMediaPLayers[2] = MediaPlayer.create(this,R.raw.sample);
-//        intervalsMediaPLayers[3] = MediaPlayer.create(this, R.raw.round_one);
-//        intervalsMediaPLayers[4] = MediaPlayer.create(this,R.raw.round_two);
-//        intervalsMediaPLayers[5] = MediaPlayer.create(this,R.raw.round_three);
-//    }
+    private void setupintervalsMediaPLayers() {
+
+        intervalsMediaPLayers[0] = MediaPlayer.create(this,R.raw.pour);
+        intervalsMediaPLayers[1] = MediaPlayer.create(this, R.raw.brake);
+        intervalsMediaPLayers[2] = MediaPlayer.create(this,R.raw.sample);
+        intervalsMediaPLayers[3] = MediaPlayer.create(this, R.raw.round_one);
+        intervalsMediaPLayers[4] = MediaPlayer.create(this,R.raw.round_two);
+        intervalsMediaPLayers[5] = MediaPlayer.create(this,R.raw.round_three);
+    }
 }
 

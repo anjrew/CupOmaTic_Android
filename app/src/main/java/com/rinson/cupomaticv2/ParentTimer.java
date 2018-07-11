@@ -181,7 +181,7 @@ public class ParentTimer {
 
     }
 
-    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate,  Context context) {
+    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate,  Context context,MediaPlayer[] mediaPlayers) {
         this.advancedMode = advancedMode;
         this.bowlSetting = bowlSetting;
         this.intervalTotalTimeInSeconds = intervalTotalTimeInSeconds;
@@ -191,7 +191,7 @@ public class ParentTimer {
         this.roundTwoTimeSeconds = roundTwoTimeSeconds;
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
-//        this.mediaPlayer = mediaPlayers;
+        this.mediaPlayer = mediaPlayers;
         this.context = context;
 
         intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
