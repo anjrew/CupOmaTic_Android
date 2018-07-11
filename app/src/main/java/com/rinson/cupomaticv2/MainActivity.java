@@ -14,9 +14,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+//Keep this media player
+import android.media.MediaPlayer;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
 public class MainActivity extends AppCompatActivity {
@@ -32,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
     boolean vibrate;
     boolean voicePrompts;
     ActionBar actionBar;
-
     MediaPlayer mediaPlayer;
+
+
 
     SharedPreferences sharedPreferences;
 
@@ -127,14 +129,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMemory();
-        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate);
+        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate,this);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
         updateGetReadyStopButton();
         actionBar = getSupportActionBar();
         hideActionBar();
-
     }
 
     private void setupProgressViews() {
@@ -177,12 +178,14 @@ public class MainActivity extends AppCompatActivity {
 
             resetMainTimerDisplay();
             invalidateAllTimers();
+            MainActivity.invalidateAllTimers();
             updateGetReadyStopButton();
             setupProgressViews();
             revealActionBar();
 
         }else {
             openBowlsActivity();
+            MainActivity.invalidateAllTimers();
             updateGetReadyStopButton();
         }
         Log.i("Info", "Button was pressed");
@@ -298,32 +301,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupintervalsMediaPLayers(String mediaPlayerId) {
+    public void setupintervalsMediaPLayers(String mediaPlayerId) {
 
         switch (mediaPlayerId){
             case "pour":
-                mediaPlayer.create(this,R.raw.pour);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.pour).start();
                 break;
             case "brake":
-                mediaPlayer.create(this,R.raw.brake);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.brake).start();
                 break;
             case "sample":
-                mediaPlayer.create(this,R.raw.sample);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.sample).start();
                 break;
             case "round_one":
-                mediaPlayer.create(this,R.raw.round_one);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.round_one).start();
                 break;
             case "round_two":
-                mediaPlayer.create(this,R.raw.round_two);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.round_two).start();
                 break;
             case "round_three":
-                mediaPlayer.create(this,R.raw.round_three);
-                mediaPlayer.start();
+                mediaPlayer.create(this,R.raw.round_three).start();
                 break;
         }
     }

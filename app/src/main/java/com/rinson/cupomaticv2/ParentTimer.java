@@ -1,11 +1,9 @@
 package com.rinson.cupomaticv2;
 
 
-import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
-import android.media.MediaPlayer;
 
 public class ParentTimer {
 
@@ -26,6 +24,7 @@ public class ParentTimer {
     static boolean advancedMode;
     boolean vibrate;
     static int voiceWarningTime = 10;
+    static MainActivity mainActivity;
 
 
     static IntervalTimer intervalTimer;
@@ -179,7 +178,7 @@ public class ParentTimer {
 
     }
 
-    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate) {
+    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate, MainActivity mainActivity) {
         this.advancedMode = advancedMode;
         this.bowlSetting = bowlSetting;
         this.intervalTotalTimeInSeconds = intervalTotalTimeInSeconds;
@@ -189,6 +188,7 @@ public class ParentTimer {
         this.roundTwoTimeSeconds = roundTwoTimeSeconds;
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
+        this.mainActivity = mainActivity;
 
 
         intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
@@ -216,9 +216,17 @@ public class ParentTimer {
 
         MainActivity.updateProgressViews();
 
-        for (int i = 0; i < timers.length; i++) {
 
-            startTimercellOnTime(timers[i]);
+            for (TimerCell x : timers) {
+                startTimercellOnTime(x);
+                playWarningOnCall(x);
+
+            }
+    }
+
+    private static void playWarningOnCall(TimerCell x) {
+        if (mainTime == alarmWarning){
+            mainActivity.setupintervalsMediaPLayers(x.iD);
 
         }
     }
@@ -249,10 +257,11 @@ public class ParentTimer {
         return time;
     }
 
-    public static void getReadyVoice(int timer){
-        if (timers[timer].getTimerSetting() - getMainTimeInterger() == (alarmWarning)) {
+    public void getReadyVoice(int timer){
 
-            //timers[i].playVoiceSound
+        if (timers[timer].getTimerSetting() - getMainTimeInterger() == (alarmWarning)) {
+            mainActivity.setupintervalsMediaPLayers(timers[timer].iD);
+
         }
 
     }
@@ -267,6 +276,7 @@ public class ParentTimer {
 
         if (timerCell.getTimerSetting() == mainTime) {
             timerCell.startTimerCell();
+
         }
     }
 
