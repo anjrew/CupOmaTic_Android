@@ -1,14 +1,13 @@
 package com.rinson.cupomaticv2;
 
-import android.arch.core.executor.ArchTaskExecutor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
-
 public class MainActivity extends AppCompatActivity {
 
     int bowlSetting;
@@ -33,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     boolean vibrate;
     boolean voicePrompts;
     ActionBar actionBar;
+
+//    MediaPlayer[] intervalsMediaPLayers;
 
     SharedPreferences sharedPreferences;
 
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             sharedPreferences.edit().putBoolean("advancedMode", false).apply();
         }
-        //
+
         if (sharedPreferences.contains("intervalTimeInSeconds")) {
             intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
             sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
         }
-        //
+
         if (sharedPreferences.contains("breakTime")) {
             breaktime = sharedPreferences.getInt("breakTime", 20);
         } else {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMemory();
-        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate);
+        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate, this);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
@@ -296,4 +296,15 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
+//    private void setupintervalsMediaPLayers() {
+//
+//        intervalsMediaPLayers[0] = MediaPlayer.create(this,R.raw.pour);
+//        intervalsMediaPLayers[1] = MediaPlayer.create(this, R.raw.brake);
+//        intervalsMediaPLayers[2] = MediaPlayer.create(this,R.raw.sample);
+//        intervalsMediaPLayers[3] = MediaPlayer.create(this, R.raw.round_one);
+//        intervalsMediaPLayers[4] = MediaPlayer.create(this,R.raw.round_two);
+//        intervalsMediaPLayers[5] = MediaPlayer.create(this,R.raw.round_three);
+//    }
 }
+

@@ -1,5 +1,7 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -14,8 +16,11 @@ public class TimerCell {
     int bowlsPassed;
     String iD;
     static CountDownTimer timer;
+//    MediaPlayer sound;
+//    MediaPlayer getReady;
+//    Context context;
 
-    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD){
+    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD, Context context){
 
         this.label = label;
         this.bowlCount = bowlCount;
@@ -25,14 +30,17 @@ public class TimerCell {
         this.timePassed = interval;
         this.bowlsPassed = 0;
         this.iD = iD;
+//        this.sound = mediaPlayer;
+//        this.context = context;
 
+17:11
     }
 
-//    public void activate(){
-//        if(active == !true){
-//        bowlsPassed ++ ;}
-//        this.active = true;
-//        startTimerCell();    }
+//    public void playGetReady(){
+//
+//        getReady = MediaPlayer.create(context,R.raw.get_ready);
+//    }
+
 
     public  void cancelTimer(){
 
@@ -73,32 +81,12 @@ public class TimerCell {
                     startTimerCell();
                     upDateIntervalTimer();
 
-                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed));
+                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + "Time = 0");
                 }
                 upDateIntervalTimer();
             }
         }.start();
     }
-
-//    public void decreaseTimer(){
-//        Log.i("Bowls "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed));
-//
-//        if (active){
-//
-//            timePassed = timePassed - 1;
-//
-//            if (bowlsPassed == bowlCount){
-//                timePassed = 0;
-//                this.active = false;
-//
-//
-//
-//            }else if (timePassed == 0){
-//                bowlsPassed = bowlsPassed + 1;
-//                timePassed = interval;
-//            }
-//        }
-//    }
 
     public void startTimerCell(){
 
@@ -193,5 +181,7 @@ public class TimerCell {
 
     }
 
-
+//    private void playSound(){
+//        sound.start();
+//    }
 }

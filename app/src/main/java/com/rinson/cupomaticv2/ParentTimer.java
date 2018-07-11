@@ -1,18 +1,19 @@
 package com.rinson.cupomaticv2;
 
 
+import android.content.Context;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
-
-import static com.rinson.cupomaticv2.ParentTimer.startTimercellOnTime;
+import android.media.MediaPlayer;
 
 public class ParentTimer {
 
 
     public static Handler handler = new Handler();
+    MediaPlayer[] mediaPlayer;
     int[] timersIntervals;
-    static TimerCell[] timers;
+    public static TimerCell[] timers;
     static int mainTime;
     static int alarmWarning = 1;
 
@@ -24,6 +25,7 @@ public class ParentTimer {
     int roundTwoTimeSeconds;
     int roundThreeTimeSeconds;
     static boolean advancedMode;
+    Context context;
     boolean vibrate;
     static int voiceWarningTime = 10;
 
@@ -179,7 +181,7 @@ public class ParentTimer {
 
     }
 
-    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate) {
+    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate,  Context context) {
         this.advancedMode = advancedMode;
         this.bowlSetting = bowlSetting;
         this.intervalTotalTimeInSeconds = intervalTotalTimeInSeconds;
@@ -189,23 +191,25 @@ public class ParentTimer {
         this.roundTwoTimeSeconds = roundTwoTimeSeconds;
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
+//        this.mediaPlayer = mediaPlayers;
+        this.context = context;
 
         intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
 
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
         timers = new TimerCell[]{
-                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour"),
+                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour",context),
 
-                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "break"),
+                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake",context),
 
-                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample"),
+                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",context),
 
-                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"Rd 1"),
+                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1",context),
 
-                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"Rd 2"),
+                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2",context),
 
-                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"Rd 3"),
+                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3",context),
         };
 
     }
@@ -273,7 +277,7 @@ public class ParentTimer {
 
         for (TimerCell x : timers){
             if(x.getActiveStatus() == true){
-            x.cancelTimer();
+                x.cancelTimer();
             }
         }
     }
@@ -290,9 +294,9 @@ public class ParentTimer {
 
     public void stopParentTimer(){
         if(running == true){
-        cancelCountdownTimer();
-        running = false;
-        handler.removeCallbacks(mainTimer);}
+            cancelCountdownTimer();
+            running = false;
+            handler.removeCallbacks(mainTimer);}
     }
 
     public void resetMainTimeToZero(){
@@ -302,9 +306,7 @@ public class ParentTimer {
     }
 
     public void hideMainActivitActionbar(){
-
     }
-
 }
 
 
