@@ -11,7 +11,6 @@ public class ParentTimer {
 
 
     public static Handler handler = new Handler();
-    MediaPlayer[] mediaPlayer;
     int[] timersIntervals;
     public static TimerCell[] timers;
     static int mainTime;
@@ -25,7 +24,6 @@ public class ParentTimer {
     int roundTwoTimeSeconds;
     int roundThreeTimeSeconds;
     static boolean advancedMode;
-    Context context;
     boolean vibrate;
     static int voiceWarningTime = 10;
 
@@ -181,7 +179,7 @@ public class ParentTimer {
 
     }
 
-    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate,  Context context,MediaPlayer[] mediaPlayers) {
+    ParentTimer(boolean advancedMode, int bowlSetting, int intervalTotalTimeInSeconds, int breaktime, int sampleTimeSeconds, int roundoneTimeSeconds,int roundTwoTimeSeconds,int roundThreeTimeSeconds, boolean vibrate) {
         this.advancedMode = advancedMode;
         this.bowlSetting = bowlSetting;
         this.intervalTotalTimeInSeconds = intervalTotalTimeInSeconds;
@@ -191,25 +189,24 @@ public class ParentTimer {
         this.roundTwoTimeSeconds = roundTwoTimeSeconds;
         this.roundThreeTimeSeconds = roundThreeTimeSeconds;
         this.vibrate = vibrate;
-        this.mediaPlayer = mediaPlayers;
-        this.context = context;
+
 
         intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
 
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
         timers = new TimerCell[]{
-                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour",context),
+                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour"),
 
-                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake",context),
+                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake"),
 
-                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",context),
+                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample"),
 
-                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1",context),
+                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1"),
 
-                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2",context),
+                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2"),
 
-                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3",context),
+                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3"),
         };
 
     }

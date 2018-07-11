@@ -1,7 +1,5 @@
 package com.rinson.cupomaticv2;
 
-import android.content.Context;
-import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.util.Log;
 
@@ -16,11 +14,9 @@ public class TimerCell {
     int bowlsPassed;
     String iD;
     static CountDownTimer timer;
-//    MediaPlayer sound;
-//    MediaPlayer getReady;
-//    Context context;
 
-    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD, Context context){
+
+    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD){
 
         this.label = label;
         this.bowlCount = bowlCount;
@@ -30,15 +26,7 @@ public class TimerCell {
         this.timePassed = interval;
         this.bowlsPassed = 0;
         this.iD = iD;
-//        this.sound = mediaPlayer;
-//        this.context = context;
-
     }
-
-//    public void playGetReady(){
-//
-//        getReady = MediaPlayer.create(context,R.raw.get_ready);
-//    }
 
 
     public  void cancelTimer(){
@@ -180,7 +168,4 @@ public class TimerCell {
 
     }
 
-//    private void playSound(){
-//        sound.start();
-//    }
 }

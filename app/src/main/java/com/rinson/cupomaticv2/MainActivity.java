@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     boolean voicePrompts;
     ActionBar actionBar;
 
-    MediaPlayer[] intervalsMediaPLayers;
+    MediaPlayer mediaPlayer;
 
     SharedPreferences sharedPreferences;
 
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMemory();
-        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate, this, intervalsMediaPLayers);
+        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
@@ -297,14 +298,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupintervalsMediaPLayers() {
+    private void setupintervalsMediaPLayers(String mediaPlayerId) {
 
-        intervalsMediaPLayers[0] = MediaPlayer.create(this,R.raw.pour);
-        intervalsMediaPLayers[1] = MediaPlayer.create(this, R.raw.brake);
-        intervalsMediaPLayers[2] = MediaPlayer.create(this,R.raw.sample);
-        intervalsMediaPLayers[3] = MediaPlayer.create(this, R.raw.round_one);
-        intervalsMediaPLayers[4] = MediaPlayer.create(this,R.raw.round_two);
-        intervalsMediaPLayers[5] = MediaPlayer.create(this,R.raw.round_three);
+        switch (mediaPlayerId){
+            case "pour":
+                mediaPlayer.create(this,R.raw.pour);
+                mediaPlayer.start();
+                break;
+            case "brake":
+                mediaPlayer.create(this,R.raw.brake);
+                mediaPlayer.start();
+                break;
+            case "sample":
+                mediaPlayer.create(this,R.raw.sample);
+                mediaPlayer.start();
+                break;
+            case "round_one":
+                mediaPlayer.create(this,R.raw.round_one);
+                mediaPlayer.start();
+                break;
+            case "round_two":
+                mediaPlayer.create(this,R.raw.round_two);
+                mediaPlayer.start();
+                break;
+            case "round_three":
+                mediaPlayer.create(this,R.raw.round_three);
+                mediaPlayer.start();
+                break;
+        }
     }
 }
 
