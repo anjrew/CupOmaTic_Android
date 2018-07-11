@@ -220,12 +220,24 @@ public class ParentTimer {
             for (TimerCell x : timers) {
                 startTimercellOnTime(x);
                 playWarningOnCall(x);
+                playBeepOnCall(x);
 
             }
     }
 
+    public static void playBeepOnCall(TimerCell x) {
+        if(mainTime == x.getTimerSetting()){
+            mainActivity.playBeep();
+        }
+    }
+
+    public static void playBeep() {
+            mainActivity.playBeep();
+    }
+
+
     private static void playWarningOnCall(TimerCell x) {
-        if (mainTime == alarmWarning){
+        if (mainTime == x.getTimerSetting() -  alarmWarning){
             mainActivity.setupintervalsMediaPLayers(x.iD);
 
         }

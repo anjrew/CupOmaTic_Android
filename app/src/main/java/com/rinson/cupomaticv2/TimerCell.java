@@ -62,6 +62,7 @@ public class TimerCell {
                     Log.i(label,"  timer has Finished");
 
                 }else{
+                    ParentTimer.playBeep();
                     timePassed = 0;
                     upDateIntervalTimer();
                     resetTimer();
