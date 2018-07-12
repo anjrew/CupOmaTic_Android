@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
 
 
-
     SharedPreferences sharedPreferences;
-
 
 
     public void setUpMemory() {
@@ -114,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_setting){
+        if (item.getItemId() == R.id.action_setting) {
             openSettingsActivity();
             Log.i("Menu items selected", "Settings");
-        }else{
+        } else {
             openHelpActivity();
             Log.i("Menu items selected", "Help");
         }
@@ -129,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setUpMemory();
-        parentTimer = new ParentTimer( advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate,this);
+        parentTimer = new ParentTimer(advancedMode, bowlSetting, intervalTotalTimeInSeconds, breaktime, sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds, vibrate, this);
         mainTimerDisplayText = findViewById(R.id.mainTimerDisplay);
         getReadyButton = findViewById(R.id.getReadyButton);
         setupProgressViews();
@@ -160,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
             sampleProgress.setBottomText("Sa");
             sampleProgress.setProgress(0);
 
-        }else{
+        } else {
             breakProgress = findViewById(R.id.breakProgress);
             breakProgress.setVisibility(View.INVISIBLE);
             breakProgress.setProgress(0);
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickButton(View view) {
 
-        if (parentTimer.getRunningstaus() == true){
+        if (parentTimer.getRunningstaus() == true) {
 
             resetMainTimerDisplay();
             invalidateAllTimers();
@@ -183,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             setupProgressViews();
             revealActionBar();
 
-        }else {
+        } else {
             openBowlsActivity();
             MainActivity.invalidateAllTimers();
             updateGetReadyStopButton();
@@ -194,35 +192,35 @@ public class MainActivity extends AppCompatActivity {
 
     // Open activity section
     public void openBowlsActivity() {
-        Intent intent = new Intent(MainActivity.this,Bowls.class);
+        Intent intent = new Intent(MainActivity.this, Bowls.class);
         startActivity(intent);
     }
 
-    public void openSettingsActivity(){
-        Intent settingsIntent = new Intent(MainActivity.this,Settings.class);
+    public void openSettingsActivity() {
+        Intent settingsIntent = new Intent(MainActivity.this, Settings.class);
         startActivity(settingsIntent);
     }
 
-    public void openHelpActivity(){
-        Intent intent = new Intent(MainActivity.this,Help.class);
+    public void openHelpActivity() {
+        Intent intent = new Intent(MainActivity.this, Help.class);
         startActivity(intent);
     }
 
-    public void updatdateMainTimerUi(){
+    public void updatdateMainTimerUi() {
         mainTimerDisplayText.setText("Go!");
     }
 
-    public static  void updatdateMainTimerDisplay(String text){
+    public static void updatdateMainTimerDisplay(String text) {
         mainTimerDisplayText.setText(text);
     }
 
-    public static void showStopButton(){
+    public static void showStopButton() {
         getReadyButton.setBackgroundResource(R.drawable.stop_button);
         getReadyButton.setText("Stop");
         getReadyButton.setTextColor(Color.WHITE);
     }
 
-    private void showGetReadyButton(){
+    private void showGetReadyButton() {
         getReadyButton.setBackgroundResource(R.drawable.get_ready_button);
         getReadyButton.setText("Get Ready");
         getReadyButton.setTextColor(Color.WHITE);
@@ -236,15 +234,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    static public void updateIntervalDisplayInt(int time){
+    static public void updateIntervalDisplayInt(int time) {
         intervalProgress.setProgress(time);
     }
 
-    static public void updateIntervalDisplayToZero(){
+    static public void updateIntervalDisplayToZero() {
         intervalProgress.setProgress(0);
     }
 
-    public static  void updateProgressViews(){
+    public static void updateProgressViews() {
 
         pourProgress.setProgress(parentTimer.timers[0].bowlsPassed);
 
@@ -254,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
             breakProgress.setProgress(parentTimer.timers[1].bowlsPassed);
             sampleProgress.setProgress(parentTimer.timers[2].bowlsPassed);
 
-        }else{
+        } else {
 
             sampleProgress.setBottomText("Br");
             sampleProgress.setProgress(parentTimer.timers[1].bowlsPassed);
@@ -262,39 +260,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public static void invalidateAllTimers(){
+    public static void invalidateAllTimers() {
         parentTimer.stopParentTimer();
         resetMainTime();
         parentTimer.cancelTimerCells();
 //        parentTimer.timers[0].cancelTimer();
     }
 
-    public void resetMainTimerDisplay(){
+    public void resetMainTimerDisplay() {
 
         updatdateMainTimerDisplay("00:00");
     }
 
-    public static void resetMainTime(){
+    public static void resetMainTime() {
         parentTimer.resetMainTimeToZero();
 
     }
 
-    public void hideActionBar(){
-        if(parentTimer.getRunningstaus() == true){
+    public void hideActionBar() {
+        if (parentTimer.getRunningstaus() == true) {
             actionBar.hide();
             actionBar.setDisplayShowHomeEnabled(false);
             actionBar.setHomeButtonEnabled(false);
         }
     }
 
-    public void revealActionBar(){
+    public void revealActionBar() {
         actionBar.show();
     }
 
     @Override
     public void onBackPressed() {
         if (parentTimer.getRunningstaus() == true) {
-            Toast.makeText(getApplicationContext(),"Back button is disabled, while the timer is running.",
+            Toast.makeText(getApplicationContext(), "Back button is disabled, while the timer is running.",
                     Toast.LENGTH_LONG).show();
         } else {
             super.onBackPressed();
@@ -303,30 +301,33 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupintervalsMediaPLayers(String mediaPlayerId) {
 
-        switch (mediaPlayerId){
+        switch (mediaPlayerId) {
             case "pour":
-                mediaPlayer.create(this,R.raw.pour).start();
+                mediaPlayer.create(this, R.raw.pour).start();
                 break;
             case "brake":
-                mediaPlayer.create(this,R.raw.brake).start();
+                mediaPlayer.create(this, R.raw.brake).start();
                 break;
             case "sample":
-                mediaPlayer.create(this,R.raw.sample).start();
+                mediaPlayer.create(this, R.raw.sample).start();
                 break;
             case "round_one":
-                mediaPlayer.create(this,R.raw.round_one).start();
+                mediaPlayer.create(this, R.raw.round_one).start();
                 break;
             case "round_two":
-                mediaPlayer.create(this,R.raw.round_two).start();
+                mediaPlayer.create(this, R.raw.round_two).start();
                 break;
             case "round_three":
-                mediaPlayer.create(this,R.raw.round_three).start();
+                mediaPlayer.create(this, R.raw.round_three).start();
                 break;
         }
     }
 
     public void playBeep() {
-        mediaPlayer.create(this,R.raw.beep).start();
+        mediaPlayer.create(this, R.raw.beep).start();
+    }
+
+    public void playPour() {
+        mediaPlayer.create(this, R.raw.pour).start();
     }
 }
-

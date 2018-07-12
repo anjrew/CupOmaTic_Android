@@ -243,5 +243,7 @@ public class Settings extends AppCompatActivity {
         Log.i("Toggles / "," AdvancedMode = " + String.valueOf(advancedMode)+" / Vibrate = ="+ String.valueOf(vibrate)+ " / Voice = "+ String.valueOf(voicePrompts));
     }
 
+
+
 }
 

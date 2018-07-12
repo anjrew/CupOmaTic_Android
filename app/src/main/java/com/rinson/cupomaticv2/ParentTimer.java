@@ -53,6 +53,8 @@ public class ParentTimer {
 
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
+                    playBeep();
+
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
 
                 } else {
@@ -60,6 +62,7 @@ public class ParentTimer {
                     MainActivity.updatdateMainTimerDisplay("GO!");
 
                 }
+                Log.i("Countdown timer" , String.valueOf(millisecondsUntilDone / 1000));
             }
 
             @Override
@@ -67,6 +70,7 @@ public class ParentTimer {
                 //Code executed at finish
                 startMainTimer();
                 MainActivity.updatdateMainTimerDisplay("Go!");
+                mainActivity.playPour();
             }
 
         }.start();
@@ -78,7 +82,9 @@ public class ParentTimer {
         @Override
         public void run() {
             //insert code to be run every second
+
             increaseTimer();
+
             if(running == true) {
 
                 mainTime++;
@@ -217,12 +223,12 @@ public class ParentTimer {
         MainActivity.updateProgressViews();
 
 
-            for (TimerCell x : timers) {
-                startTimercellOnTime(x);
-                playWarningOnCall(x);
-                playBeepOnCall(x);
+        for (TimerCell x : timers) {
+            startTimercellOnTime(x);
+            playWarningOnCall(x);
+            playBeepOnCall(x);
 
-            }
+        }
     }
 
     public static void playBeepOnCall(TimerCell x) {
@@ -232,7 +238,7 @@ public class ParentTimer {
     }
 
     public static void playBeep() {
-            mainActivity.playBeep();
+        mainActivity.playBeep();
     }
 
 
@@ -326,6 +332,7 @@ public class ParentTimer {
 
     public void hideMainActivitActionbar(){
     }
+
 }
 
 

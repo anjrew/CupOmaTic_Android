@@ -69,7 +69,7 @@ public class TimerCell {
                     startTimerCell();
                     upDateIntervalTimer();
 
-                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + "Time = 0");
+                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = 0");
                 }
                 upDateIntervalTimer();
             }
