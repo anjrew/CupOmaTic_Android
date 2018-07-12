@@ -49,7 +49,7 @@ public class ParentTimer {
                 //Code executed at every Interval
                 if ((millisecondsUntilDone / 1000 > countDownTimerSeconds - getReadyDisplayTime)){
 
-                    MainActivity.updatdateMainTimerDisplay("Get Ready");
+                    mainActivity.updatdateMainTimerDisplay("Get Ready");
 
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
@@ -58,8 +58,8 @@ public class ParentTimer {
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
 
                 } else {
-
-                    MainActivity.updatdateMainTimerDisplay("GO!");
+                    mainActivity.playPour();
+                    mainActivity.updatdateMainTimerDisplay("GO!");
 
                 }
                 Log.i("Countdown timer" , String.valueOf(millisecondsUntilDone / 1000));
@@ -68,7 +68,6 @@ public class ParentTimer {
             @Override
             public void onFinish() {
                 //Code executed at finish
-                mainActivity.playPour();
 
                 startMainTimer();
                 MainActivity.updatdateMainTimerDisplay("Go!");

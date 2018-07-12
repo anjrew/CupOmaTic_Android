@@ -63,7 +63,7 @@ public class TimerCell {
 
                 }else{
                     ParentTimer.playBeep();
-                    timePassed = 0;
+                    timePassed = timePassed - 1;
                     upDateIntervalTimer();
                     resetTimer();
                     startTimerCell();

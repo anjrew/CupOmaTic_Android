@@ -303,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (mediaPlayerId) {
             case "pour":
-                mediaPlayer.create(this, R.raw.pour).start();
                 break;
             case "brake":
                 mediaPlayer.create(this, R.raw.brake).start();
