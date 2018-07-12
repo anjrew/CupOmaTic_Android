@@ -132,7 +132,7 @@ public class Settings extends AppCompatActivity {
                         TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
                 };
 
-        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames,toggleButtons);
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames,toggleButtons, this);
         settingsListView.setAdapter(customListAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -220,21 +220,6 @@ public class Settings extends AppCompatActivity {
 
     public void updateToggleVariables(){
 
-        if(this.advancedModeToggle.isChecked()==true){
-            advancedMode = true;
-        }else{
-            advancedMode = false;
-        }
-        if(this.vibrateToggle.isChecked()==true){
-            vibrate = true;
-        }else{
-            vibrate = false;
-        }
-        if(this.voicePromptsToggle.isChecked()==true){
-            voicePrompts = true;
-        }else{
-            voicePrompts = false;
-        }
 
         sharedPreferences.edit().putBoolean("voicePrompts", voicePrompts).apply();
         sharedPreferences.edit().putBoolean("vibrate", vibrate).apply();
@@ -243,7 +228,27 @@ public class Settings extends AppCompatActivity {
         Log.i("Toggles / "," AdvancedMode = " + String.valueOf(advancedMode)+" / Vibrate = ="+ String.valueOf(vibrate)+ " / Voice = "+ String.valueOf(voicePrompts));
     }
 
+    public void updateAdvancedMode(Boolean state){
+        advancedMode = state;
+        sharedPreferences.edit().putBoolean("advancedMode", advancedMode).apply();
+        Log.i("Set Advanced Mode = " , String.valueOf(advancedMode));
 
+    }
 
+    public void updateVibrateMode(Boolean state){
+
+        vibrate = state;
+        sharedPreferences.edit().putBoolean("vibrate", vibrate).apply();
+        Log.i("Set Vibrate Mode = " , String.valueOf(vibrate));
+
+    }
+
+    public void updateVoiceMode(Boolean state){
+
+        voicePrompts = state;
+        sharedPreferences.edit().putBoolean("voicePrompts", voicePrompts).apply();
+        Log.i("Set voice Mode = " , String.valueOf(voicePrompts));
+
+    }
 }
 

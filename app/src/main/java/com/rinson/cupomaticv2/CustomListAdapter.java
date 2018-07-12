@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -15,12 +16,13 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private final String[] element;
     private final String[] key;
     private final ToggleButton[] toggleButtons;
-//    private final boolean[] toggleBooleans;
+    private Settings settingActivity;
+    boolean checked;
 
 
 
 
-    public CustomListAdapter(Activity activity, String[] itemName, String[] element, ToggleButton[] toggleButtons) {
+    public CustomListAdapter(Activity activity, String[] itemName, String[] element, ToggleButton[] toggleButtons, Settings settingsActivity) {
         super(activity, R.layout.list_view_row, itemName);
         // TODO Auto-generated constructor stub
 
@@ -28,10 +30,10 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         this.key=itemName;
         this.element=element;
         this.toggleButtons = toggleButtons;
-//        this.toggleBooleans =
+        this.settingActivity = settingsActivity;
     }
 
-    public View getView(int position,View view,ViewGroup parent) {
+    public View getView(final int position, View view, ViewGroup parent) {
         LayoutInflater inflater=activity.getLayoutInflater();
         View rowView=inflater.inflate(R.layout.list_view_row, null,true);
 
@@ -52,27 +54,39 @@ public class CustomListAdapter extends ArrayAdapter<String> {
             toggle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (toggle.isChecked() == !true) {
-                        toggle.setChecked(false);
-                    } else {
-                        toggle.setChecked(true);
-                    }
-
-                    if(toggle.isChecked()==true){
-                        Log.i("Toggle ", "is Checked");
-                        toggle.setChecked(true);
-                    }else{
-                        Log.i("Toggle ", "is not Checked");
-                        toggle.setChecked(false);
-                    }
+                    checked = toggle.isChecked();
+                    setToggleStates(position);
                 }
             });
         }
-
 
         txtTitle.setText(key[position]);
         extratxt.setText(element[position]);
 
         return rowView;
+    }
+
+
+    public void setToggleStates(int position){
+
+        switch (position){
+
+            case 0:
+                settingActivity.updateAdvancedMode(checked);
+                Log.i("Advanced Mode", String.valueOf(checked));
+                break;
+            case 1:
+                settingActivity.updateVoiceMode(checked);
+                Log.i("Voice Mode", String.valueOf(checked));
+
+                break;
+            case 2:
+                settingActivity.updateVibrateMode(checked);
+                Log.i("Vibrate Mode", String.valueOf(checked));
+
+                break;
+        }
+
+
     }
 }
