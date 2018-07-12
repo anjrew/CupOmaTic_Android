@@ -202,17 +202,17 @@ public class ParentTimer {
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
         timers = new TimerCell[]{
-                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour"),
+                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour",this),
 
-                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake"),
+                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake",this),
 
-                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample"),
+                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",this),
 
-                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1"),
+                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1",this),
 
-                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2"),
+                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2",this),
 
-                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3"),
+                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3",this),
         };
 
     }

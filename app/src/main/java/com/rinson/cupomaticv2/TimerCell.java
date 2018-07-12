@@ -14,9 +14,10 @@ public class TimerCell {
     int bowlsPassed;
     String iD;
     static CountDownTimer timer;
+    ParentTimer parentTimer;
 
 
-    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD){
+    TimerCell(String label, int interval, int timerSetting, int bowlCount, String iD, ParentTimer parentTimer){
 
         this.label = label;
         this.bowlCount = bowlCount;
@@ -26,6 +27,7 @@ public class TimerCell {
         this.timePassed = interval;
         this.bowlsPassed = 0;
         this.iD = iD;
+        this.parentTimer = parentTimer;
     }
 
 
@@ -59,19 +61,18 @@ public class TimerCell {
                     active = false;
                     upDateIntervalTimer();
 
+
                     Log.i(label,"  timer has Finished");
 
                 }else{
-                    ParentTimer.playBeep();
+                    upDateIntervalTimerToZero();
+                    parentTimer.playBeep();
                     timePassed = timePassed - 1;
-                    upDateIntervalTimer();
                     resetTimer();
                     startTimerCell();
-                    upDateIntervalTimer();
 
-                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = 0");
+                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
                 }
-                upDateIntervalTimer();
             }
         }.start();
     }
@@ -165,7 +166,12 @@ public class TimerCell {
     }
 
     public void upDateIntervalTimer(){
-        MainActivity.intervalProgress.setProgress(timePassed);
+        parentTimer.mainActivity.intervalProgress.setProgress(timePassed);
+
+    }
+
+    public void upDateIntervalTimerToZero(){
+        parentTimer.mainActivity.intervalProgress.setProgress(0);
 
     }
 

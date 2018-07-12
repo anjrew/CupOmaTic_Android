@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +17,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-//Keep this media player
-import android.media.MediaPlayer;
 
 import com.github.lzyzsd.circleprogress.ArcProgress;
+
+//Keep this media player
 public class MainActivity extends AppCompatActivity {
 
     int bowlSetting;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     boolean voicePrompts;
     ActionBar actionBar;
     MediaPlayer mediaPlayer;
+    SoundPool sounds;
 
 
     SharedPreferences sharedPreferences;
@@ -305,18 +307,67 @@ public class MainActivity extends AppCompatActivity {
             case "pour":
                 break;
             case "brake":
-                mediaPlayer.create(this, R.raw.brake).start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.brake);
+                mediaPlayer.start();
+                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+
+                    }
+                });
                 break;
             case "sample":
-                mediaPlayer.create(this, R.raw.sample).start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.sample);
+                mediaPlayer.start();
+                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+
+                    }
+                });
+
                 break;
             case "round_one":
-                mediaPlayer.create(this, R.raw.round_one).start();
+                mediaPlayer = MediaPlayer.create(this, R.raw.round_one);
+                mediaPlayer.start();
+                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+
+                    }
+                });
+
+
                 break;
             case "round_two":
+                mediaPlayer = MediaPlayer.create(this, R.raw.round_two);
+                mediaPlayer.start();
+                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+
+                    }
+                });
+
+
                 mediaPlayer.create(this, R.raw.round_two).start();
                 break;
             case "round_three":
+                mediaPlayer = MediaPlayer.create(this, R.raw.round_three);
+                mediaPlayer.start();
+                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        mediaPlayer.release();
+
+                    }
+                });
+
+
                 mediaPlayer.create(this, R.raw.round_three).start();
                 break;
         }
@@ -332,24 +383,35 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void playBeep() {
-        mediaPlayer.create(this, R.raw.beep).start();
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                mediaPlayer.release();
-//
-//            }
-//            });
+        mediaPlayer = MediaPlayer.create(this, R.raw.beep);
+        mediaPlayer.start();
+        this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+
+            }
+        });
+
     }
 
-        public void playPour(){
-            mediaPlayer.create(this, R.raw.pour).start();
-//            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                @Override
-//                public void onCompletion(MediaPlayer mediaPlayer) {
-//                    mediaPlayer.release();
+    public void playPour(){
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.pour);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+            }
+        });
+    }
 //
-//                }
-//            });
-        }
+//        private void initialiseSoundPool(){
+//
+//            AudioAttributes audioAttributes = new AudioAttributes().Builder();
+//
+//
+//
+//        }
 }
