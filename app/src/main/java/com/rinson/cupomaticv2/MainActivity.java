@@ -323,11 +323,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+//    public void playBeep() {
+//        mediaPlayer.create(this, R.raw.beep).start();
+//    }
+//
+//    public void playPour() {
+//        mediaPlayer.create(this, R.raw.pour).start();
+//    }
+
+
     public void playBeep() {
         mediaPlayer.create(this, R.raw.beep).start();
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                mediaPlayer.release();
+//
+//            }
+//            });
     }
 
-    public void playPour() {
-        mediaPlayer.create(this, R.raw.pour).start();
-    }
+        public void playPour(){
+            mediaPlayer.create(this, R.raw.pour).start();
+//            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                @Override
+//                public void onCompletion(MediaPlayer mediaPlayer) {
+//                    mediaPlayer.release();
+//
+//                }
+//            });
+        }
 }

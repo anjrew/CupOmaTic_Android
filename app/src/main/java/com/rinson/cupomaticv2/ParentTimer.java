@@ -68,9 +68,10 @@ public class ParentTimer {
             @Override
             public void onFinish() {
                 //Code executed at finish
+                mainActivity.playPour();
+
                 startMainTimer();
                 MainActivity.updatdateMainTimerDisplay("Go!");
-                mainActivity.playPour();
             }
 
         }.start();
