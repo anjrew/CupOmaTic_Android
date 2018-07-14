@@ -106,6 +106,11 @@ public class Settings extends AppCompatActivity {
     public void saveButtonClick(View view) {
         updateToggleVariables();
         openMainActivity();
+        Log.i("Break = ",TimeConverters.convertIntSecStringsmmss(breaktime));
+        Log.i("Sample = ",TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds));
+        Log.i("Round 1  = ",TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds));
+        Log.i("Round 2 = ",TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds));
+        Log.i("Round 3 = ",TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds));
 
     }
 
@@ -226,6 +231,7 @@ public class Settings extends AppCompatActivity {
         sharedPreferences.edit().putBoolean("advancedMode", advancedMode).apply();
 
         Log.i("Toggles / "," AdvancedMode = " + String.valueOf(advancedMode)+" / Vibrate = ="+ String.valueOf(vibrate)+ " / Voice = "+ String.valueOf(voicePrompts));
+
     }
 
     public void updateAdvancedMode(Boolean state){

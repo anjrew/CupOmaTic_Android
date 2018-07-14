@@ -23,7 +23,7 @@ public class ParentTimer {
     int roundThreeTimeSeconds;
     static boolean advancedMode;
     boolean vibrate;
-    static int voiceWarningTime = 10;
+    private static int getReadyWarningTime = 10;
     static MainActivity mainActivity;
 
 
@@ -53,7 +53,6 @@ public class ParentTimer {
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
                     playBeep();
-
                     MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
 
                 } else {
@@ -87,7 +86,7 @@ public class ParentTimer {
             if(running == true) {
 
                 mainTime++;
-                MainActivity.updatdateMainTimerDisplay(convertSecsmmss(mainTime));
+                MainActivity.updatdateMainTimerDisplay(TimeConverters.convertIntSecStringsmmss(mainTime));
 
                 //Time interval of timer
                 handler.postDelayed(this, 1000);
@@ -127,34 +126,6 @@ public class ParentTimer {
         Log.i("Main time run status", String.valueOf(running));
     }
 
-    public static String convertSecsmmss(int timeInput){
-
-        int timeSecs = timeInput;
-        String timeString;
-
-        int minutes = timeSecs / 60;
-        int seconds = timeSecs % 60;
-
-        if (minutes < 10 && seconds < 10){
-
-            timeString = "0"+ String.valueOf(minutes)+":0"+String.valueOf(seconds);
-
-        }else if (minutes < 10 ){
-
-            timeString = "0"+ String.valueOf(minutes)+":"+ String.valueOf(seconds);
-
-        }else if (seconds < 10) {
-
-            timeString = String.valueOf(minutes)+":0" + String.valueOf(seconds);
-
-        } else {
-
-            timeString = String.valueOf(minutes)+":"+String.valueOf(seconds);
-        }
-        return timeString;
-    }
-
-
 
     public void cancelCountdownTimer(){
         startTimer.cancel();
@@ -185,11 +156,11 @@ public class ParentTimer {
 
                 new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",this),
 
-                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_1",this),
+                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_one",this),
 
-                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_2",this),
+                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_two",this),
 
-                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_3",this),
+                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_three",this),
         };
 
     }
@@ -204,6 +175,8 @@ public class ParentTimer {
             startTimercellOnTime(x);
             playWarningOnCall(x);
             playBeepOnCall(x);
+            getReadyVoiceOnCall(x);
+
 
         }
     }
@@ -239,7 +212,7 @@ public class ParentTimer {
             timeInt = (timerTwo-timerOne) - (getMainTimeInterger() - timerOne);
 
             if(timeInt > 60){
-                time = convertSecsmmss(timeInt);
+                time = TimeConverters.convertIntSecStringsmmss(timeInt);
             }else{
                 time = String.valueOf(timeInt);
             }
@@ -252,20 +225,15 @@ public class ParentTimer {
         return time;
     }
 
-    public void getReadyVoice(int timer){
+    public static void getReadyVoiceOnCall(TimerCell timer){
 
-        if (timers[timer].getTimerSetting() - getMainTimeInterger() == (alarmWarning)) {
-            mainActivity.setupintervalsMediaPLayers(timers[timer].iD);
+        if (timer.getTimerSetting() - getReadyWarningTime == getMainTimeInterger()) {
+            mainActivity.playGetReady();
 
         }
 
     }
 
-    public static void alarmBeep(int timer){
-        if (timers[timer].getTimerSetting() - mainTime == voiceWarningTime) {
-//                                        audio.playGetReady()
-        }
-    }
 
     public static void  startTimercellOnTime(TimerCell timerCell){
 

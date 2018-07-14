@@ -208,9 +208,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void updatdateMainTimerUi() {
-        mainTimerDisplayText.setText("Go!");
-    }
 
     public static void updatdateMainTimerDisplay(String text) {
         mainTimerDisplayText.setText(text);
@@ -234,14 +231,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             showGetReadyButton();
         }
-    }
-
-    static public void updateIntervalDisplayInt(int time) {
-        intervalProgress.setProgress(time);
-    }
-
-    static public void updateIntervalDisplayToZero() {
-        intervalProgress.setProgress(0);
     }
 
     public static void updateProgressViews() {
@@ -313,10 +302,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mediaPlayer.release();
-
                     }
                 });
                 break;
+
             case "sample":
                 mediaPlayer = MediaPlayer.create(this, R.raw.sample);
                 mediaPlayer.start();
@@ -324,11 +313,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mediaPlayer.release();
-
                     }
                 });
-
                 break;
+
             case "round_one":
                 mediaPlayer = MediaPlayer.create(this, R.raw.round_one);
                 mediaPlayer.start();
@@ -336,12 +324,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mediaPlayer.release();
-
                     }
                 });
-
-
                 break;
+
             case "round_two":
                 mediaPlayer = MediaPlayer.create(this, R.raw.round_two);
                 mediaPlayer.start();
@@ -349,13 +335,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mediaPlayer.release();
-
                     }
                 });
-
-
-                mediaPlayer.create(this, R.raw.round_two).start();
                 break;
+
             case "round_three":
                 mediaPlayer = MediaPlayer.create(this, R.raw.round_three);
                 mediaPlayer.start();
@@ -363,23 +346,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompletion(MediaPlayer mediaPlayer) {
                         mediaPlayer.release();
-
                     }
                 });
-
-
-                mediaPlayer.create(this, R.raw.round_three).start();
                 break;
         }
     }
-
-//    public void playBeep() {
-//        mediaPlayer.create(this, R.raw.beep).start();
-//    }
-//
-//    public void playPour() {
-//        mediaPlayer.create(this, R.raw.pour).start();
-//    }
 
 
     public void playBeep() {
@@ -389,7 +360,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 mediaPlayer.release();
-
             }
         });
 
@@ -406,12 +376,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-//
-//        private void initialiseSoundPool(){
-//
-//            AudioAttributes audioAttributes = new AudioAttributes().Builder();
-//
-//
-//
-//        }
+
+    public void playGetReady(){
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.get_ready);
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+            }
+        });
+    }
 }
