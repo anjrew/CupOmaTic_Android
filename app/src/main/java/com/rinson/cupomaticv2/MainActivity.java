@@ -354,6 +354,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void playBeep() {
+
         mediaPlayer = MediaPlayer.create(this, R.raw.beep);
         mediaPlayer.start();
         this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {

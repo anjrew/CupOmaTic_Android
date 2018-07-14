@@ -156,11 +156,11 @@ public class ParentTimer {
 
                 new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",this),
 
-                new TimerCell("Round 1", intervalTotalTimeInSeconds, timersIntervals[3], bowlSetting,"round_one",this),
+                new TimerCell("Round 1", 0, timersIntervals[3], 0,"round_one",this),
 
-                new TimerCell("Round 2", intervalTotalTimeInSeconds, timersIntervals[4], bowlSetting,"round_two",this),
+                new TimerCell("Round 2", 0, timersIntervals[4], 0,"round_two",this),
 
-                new TimerCell("Round 3", intervalTotalTimeInSeconds, timersIntervals[5], bowlSetting,"round_three",this),
+                new TimerCell("Round 3", 0, timersIntervals[5], 0,"round_three",this),
         };
 
     }
@@ -199,31 +199,6 @@ public class ParentTimer {
         }
     }
 
-
-    public static String getRoundTime(int timerIndex) {
-        int timerOne;
-        String time;
-        int timeInt;
-        int timerTwo;
-
-        if (timerIndex <= timers.length){
-            timerOne = timers[timerIndex].getTimerSetting();
-            timerTwo = timers[timerIndex+1].getTimerSetting();
-            timeInt = (timerTwo-timerOne) - (getMainTimeInterger() - timerOne);
-
-            if(timeInt > 60){
-                time = TimeConverters.convertIntSecStringsmmss(timeInt);
-            }else{
-                time = String.valueOf(timeInt);
-            }
-
-        }else{
-
-            time = "Final Taste";
-        }
-
-        return time;
-    }
 
     public static void getReadyVoiceOnCall(TimerCell timer){
 
