@@ -88,7 +88,7 @@ public class TimerCell {
         if (parentTimer.running){
                 active = true;
                 stageTimer();
-                parentTimer.startIntervalTimer(iD);
+//                parentTimer.startIntervalTimer(iD);
                 bowlsPassed = bowlsPassed + 1;}
     }
 

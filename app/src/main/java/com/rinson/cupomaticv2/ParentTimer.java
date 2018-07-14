@@ -156,11 +156,11 @@ public class ParentTimer {
 
                 new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",this),
 
-                new TimerCell("Round 1", 0, timersIntervals[3], 0,"round_one",this),
+                new TimerCell("Round 1", 1, timersIntervals[3], 1,"round_one",this),
 
-                new TimerCell("Round 2", 0, timersIntervals[4], 0,"round_two",this),
+                new TimerCell("Round 2", 1, timersIntervals[4], 1,"round_two",this),
 
-                new TimerCell("Round 3", 0, timersIntervals[5], 0,"round_three",this),
+                new TimerCell("Round 3", 1, timersIntervals[5], 1,"round_three",this),
         };
 
     }

@@ -18,29 +18,6 @@ public class IntervalTimer {
     static CountDownTimer intervalTimer;
     String id;
 
-
-    public void decreaseTimer(){
-
-        if (bowlAmount > 0) {
-            intervalTimeInSeconds -= 1;
-
-            if (intervalTimeInSeconds == 0){
-                intervalTimeInSeconds = timeSetting;
-                bowlAmount -= 1;
-            }
-
-        }else if (bowlAmount == 0) {
-
-            invalidateIntervalTimer();
-            totalReset();
-
-        }else{
-            Log.i("WARNING","YOU SHOULDN'T BE HERE");
-        }
-    }
-
-
-
     public void startTimer(){
         intervalTimer();
         active = true;
@@ -97,6 +74,7 @@ public class IntervalTimer {
                     MainActivity.intervalProgress.setProgress(0);
                     Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
                     resetForNextBowl();
+                    ParentTimer.playBeep();
                     startTimer();
                 }else{
                     MainActivity.intervalProgress.setProgress(0);
