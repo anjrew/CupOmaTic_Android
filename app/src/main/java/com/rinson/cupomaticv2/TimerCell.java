@@ -48,7 +48,6 @@ public class TimerCell {
                 public void onTick(long millisecondsUntilDone) {
                     //Code executed at every Interval
                     timePassed = timePassed - 1;
-                    upDateIntervalTimer();
                     Log.i("Bowls done for " + iD, String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed) + " - Active = " + String.valueOf(active));
 
                 }
@@ -60,17 +59,14 @@ public class TimerCell {
                         bowlsPassed = bowlsPassed + 1;
                         timePassed = 0;
                         active = false;
-                        upDateIntervalTimer();
 
 
                         Log.i(label, "  timer has Finished");
 
                     } else {
-                        upDateIntervalTimerToZero();
-                        parentTimer.playBeep();
                         timePassed = timePassed - 1;
                         resetTimer();
-                        startTimerCell();
+                        ReStartTimerCell();
 
                         Log.i(label, "  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
                     }
@@ -81,9 +77,19 @@ public class TimerCell {
 
     public void startTimerCell(){
         if (parentTimer.running){
+            if(!active){
         active = true;
         stageTimer();
-        bowlsPassed = bowlsPassed + 1;}
+        parentTimer.startIntervalTimer(iD);
+        bowlsPassed = bowlsPassed + 1;}}
+    }
+
+    public void ReStartTimerCell(){
+        if (parentTimer.running){
+                active = true;
+                stageTimer();
+                parentTimer.startIntervalTimer(iD);
+                bowlsPassed = bowlsPassed + 1;}
     }
 
 

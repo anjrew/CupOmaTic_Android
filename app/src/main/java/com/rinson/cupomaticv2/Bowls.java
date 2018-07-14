@@ -67,7 +67,7 @@ public class Bowls extends AppCompatActivity {
         MainActivity.invalidateAllTimers();
         openMainActivity();
         ParentTimer.startStartTimer();
-        ParentTimer.switchParentTimerActiviationState();
+        ParentTimer.running = true;
         MainActivity.showStopButton();
     }
 }

@@ -16,6 +16,7 @@ public class IntervalTimer {
     Boolean active;
     static Boolean running;
     static CountDownTimer intervalTimer;
+    String id;
 
 
     public void decreaseTimer(){
@@ -71,8 +72,6 @@ public class IntervalTimer {
 
     public void totalReset(){
         cancelIntervalTimer();
-        bowlAmount = bowlSetting;
-        intervalTimeInSeconds = timeSetting;
         active = false;
     }
 
@@ -85,17 +84,15 @@ public class IntervalTimer {
             @Override
             public void onTick(long millisecondsUntilDone) {
                 //Code executed at every Interval
-                Log.i("Interval Timer =","  Interval Time = " + String.valueOf(millisecondsUntilDone/1000)+ "  Bowls left =" + bowlAmount) ;
+                Log.i("Interval Timer =",String.valueOf(id)+"  - Time = " + String.valueOf(millisecondsUntilDone/1000)+ "-  Bowls left =" + bowlAmount) ;
                 intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
-//                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
+                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
             }
 
             @Override
             public void onFinish() {
                 intervalTimeInSeconds = 0;
                 //Code executed at finish
-                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
-
                 if(bowlAmount > 0){
                     MainActivity.intervalProgress.setProgress(0);
                     Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
@@ -141,5 +138,10 @@ public class IntervalTimer {
         int seconds = milliSeconds/1000;
 
         return seconds;
+    }
+    public void setId(String iD){
+
+        this.id = iD;
+
     }
 }

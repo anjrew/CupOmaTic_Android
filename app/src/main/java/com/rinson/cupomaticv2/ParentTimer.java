@@ -232,6 +232,12 @@ public class ParentTimer {
         mainTime = 0;
     }
 
+    public void startIntervalTimer(String id){
+        intervalTimer.setId(id);
+        intervalTimer.startTimer();
+
+    }
+
     public void parentTimerCancelsIntervalTimer(){
         intervalTimer.cancelIntervalTimerFromParent();
 
