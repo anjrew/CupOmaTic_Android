@@ -1,7 +1,6 @@
 package com.rinson.cupomaticv2;
 
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.util.Log;
 
 import java.util.Timer;
@@ -19,16 +18,15 @@ public class IntervalTimer {
     String id;
 
     public void startTimer(){
-        intervalTimer();
+        reset();
+        if(!active){intervalTimer();}
         active = true;
-        bowlAmount -= 1;
-
     }
 
     IntervalTimer(int timeSetting, int bowlSetting) {
-        this.timeSetting = timeSetting;
+        this.timeSetting = timeSetting ;
         this.bowlSetting = bowlSetting;
-        this.intervalTimeInSeconds = timeSetting;
+        this.intervalTimeInSeconds = this.timeSetting * bowlSetting - 1;
         this.bowlAmount = bowlSetting;
         this.active = false;
 
@@ -36,7 +34,7 @@ public class IntervalTimer {
         Log.i("IntervalTimeInSeconds :",String.valueOf(intervalTimeInSeconds));
     }
 
-    public static void invalidateIntervalTimer(){
+    public void invalidateIntervalTimer(){
         intervalTimer.cancel();
         cancelIntervalTimer();
     }
@@ -52,42 +50,49 @@ public class IntervalTimer {
         active = false;
     }
 
+    public void reset(){
+
+        this.intervalTimeInSeconds = this.timeSetting * bowlSetting;
+    }
+
+
+
 
 
     public void intervalTimer(){
 
-        intervalTimer = new CountDownTimer((timeSetting * 1000), 1000) {
+        intervalTimer = new CountDownTimer((intervalTimeInSeconds * 1000), 1000) {
 
             @Override
             public void onTick(long millisecondsUntilDone) {
+
+                intervalTimeInSeconds --;
+
                 //Code executed at every Interval
-                Log.i("Interval Timer =",String.valueOf(id)+"  - Time = " + String.valueOf(millisecondsUntilDone/1000)+ "-  Bowls left =" + bowlAmount) ;
-                intervalTimeInSeconds = ((int)millisecondsUntilDone/1000);
-                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds);
+//                Log.i("Interval Timer =",String.valueOf(id)+"  - Time = " + String.valueOf(millisecondsUntilDone/1000)+ "-  Bowls left =" + bowlAmount) ;
+                MainActivity.intervalProgress.setProgress(intervalTimeInSeconds % timeSetting);
+//                Log.i("Interval Timer", String.valueOf(intervalTimeInSeconds % timeSetting));
+//                Log.i("Interval Timer setting", String.valueOf(timeSetting) + " Time " + String.valueOf(intervalTimeInSeconds));
+
             }
 
             @Override
             public void onFinish() {
-                intervalTimeInSeconds = 0;
                 //Code executed at finish
-                if(bowlAmount > 0){
-                    MainActivity.intervalProgress.setProgress(0);
-                    Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
-                    resetForNextBowl();
-                    ParentTimer.playBeep();
-                    startTimer();
-                }else{
-                    MainActivity.intervalProgress.setProgress(0);
-                    totalReset();
-                    Log.i("interval Timer","Finished");
-                }
+
+                intervalTimeInSeconds = 0;
+                active = false;
+
+                MainActivity.intervalProgress.setProgress(0);
+                Log.i("interval Timer","Finished "+String.valueOf(bowlAmount));
             }
         }.start();
     }
 
-    public static void  cancelIntervalTimer(){
+    public  void  cancelIntervalTimer(){
 
         intervalTimer.cancel();
+        active = false;
     }
 
     public void cancelIntervalTimerFromParent(){

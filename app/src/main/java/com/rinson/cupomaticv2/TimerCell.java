@@ -42,13 +42,12 @@ public class TimerCell {
 
         if(active = true) {
 
-            upDateIntervalTimer();
             timer = new CountDownTimer((interval * 1000), 1000) {
                 @Override
                 public void onTick(long millisecondsUntilDone) {
                     //Code executed at every Interval
                     timePassed = timePassed - 1;
-                    Log.i("Bowls done for " + iD, String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed) + " - Active = " + String.valueOf(active));
+//                    Log.i("Bowls done for " + iD, String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed) + " - Active = " + String.valueOf(active));
 
                 }
 
@@ -61,14 +60,14 @@ public class TimerCell {
                         active = false;
 
 
-                        Log.i(label, "  timer has Finished");
+//                        Log.i(label, "  timer has Finished");
 
                     } else {
                         timePassed = timePassed - 1;
                         resetTimer();
                         ReStartTimerCell();
 
-                        Log.i(label, "  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
+//                        Log.i(label, "  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
                     }
                 }
             }.start();

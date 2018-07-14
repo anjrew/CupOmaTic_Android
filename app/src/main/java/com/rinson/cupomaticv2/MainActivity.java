@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         intervalProgress = findViewById(R.id.intervalProgress);
-        intervalProgress.setMax(intervalTotalTimeInSeconds);
+        intervalProgress.setMax(intervalTotalTimeInSeconds - 1);
         intervalProgress.setProgress(0);
 
         pourProgress = findViewById(R.id.pourProgress);
