@@ -31,7 +31,6 @@ public class ParentTimer {
 
     //Start Timer
     Boolean initiateMainTimer = true;
-    Boolean timerActive = false;
     int startTime;
     public static Boolean running = false;
     static int startDisplayTime = 1;
@@ -99,31 +98,12 @@ public class ParentTimer {
     };
 
     public static void startMainTimer(){
+        running = true;
         handler.removeCallbacks(mainTimer);
         handler.postDelayed(mainTimer, 0);
-    }
-
-
-    public static void increaseTimeByOneSecond() {
-        for (int i = 0; i < timers.length; i++) {
-//            timers[i].addSecond();
-        }
-        mainTime = +1;
 
     }
 
-    public void comeBackFromBreak() {
-
-    }
-
-
-    public void activateRunTimer() {
-        running = true;
-    }
-
-    public void deactivateRunTimer() {
-        running = false;
-    }
 
     public static int getMainTimeInterger() {
         return mainTime;
@@ -133,9 +113,6 @@ public class ParentTimer {
         return running;
     }
 
-    public void setRunningStatusToFalse(){
-        running = false ;
-    }
 
     public static void switchParentTimerActiviationState() {
         if (running == true) {

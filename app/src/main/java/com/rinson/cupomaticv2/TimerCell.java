@@ -32,55 +32,58 @@ public class TimerCell {
 
 
     public  void cancelTimer(){
-
+        active = false;
         timer.cancel();
         totalResetTimer();
     }
 
 
     public void stageTimer(){
-        Log.i("Inside","Timercell");
-        active = true;
-        upDateIntervalTimer();
-        timer = new CountDownTimer((interval * 1000), 1000) {
-            @Override
-            public void onTick(long millisecondsUntilDone) {
-                //Code executed at every Interval
-                timePassed = timePassed - 1;
-                upDateIntervalTimer();
-                Log.i("Bowls done for "+ iD,String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed)+" - Active = "+ String.valueOf(active));
 
-            }
+        if(active = true) {
 
-            @Override
-            public void onFinish() {
-                //Code executed at finish
-                if (bowlsPassed == (bowlCount - 1)){
-                    bowlsPassed = bowlsPassed + 1 ;
-                    timePassed = 0;
-                    active = false;
-                    upDateIntervalTimer();
-
-
-                    Log.i(label,"  timer has Finished");
-
-                }else{
-                    upDateIntervalTimerToZero();
-                    parentTimer.playBeep();
+            upDateIntervalTimer();
+            timer = new CountDownTimer((interval * 1000), 1000) {
+                @Override
+                public void onTick(long millisecondsUntilDone) {
+                    //Code executed at every Interval
                     timePassed = timePassed - 1;
-                    resetTimer();
-                    startTimerCell();
+                    upDateIntervalTimer();
+                    Log.i("Bowls done for " + iD, String.valueOf(bowlsPassed) + " Time Passed = " + String.valueOf(timePassed) + " - Active = " + String.valueOf(active));
 
-                    Log.i(label,"  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
                 }
-            }
-        }.start();
+
+                @Override
+                public void onFinish() {
+                    //Code executed at finish
+                    if (bowlsPassed == (bowlCount - 1)) {
+                        bowlsPassed = bowlsPassed + 1;
+                        timePassed = 0;
+                        active = false;
+                        upDateIntervalTimer();
+
+
+                        Log.i(label, "  timer has Finished");
+
+                    } else {
+                        upDateIntervalTimerToZero();
+                        parentTimer.playBeep();
+                        timePassed = timePassed - 1;
+                        resetTimer();
+                        startTimerCell();
+
+                        Log.i(label, "  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
+                    }
+                }
+            }.start();
+        }
     }
 
     public void startTimerCell(){
-
+        if (parentTimer.running){
+        active = true;
         stageTimer();
-        bowlsPassed = bowlsPassed + 1;
+        bowlsPassed = bowlsPassed + 1;}
     }
 
 
@@ -94,38 +97,9 @@ public class TimerCell {
         resetTimer();
     }
 
-    public void hardStop(){
-        bowlsPassed=bowlCount;
-        interval=0;
-        timer.cancel();
-
-    }
-
-
-    public void resetForNextBowl(){
-
-        active = false;
-    }
-
-
-    public String Label(){
-        return this.label;
-    }
-
-    public int getBowlCount(){
-        return this.bowlCount;
-    }
 
     public int getTimerSetting(){
         return this.timerSetting;
-    }
-
-    public int getBowlsPassed(){
-        return this.bowlsPassed;
-    }
-
-    public int getTimePassed(){
-        return this.timePassed;
     }
 
     public String getId(){
@@ -136,34 +110,6 @@ public class TimerCell {
         return active;
     }
 
-
-
-    public int getTimeUntil(int mainTimerTime){
-        return mainTimerTime - timePassed;
-    }
-
-
-    public String getBowlsPassedString(int numberOfBowls){
-
-        return String.valueOf(getBowlsPassed());
-
-    }
-
-
-    public int getDisplayTime(int mainTimer){
-        if (mainTimer <= timerSetting) {
-
-            return timerSetting - mainTimer;
-
-        }else if(timerSetting == mainTimer){
-
-            return 0;
-
-        }else{
-
-            return getTimePassed();
-        }
-    }
 
     public void upDateIntervalTimer(){
         parentTimer.mainActivity.intervalProgress.setProgress(timePassed);
