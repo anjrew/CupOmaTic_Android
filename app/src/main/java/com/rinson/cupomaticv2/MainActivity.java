@@ -253,9 +253,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void invalidateAllTimers() {
         parentTimer.stopParentTimer();
+        parentTimer.parentTimerCancelsIntervalTimer();
         resetMainTime();
         parentTimer.cancelTimerCells();
-//        parentTimer.timers[0].cancelTimer();
     }
 
     public void resetMainTimerDisplay() {
@@ -292,63 +292,67 @@ public class MainActivity extends AppCompatActivity {
 
     public void setupintervalsMediaPLayers(String mediaPlayerId) {
 
-        switch (mediaPlayerId) {
-            case "pour":
-                break;
-            case "brake":
-                mediaPlayer = MediaPlayer.create(this, R.raw.brake);
-                mediaPlayer.start();
-                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                break;
+        if(voicePrompts) {
 
-            case "sample":
-                mediaPlayer = MediaPlayer.create(this, R.raw.sample);
-                mediaPlayer.start();
-                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                break;
+            switch (mediaPlayerId) {
+                case "pour":
+                    break;
 
-            case "round_one":
-                mediaPlayer = MediaPlayer.create(this, R.raw.round_one);
-                mediaPlayer.start();
-                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                break;
+                case "brake":
+                    mediaPlayer = MediaPlayer.create(this, R.raw.brake);
+                    mediaPlayer.start();
+                    this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    break;
 
-            case "round_two":
-                mediaPlayer = MediaPlayer.create(this, R.raw.round_two);
-                mediaPlayer.start();
-                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                break;
+                case "sample":
+                    mediaPlayer = MediaPlayer.create(this, R.raw.sample);
+                    mediaPlayer.start();
+                    this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    break;
 
-            case "round_three":
-                mediaPlayer = MediaPlayer.create(this, R.raw.round_three);
-                mediaPlayer.start();
-                this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mediaPlayer) {
-                        mediaPlayer.release();
-                    }
-                });
-                break;
+                case "round_one":
+                    mediaPlayer = MediaPlayer.create(this, R.raw.round_one);
+                    mediaPlayer.start();
+                    this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    break;
+
+                case "round_two":
+                    mediaPlayer = MediaPlayer.create(this, R.raw.round_two);
+                    mediaPlayer.start();
+                    this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    break;
+
+                case "round_three":
+                    mediaPlayer = MediaPlayer.create(this, R.raw.round_three);
+                    mediaPlayer.start();
+                    this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        @Override
+                        public void onCompletion(MediaPlayer mediaPlayer) {
+                            mediaPlayer.release();
+                        }
+                    });
+                    break;
+            }
         }
     }
 

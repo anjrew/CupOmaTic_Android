@@ -113,19 +113,6 @@ public class ParentTimer {
     }
 
 
-    public static void switchParentTimerActiviationState() {
-        if (running == true) {
-
-            running = false;
-
-        } else {
-
-            running = true;
-        }
-
-        Log.i("Main time run status", String.valueOf(running));
-    }
-
 
     public void cancelCountdownTimer(){
         startTimer.cancel();
@@ -227,10 +214,6 @@ public class ParentTimer {
         }
     }
 
-    public void  totalResetOfTimer(){
-//        setRunningStatusToFalse();
-        mainTime = 0;
-    }
 
     public void startIntervalTimer(String id){
         intervalTimer.setId(id);
@@ -239,7 +222,8 @@ public class ParentTimer {
     }
 
     public void parentTimerCancelsIntervalTimer(){
-        intervalTimer.cancelIntervalTimerFromParent();
+
+        if(intervalTimer.active)intervalTimer.cancelIntervalTimerFromParent();
 
     }
 
@@ -254,9 +238,6 @@ public class ParentTimer {
 
         mainTime = 0;
 
-    }
-
-    public void hideMainActivitActionbar(){
     }
 
 }

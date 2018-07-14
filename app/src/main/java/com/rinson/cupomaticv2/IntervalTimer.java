@@ -13,7 +13,6 @@ public class IntervalTimer {
     int bowlAmount;
     int intervalTimeInSeconds;
     Boolean active;
-    static Boolean running;
     static CountDownTimer intervalTimer;
     String id;
 
@@ -25,7 +24,7 @@ public class IntervalTimer {
 
     IntervalTimer(int timeSetting, int bowlSetting) {
         this.timeSetting = timeSetting ;
-        this.bowlSetting = bowlSetting;
+        this.bowlSetting = bowlSetting - 1 ;
         this.intervalTimeInSeconds = this.timeSetting * bowlSetting - 1;
         this.bowlAmount = bowlSetting;
         this.active = false;
@@ -34,28 +33,11 @@ public class IntervalTimer {
         Log.i("IntervalTimeInSeconds :",String.valueOf(intervalTimeInSeconds));
     }
 
-    public void invalidateIntervalTimer(){
-        intervalTimer.cancel();
-        cancelIntervalTimer();
-    }
-
-    public void resetForNextBowl(){
-
-        intervalTimeInSeconds = timeSetting;
-        active = true;
-    }
-
-    public void totalReset(){
-        cancelIntervalTimer();
-        active = false;
-    }
 
     public void reset(){
 
         this.intervalTimeInSeconds = this.timeSetting * bowlSetting;
     }
-
-
 
 
 
@@ -89,39 +71,21 @@ public class IntervalTimer {
         }.start();
     }
 
-    public  void  cancelIntervalTimer(){
 
-        intervalTimer.cancel();
-        active = false;
-    }
 
     public void cancelIntervalTimerFromParent(){
 
         intervalTimer.cancel();
-
-    }
-
+        active = false;
 
 
-    public Boolean queryActive(){
-
-        return active;
-    }
-
-    public int getTimeInt() {
-        return intervalTimeInSeconds;
     }
 
     public void setBowlAmount(int bowlSetAs){
         bowlAmount = bowlSetAs;
     }
 
-    public int getSecondsFromMilliSeconds(int milliSeconds){
 
-        int seconds = milliSeconds/1000;
-
-        return seconds;
-    }
     public void setId(String iD){
 
         this.id = iD;
