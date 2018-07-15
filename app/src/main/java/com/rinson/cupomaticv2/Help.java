@@ -33,7 +33,7 @@ public class Help extends AppCompatActivity {
 
     public void setUpValues(){
         item  =  new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Main Timer", "Interval", "Break", "Sample", "Rounds", "Contact"};
-        description = new String[]{advancedModeText, voicePromptsText, vibrateText,mainTimerText, intervalText, breakText, sampleText, roundsText, contactText};
+        description = new String[]{advancedModeText, voicePromptsText, vibrateText, mainTimerText, intervalText, breakText, sampleText, roundsText, contactText};
     }
 
 

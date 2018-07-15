@@ -2,7 +2,9 @@
     android:id="@+id/row"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:padding="6dip">
+    android:padding="15dip"
+    android:layout_margin="15dip">
+
 
 
     <TextView
@@ -15,49 +17,26 @@
         android:gravity="center_vertical"
         android:padding="6dip"
         android:text="Option"
-        android:textAlignment="center"
-        android:textSize="20sp" />
-
-    <!--<TextView-->
-    <!--android:id="@+id/Option"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="56dp"-->
-    <!--android:layout_alignParentStart="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_marginEnd="25dp"-->
-    <!--android:layout_marginStart="25dp"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:padding="6dip"-->
-    <!--android:text="Option"-->
-    <!--android:textSize="20sp" />-->
-
+        android:textAlignment="viewStart"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/Value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_below="@id/Option"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:gravity="center_vertical"
         android:padding="6dip"
-        android:layout_below="@id/Option"
 
         android:text="Value"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textSize="16sp" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/Value"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_below="@id/Option"-->
-    <!--android:layout_marginEnd="25dp"-->
-    <!--android:layout_marginStart="25dp"-->
-    <!--android:gravity="center_vertical"-->
-    <!--android:padding="6dip"-->
-    <!--android:text="Value"-->
-    <!--android:textSize="16sp" />-->
+
 
 
 </RelativeLayout>
