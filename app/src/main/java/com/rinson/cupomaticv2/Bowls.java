@@ -42,7 +42,7 @@ public class Bowls extends AppCompatActivity {
 
         if (numberSelection.getText().toString().matches("")) {
             Toast toast= Toast.makeText(getApplicationContext(),
-                    "You did not enter a number.", Toast.LENGTH_SHORT);
+                    "Please enter a number.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
         }else {

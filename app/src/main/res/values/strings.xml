@@ -14,6 +14,13 @@
     <string name="sample">Sample</string>
     <string name="Save">Save Settings</string>
     <string name="Ready">Ready</string>
+    <string name="Settings">Settings</string>
+    <string name="Help">Help</string>
+    <string name="One">Ready</string>
+    <string name="Two">Ready</string>
+    <string name="Three">Ready</string>
+
+    <string name="Four">Ready</string>
 
 
     <string-array name="Classes">

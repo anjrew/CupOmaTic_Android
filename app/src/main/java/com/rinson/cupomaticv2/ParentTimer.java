@@ -135,20 +135,7 @@ public class ParentTimer {
         intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting, this);
 
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
-
-        timers = new TimerCell[]{
-                new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour",this),
-
-                new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1],bowlSetting, "brake",this),
-
-                new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting,"sample",this),
-
-                new TimerCell("Round 1", 1, timersIntervals[3], 1,"round_one",this),
-
-                new TimerCell("Round 2", 1, timersIntervals[4], 1,"round_two",this),
-
-                new TimerCell("Round 3", 1, timersIntervals[5], 1,"round_three",this),
-        };
+        setupTimerCells();
 
     }
 
@@ -238,6 +225,40 @@ public class ParentTimer {
 
         mainTime = 0;
 
+    }
+
+    public void setupTimerCells(){
+
+        if(advancedMode) {
+            timers = new TimerCell[]{
+                    new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour", this),
+
+                    new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1], bowlSetting, "brake", this),
+
+                    new TimerCell("Sample", intervalTotalTimeInSeconds, timersIntervals[2], bowlSetting, "sample", this),
+
+                    new TimerCell("Round 1", 1, timersIntervals[3], 1, "round_one", this),
+
+                    new TimerCell("Round 2", 1, timersIntervals[4], 1, "round_two", this),
+
+                    new TimerCell("Round 3", 1, timersIntervals[5], 1, "round_three", this),
+            };
+        }else{
+
+            timers = new TimerCell[]{
+                    new TimerCell("Pour", intervalTotalTimeInSeconds, 0, bowlSetting, "pour", this),
+
+                    new TimerCell("Break", intervalTotalTimeInSeconds, timersIntervals[1], bowlSetting, "brake", this),
+
+                    new TimerCell("Sample", 1, -1, 1, "sample", this),
+
+                    new TimerCell("Round 1", 1, -1, 1, "round_one", this),
+
+                    new TimerCell("Round 2", 1, -1, 1, "round_two", this),
+
+                    new TimerCell("Round 3", 1, -1, 1, "round_three", this),
+            };
+        }
     }
 
 }
