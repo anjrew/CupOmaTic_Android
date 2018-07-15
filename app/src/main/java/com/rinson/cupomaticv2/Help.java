@@ -22,8 +22,8 @@ public class Help extends AppCompatActivity {
     }
 
     public void setUpValues(){
-        item  =  new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Interval", "Break", "Sample", "Round one", "Round two", "Round three"};
-        description = new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Interval", "Break", "Sample", "Round one", "Round two", "Round three"};
+        item  =  new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Main Timer", "Interval", "Break", "Sample", "Round one", "Round two", "Round three", "Contact"};
+        description = new String[]{"Advanced mode", "Voice prompts", "Vibrate","Main Timer", "Interval", "Break", "Sample", "Round one", "Round two", "Round three", "Contact"};
     }
 
 

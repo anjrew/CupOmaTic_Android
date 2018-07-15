@@ -16,9 +16,18 @@
     <string name="Ready">Ready</string>
     <string name="Settings">Settings</string>
     <string name="Help">Help</string>
-    <string name="One">Ready</string>
-    <string name="Two">Ready</string>
-    <string name="Three">Ready</string>
+
+
+
+    <string name="Advanced_mode_description">Adds sample collection, and tasting rounds to the session.</string>
+    <string name="Voice_prompts_description">Adds voice prompts.</string>
+    <string name="Vibrate_description">If turned on, the phone vill vibrate for each action.</string>
+    <string name="Interval_description">Shows the interval time between each action for each bowl.</string>
+    <string name="Break_description">The time at which you will break the crust on the cupping bowl.</string>
+    <string name="Sample_description">The point in time in which you take a coffee sample for testing(TDS etc.)</string>
+    <string name="Rounds_description">The rounds will be called by the voice prompts. This these are the point in which you should start the rounds of tasting.</string>
+    <string name="Main_timer_description"> Is the large timer at the top of the main screen which shows the time since the start of the session.</string> I
+    <string name="Bowl_indications_description">These are the small circular progress views at the bottom of the screen. They indicate how many bowls the specific action should have already been performed on at that given moment.</string>
 
     <string name="Four">Ready</string>
 
