@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     boolean voicePrompts;
     ActionBar actionBar;
     MediaPlayer mediaPlayer;
-    SoundPool sounds;
+    Vibrator vibrator;
 
 
     SharedPreferences sharedPreferences;
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         updateGetReadyStopButton();
         actionBar = getSupportActionBar();
         hideActionBar();
+        setUpVibrate();
     }
 
     private void setupProgressViews() {
@@ -359,6 +361,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void playBeep() {
 
+        if(vibrate){
+
+            vibrator.vibrate(1000);
+        }
+
         mediaPlayer = MediaPlayer.create(this, R.raw.beep);
         mediaPlayer.start();
         this.mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -383,14 +390,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void playGetReady(){
+        if(voicePrompts) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.get_ready);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    mediaPlayer.release();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.get_ready);
-        mediaPlayer.start();
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                mediaPlayer.release();
-            }
-        });
+                }
+            });
+        }
     }
+
+    public void setUpVibrate(){
+        vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        }
 }

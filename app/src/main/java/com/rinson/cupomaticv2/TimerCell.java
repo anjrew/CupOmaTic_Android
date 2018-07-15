@@ -66,7 +66,6 @@ public class TimerCell {
                         timePassed = timePassed - 1;
                         resetTimer();
                         ReStartTimerCell();
-
 //                        Log.i(label, "  timer completed bowl " + String.valueOf(bowlsPassed) + " Time = " + String.valueOf(timePassed));
                     }
                 }

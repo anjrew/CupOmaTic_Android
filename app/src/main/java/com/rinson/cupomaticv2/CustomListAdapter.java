@@ -74,6 +74,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
             case 0:
                 settingActivity.updateAdvancedMode(checked);
                 Log.i("Advanced Mode", String.valueOf(checked));
+                settingActivity.recreate();
                 break;
             case 1:
                 settingActivity.updateVoiceMode(checked);

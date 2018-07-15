@@ -30,31 +30,32 @@ public class Settings extends AppCompatActivity {
     ToggleButton advancedModeToggle;
     ToggleButton vibrateToggle;
     ToggleButton voicePromptsToggle;
+    String[] settingsValues;
 
     SharedPreferences sharedPreferences;
 
     public void setUpMemory() {
         sharedPreferences = this.getSharedPreferences("com.rinson.cupomaticv2", Context.MODE_PRIVATE);
 
-        if (sharedPreferences.contains("vibrate")){
+        if (sharedPreferences.contains("vibrate")) {
             vibrate = sharedPreferences.getBoolean("vibrate", false);
         } else {
             sharedPreferences.edit().putBoolean("vibrate", false).apply();
         }
 
-        if (sharedPreferences.contains("bowlSetting")){
+        if (sharedPreferences.contains("bowlSetting")) {
             bowlSetting = sharedPreferences.getInt("bowlSetting", 0);
         } else {
             sharedPreferences.edit().putInt("bowlSetting", 20).apply();
         }
 
-        if (sharedPreferences.contains("advancedMode")){
-            advancedMode = sharedPreferences.getBoolean("advancedMode",false);
+        if (sharedPreferences.contains("advancedMode")) {
+            advancedMode = sharedPreferences.getBoolean("advancedMode", false);
         } else {
             sharedPreferences.edit().putBoolean("advancedMode", false).apply();
         }
         //
-        if (sharedPreferences.contains("intervalTimeInSeconds")){
+        if (sharedPreferences.contains("intervalTimeInSeconds")) {
             intervalTotalTimeInSeconds = sharedPreferences.getInt("intervalTimeInSeconds", 20);
         } else {
             sharedPreferences.edit().putInt("intervalTimeInSeconds", 20).apply();
@@ -85,12 +86,12 @@ public class Settings extends AppCompatActivity {
         } else {
             sharedPreferences.edit().putInt("roundThreeTime", 1320).apply();
         }
-        if (sharedPreferences.contains("voicePrompts")){
+        if (sharedPreferences.contains("voicePrompts")) {
             voicePrompts = sharedPreferences.getBoolean("voicePrompts", true);
         } else {
-            sharedPreferences.edit().putBoolean("voicePrompts", true).apply();        }
+            sharedPreferences.edit().putBoolean("voicePrompts", true).apply();
+        }
     }
-
 
 
     @Override
@@ -99,6 +100,7 @@ public class Settings extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         setUpMemory();
         createToggleButtons();
+        setupSettingsValues();
         createListView();
     }
 
@@ -106,11 +108,11 @@ public class Settings extends AppCompatActivity {
     public void saveButtonClick(View view) {
         updateToggleVariables();
         openMainActivity();
-        Log.i("Break = ",TimeConverters.convertIntSecStringsmmss(breaktime));
-        Log.i("Sample = ",TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds));
-        Log.i("Round 1  = ",TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds));
-        Log.i("Round 2 = ",TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds));
-        Log.i("Round 3 = ",TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds));
+        Log.i("Break = ", TimeConverters.convertIntSecStringsmmss(breaktime));
+        Log.i("Sample = ", TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds));
+        Log.i("Round 1  = ", TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds));
+        Log.i("Round 2 = ", TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds));
+        Log.i("Round 3 = ", TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds));
 
     }
 
@@ -125,34 +127,25 @@ public class Settings extends AppCompatActivity {
     public void createListView() {
 
         ListView settingsListView = (findViewById(R.id.settingListView));
-        final ToggleButton[] toggleButtons = {advancedModeToggle, voicePromptsToggle,vibrateToggle};
+        final ToggleButton[] toggleButtons = {advancedModeToggle, voicePromptsToggle, vibrateToggle};
         final String[] settingsNames = {"Advanced mode", "Voice prompts", "Vibrate", "Interval", "Break", "Sample", "Round one", "Round two", "Round three"};
-        final String[] settingsValues =
-                {"Mode1","Vibrate1", "Voice prompts",
-                        TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
-                        TimeConverters.convertIntSecStringsmmss(breaktime),
-                        TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
-                        TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
-                        TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
-                        TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds),
-                };
 
-        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames,toggleButtons, this);
+        CustomListAdapter customListAdapter = new CustomListAdapter(this, settingsValues, settingsNames, toggleButtons, this);
         settingsListView.setAdapter(customListAdapter);
         settingsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Selected", settingsNames[position]);
-                if(position >= toggleButtons.length) {
+                if (position >= toggleButtons.length) {
                     selectOpenActivity(position);
-                }else{
-                    }
+                } else {
+                }
 
             }
         });
     }
 
-    public void openIntervalActivity(){
+    public void openIntervalActivity() {
 
         Intent intent = new Intent(Settings.this, Interval.class);
 
@@ -172,6 +165,7 @@ public class Settings extends AppCompatActivity {
 
         startActivity(intent);
     }
+
     public void openRoundOneActivity() {
 
         Intent intent = new Intent(Settings.this, Round_one.class);
@@ -193,25 +187,31 @@ public class Settings extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void selectOpenActivity(int arrayNumber){
+    public void selectOpenActivity(int arrayNumber) {
 
-        switch (arrayNumber){
-            case 3: openIntervalActivity();
+        switch (arrayNumber) {
+            case 3:
+                openIntervalActivity();
                 break;
-            case 4: openBreakActivity();
+            case 4:
+                openBreakActivity();
                 break;
-            case 5: openSampleActivity();
+            case 5:
+                openSampleActivity();
                 break;
-            case 6: openRoundOneActivity();
+            case 6:
+                openRoundOneActivity();
                 break;
-            case 7: openRoundTwoActivity();
+            case 7:
+                openRoundTwoActivity();
                 break;
-            case 8: openRoundThreeActivity();
+            case 8:
+                openRoundThreeActivity();
                 break;
         }
     }
 
-    public void createToggleButtons(){
+    public void createToggleButtons() {
         advancedModeToggle = new ToggleButton(getApplicationContext());
         advancedModeToggle.setChecked(advancedMode);
 
@@ -223,38 +223,61 @@ public class Settings extends AppCompatActivity {
 
     }
 
-    public void updateToggleVariables(){
+    public void updateToggleVariables() {
 
 
         sharedPreferences.edit().putBoolean("voicePrompts", voicePrompts).apply();
         sharedPreferences.edit().putBoolean("vibrate", vibrate).apply();
         sharedPreferences.edit().putBoolean("advancedMode", advancedMode).apply();
 
-        Log.i("Toggles / "," AdvancedMode = " + String.valueOf(advancedMode)+" / Vibrate = ="+ String.valueOf(vibrate)+ " / Voice = "+ String.valueOf(voicePrompts));
+        Log.i("Toggles / ", " AdvancedMode = " + String.valueOf(advancedMode) + " / Vibrate = =" + String.valueOf(vibrate) + " / Voice = " + String.valueOf(voicePrompts));
 
     }
 
-    public void updateAdvancedMode(Boolean state){
+    public void updateAdvancedMode(Boolean state) {
         advancedMode = state;
         sharedPreferences.edit().putBoolean("advancedMode", advancedMode).apply();
-        Log.i("Set Advanced Mode = " , String.valueOf(advancedMode));
+        Log.i("Set Advanced Mode = ", String.valueOf(advancedMode));
 
     }
 
-    public void updateVibrateMode(Boolean state){
+    public void updateVibrateMode(Boolean state) {
 
         vibrate = state;
         sharedPreferences.edit().putBoolean("vibrate", vibrate).apply();
-        Log.i("Set Vibrate Mode = " , String.valueOf(vibrate));
+        Log.i("Set Vibrate Mode = ", String.valueOf(vibrate));
 
     }
 
-    public void updateVoiceMode(Boolean state){
+    public void updateVoiceMode(Boolean state) {
 
         voicePrompts = state;
         sharedPreferences.edit().putBoolean("voicePrompts", voicePrompts).apply();
-        Log.i("Set voice Mode = " , String.valueOf(voicePrompts));
+        Log.i("Set voice Mode = ", String.valueOf(voicePrompts));
+    }
 
+    public void setupSettingsValues() {
+        if (advancedMode) {
+            settingsValues =
+                    new String[]{"Mode1", "Vibrate1", "Voice prompts",
+                            TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
+                            TimeConverters.convertIntSecStringsmmss(breaktime),
+                            TimeConverters.convertIntSecStringsmmss(sampleTimeSeconds),
+                            TimeConverters.convertIntSecStringsmmss(roundoneTimeSeconds),
+                            TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
+                            TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds)
+                    };
+            }else {
+            settingsValues =
+                    new String[]{"Mode1", "Vibrate1", "Voice prompts",
+                            TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
+                            TimeConverters.convertIntSecStringsmmss(breaktime),
+                            "Disabled in advanced mode",
+                            "Disabled in advanced mode",
+                            "Disabled in advanced mode",
+                            "Disabled in advanced mode",
+                    };
+        }
     }
 }
 

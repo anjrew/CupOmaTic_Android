@@ -132,7 +132,7 @@ public class ParentTimer {
         this.mainActivity = mainActivity;
 
 
-        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting);
+        intervalTimer = new IntervalTimer(intervalTotalTimeInSeconds,bowlSetting, this);
 
         timersIntervals = new int[]{0, breaktime,sampleTimeSeconds, roundoneTimeSeconds, roundTwoTimeSeconds, roundThreeTimeSeconds};
 
