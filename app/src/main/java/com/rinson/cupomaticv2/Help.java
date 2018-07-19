@@ -1,5 +1,6 @@
 package com.rinson.cupomaticv2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,8 +48,34 @@ public class Help extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Selected", item[position]);
+                if (position == item.length) {
+                    selectOpenActivity(position);
+                }
             }
         });
+    }
+
+    public void selectOpenActivity(int arrayNumber) {
+//        Log.i(String.valueOf(arrayNumber,));
+
+        switch (arrayNumber) {
+
+            case 9:
+
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@cupomatic.com"});
+                email.putExtra(Intent.EXTRA_SUBJECT, "CupOmatic Feedback");
+                email.putExtra(Intent.EXTRA_TEXT, "Your app is AMAZING!!! Bravo!");
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email, "Choose an Email client :"));
+
+
+                break;
+            default:
+                Log.i("Warning  ","  You shouldn't be here");
+                break;
+
+        }
     }
 
     public void setupDescriptionStrings(){

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
@@ -405,5 +404,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void setUpVibrate(){
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        }
+    }
 }

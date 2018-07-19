@@ -1,7 +1,6 @@
 package com.rinson.cupomaticv2;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 
 public class TimerCell {
 
@@ -76,18 +75,18 @@ public class TimerCell {
     public void startTimerCell(){
         if (parentTimer.running){
             if(!active){
-        active = true;
-        stageTimer();
-        parentTimer.startIntervalTimer(iD);
-        bowlsPassed = bowlsPassed + 1;}}
+                active = true;
+                stageTimer();
+                parentTimer.startIntervalTimer(iD);
+                bowlsPassed = bowlsPassed + 1;}}
     }
 
     public void ReStartTimerCell(){
         if (parentTimer.running){
-                active = true;
-                stageTimer();
+            active = true;
+            stageTimer();
 //                parentTimer.startIntervalTimer(iD);
-                bowlsPassed = bowlsPassed + 1;}
+            bowlsPassed = bowlsPassed + 1;}
     }
 
 

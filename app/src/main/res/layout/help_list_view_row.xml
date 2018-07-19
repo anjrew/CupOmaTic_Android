@@ -17,7 +17,6 @@
         android:gravity="center_vertical"
         android:padding="6dip"
         android:text="Option"
-        android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -33,7 +32,6 @@
         android:padding="6dip"
 
         android:text="Value"
-        android:textAlignment="viewStart"
         android:textSize="16sp" />
 
 

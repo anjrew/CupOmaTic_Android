@@ -3,16 +3,12 @@ package com.rinson.cupomaticv2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 
 public class Settings extends AppCompatActivity {
@@ -267,7 +263,7 @@ public class Settings extends AppCompatActivity {
                             TimeConverters.convertIntSecStringsmmss(roundTwoTimeSeconds),
                             TimeConverters.convertIntSecStringsmmss(roundThreeTimeSeconds)
                     };
-            }else {
+        }else {
             settingsValues =
                     new String[]{"Mode1", "Vibrate1", "Voice prompts",
                             TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
