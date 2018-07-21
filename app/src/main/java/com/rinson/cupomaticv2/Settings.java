@@ -268,10 +268,10 @@ public class Settings extends AppCompatActivity {
                     new String[]{"Mode1", "Vibrate1", "Voice prompts",
                             TimeConverters.convertIntSecStringsmmss(intervalTotalTimeInSeconds),
                             TimeConverters.convertIntSecStringsmmss(breaktime),
-                            "Disabled in advanced mode",
-                            "Disabled in advanced mode",
-                            "Disabled in advanced mode",
-                            "Disabled in advanced mode",
+                            getString(R.string.NA_in_advanced_mode),
+                            getString(R.string.NA_in_advanced_mode),
+                            getString(R.string.NA_in_advanced_mode),
+                            getString(R.string.NA_in_advanced_mode),
                     };
         }
     }

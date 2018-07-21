@@ -33,7 +33,7 @@ public class Help extends AppCompatActivity {
     }
 
     public void setUpValues(){
-        item  =  new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Main Timer", "Interval", "Break", "Sample", "Rounds", "Contact"};
+        item  =  new String[]{"Advanced mode", "Voice prompts", "Vibrate", "Main Timer", "Interval (Int)", "Break (Br)", "Sample (Sa)", "Rounds", "Contact"};
         description = new String[]{advancedModeText, voicePromptsText, vibrateText, mainTimerText, intervalText, breakText, sampleText, roundsText, contactText};
     }
 
@@ -65,7 +65,7 @@ public class Help extends AppCompatActivity {
 
                 Log.i("Email  ","  In Email");
                 Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@cupomatic.com"});
+                email.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@cupomatic.net"});
                 email.putExtra(Intent.EXTRA_SUBJECT, "CupOmatic Feedback");
                 email.putExtra(Intent.EXTRA_TEXT, "Your app is AMAZING!!! Bravo!");
                 email.setType("message/rfc822");
