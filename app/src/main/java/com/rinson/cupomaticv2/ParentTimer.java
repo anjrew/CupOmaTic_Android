@@ -53,7 +53,7 @@ public class ParentTimer {
                 }else if(((millisecondsUntilDone / 1000) > startDisplayTime)) {
 
                     playBeep();
-                    MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)));
+                    MainActivity.updatdateMainTimerDisplay(String.valueOf((millisecondsUntilDone / 1000 - startDisplayTime)+"..."));
 
                 } else {
                     mainActivity.playPour();

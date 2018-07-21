@@ -48,8 +48,9 @@ public class Help extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.i("Selected", item[position]);
-                if (position == item.length) {
+                if (position == 8) {
                     selectOpenActivity(position);
+                    Log.i("Position selected",String.valueOf(position));
                 }
             }
         });
@@ -60,8 +61,9 @@ public class Help extends AppCompatActivity {
 
         switch (arrayNumber) {
 
-            case 9:
+            case 8:
 
+                Log.i("Email  ","  In Email");
                 Intent email = new Intent(Intent.ACTION_SEND);
                 email.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@cupomatic.com"});
                 email.putExtra(Intent.EXTRA_SUBJECT, "CupOmatic Feedback");

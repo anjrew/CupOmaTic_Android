@@ -15,7 +15,7 @@
     <string name="Save">Save Settings</string>
     <string name="Ready">Ready</string>
     <string name="Settings">Settings</string>
-    <string name="Help">Help</string>
+    <string name="Help">Info</string>
 
 
 
@@ -28,8 +28,12 @@
     <string name="Rounds_description">The rounds will be called by the voice prompts. This these are the point in which you should start the rounds of tasting.</string>
     <string name="Main_timer_description"> Is the large timer at the top of the main screen which shows the time since the start of the session.</string> I
     <string name="Bowl_indications_description">These are the small circular progress views at the bottom of the screen. They indicate how many bowls the specific action should have already been performed on at that given moment.</string>
-    <string name="Contact_description">For more information, positive or negative feedback,  email me: info@cupomatic.com.</string>
+    <string name="Contact_description">For more information, and/or positive or negative feedback, click here and email me: info@cupomatic.com.</string>
 
+    <string-array name="Contact_description_array">
+        <item>For more information, and/or positive or negative feedback, click here and email me:</item>
+        <item><u>info@cupomatic.com</u></item>
+    </string-array>
 
 
     <string name="Four">Ready</string>

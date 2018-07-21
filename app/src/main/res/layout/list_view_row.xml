@@ -36,11 +36,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center_vertical"
         android:layout_marginRight="20dp"
-        android:text="ToggleButton"
+        android:focusable="false"
+        android:gravity="center_vertical"
         android:onClick="myClickHandler"
-        android:focusable="false"/>
+        android:text="ToggleButton"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
